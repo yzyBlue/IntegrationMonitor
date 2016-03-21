@@ -5,6 +5,68 @@
 	<artifactId>integration-monitor</artifactId>
 	<version>0.0.1</version>
 	<packaging>pom</packaging>
+	<url> https://github.com/yzyBlue/IntegrationMonitor </url>
+	<description> Integration monitor project is builded for integration engineer to monitor the message in the transaction work flows. </description>
+	<inceptionYear>2016</inceptionYear>
+
+	<mailingLists>
+		<!-- 该元素描述了项目相关的所有邮件列表。自动产生的网站引用这些信息。 -->
+		<mailingList>
+			<!-- 邮件的名称 -->
+			<name> Vico-Lab </name>
+			<!-- 发送邮件的地址或链接，如果是邮件地址，创建文档时，mailto: 链接会被自动创建 -->
+			<post> Yuan.Ziyang@vico-lab.com </post>
+		</mailingList>
+	</mailingLists>
+
+	<developers>
+		<!-- 某个项目开发者的信息 -->
+		<developer>
+			<!-- SCM里项目开发者的唯一标识符 -->
+			<id> IntegrationMonitor </id>
+			<!-- 项目开发者的全名 -->
+			<name> Yuan.Ziyang </name>
+			<!-- 项目开发者的email -->
+			<email> Yuan.Ziyang@vico-lab.com </email>
+			<!-- 项目开发者的主页的URL -->
+			<url />
+			<!-- 项目开发者在项目中扮演的角色，角色元素描述了各种角色 -->
+			<roles>
+				<role> Project Manager </role>
+				<role> Architect </role>
+			</roles>
+			<!-- 项目开发者所属组织 -->
+			<organization> 杭州维科软件工程有限责任公司 </organization>
+			<!-- 项目开发者所属组织的URL -->
+			<organizationUrl> http://www.vico-lab.com/index.asp </organizationUrl>
+			<!-- 项目开发者属性，如即时消息如何处理等 -->
+			<properties>
+				<dept> No </dept>
+			</properties>
+			<!-- 项目开发者所在时区， -11到12范围内的整数。 -->
+			<timezone> +8 </timezone>
+		</developer>
+	</developers>
+
+	<contributors>
+		<!-- 项目的其他贡献者。参见developers/developer元素 -->
+		<contributor>
+			<name />
+			<email />
+			<url />
+			<organization />
+			<organizationUrl />
+			<roles />
+			<timezone />
+			<properties />
+		</contributor>
+	</contributors>
+	<organization>
+		<!-- 组织的全名 -->
+		<name> 杭州维科软件工程有限责任公司 </name>
+		<!-- 组织主页的URL -->
+		<url> http://www.vico-lab.com/index.asp </url>
+	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.0.6.RELEASE</spring.version>
