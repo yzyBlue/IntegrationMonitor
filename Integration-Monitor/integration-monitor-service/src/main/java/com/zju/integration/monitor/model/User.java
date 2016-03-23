@@ -1,0 +1,204 @@
+package com.zju.integration.monitor.model;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+/**
+ * @author Yuan.Ziyang
+ * @since 2016-03-22
+ * @version v0.0.1
+ * @date 2016-03-22
+ * @description User information object
+ */
+public class User {
+	private long userId;
+	private String userName;
+	private String passWord;
+	private String roleCode;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	private Date createDate;
+	private String creatorId;
+	private String voidedBy;
+	private String voidFlag;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	private Date modifyDate;
+
+	public User() {
+		super();
+	}
+
+	public User(long userId, String userName, String passWord, String roleCode,
+			Date createDate, String creatorId, String voidedBy,
+			String voidFlag, Date modifyDate) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.passWord = passWord;
+		this.roleCode = roleCode;
+		this.createDate = createDate;
+		this.creatorId = creatorId;
+		this.voidedBy = voidedBy;
+		this.voidFlag = voidFlag;
+		this.modifyDate = modifyDate;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassWord() {
+		return passWord;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(String creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public String getVoidedBy() {
+		return voidedBy;
+	}
+
+	public void setVoidedBy(String voidedBy) {
+		this.voidedBy = voidedBy;
+	}
+
+	public String getVoidFlag() {
+		return voidFlag;
+	}
+
+	public void setVoidFlag(String voidFlag) {
+		this.voidFlag = voidFlag;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName
+				+ ", passWord=" + passWord + ", roleCode=" + roleCode
+				+ ", createDate=" + createDate + ", creatorId=" + creatorId
+				+ ", voidedBy=" + voidedBy + ", voidFlag=" + voidFlag
+				+ ", modifyDate=" + modifyDate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result
+				+ ((creatorId == null) ? 0 : creatorId.hashCode());
+		result = prime * result
+				+ ((modifyDate == null) ? 0 : modifyDate.hashCode());
+		result = prime * result
+				+ ((passWord == null) ? 0 : passWord.hashCode());
+		result = prime * result
+				+ ((roleCode == null) ? 0 : roleCode.hashCode());
+		result = prime * result + (int) (userId ^ (userId >>> 32));
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result
+				+ ((voidFlag == null) ? 0 : voidFlag.hashCode());
+		result = prime * result
+				+ ((voidedBy == null) ? 0 : voidedBy.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (createDate == null) {
+			if (other.createDate != null)
+				return false;
+		} else if (!createDate.equals(other.createDate))
+			return false;
+		if (creatorId == null) {
+			if (other.creatorId != null)
+				return false;
+		} else if (!creatorId.equals(other.creatorId))
+			return false;
+		if (modifyDate == null) {
+			if (other.modifyDate != null)
+				return false;
+		} else if (!modifyDate.equals(other.modifyDate))
+			return false;
+		if (passWord == null) {
+			if (other.passWord != null)
+				return false;
+		} else if (!passWord.equals(other.passWord))
+			return false;
+		if (roleCode == null) {
+			if (other.roleCode != null)
+				return false;
+		} else if (!roleCode.equals(other.roleCode))
+			return false;
+		if (userId != other.userId)
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		if (voidFlag == null) {
+			if (other.voidFlag != null)
+				return false;
+		} else if (!voidFlag.equals(other.voidFlag))
+			return false;
+		if (voidedBy == null) {
+			if (other.voidedBy != null)
+				return false;
+		} else if (!voidedBy.equals(other.voidedBy))
+			return false;
+		return true;
+	}
+}
