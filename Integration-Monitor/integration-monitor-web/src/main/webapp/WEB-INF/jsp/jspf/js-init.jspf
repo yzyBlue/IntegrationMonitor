@@ -1,0 +1,49 @@
+<!-- js library -->
+<script src="js/lib/angularjs/require.js"></script>
+<script src="js/lib/angularjs/jquery-2.1.1.js"></script>
+<script src="js/lib/angularjs/angular.js"></script>
+<script src="js/lib/angularjs/angular-animate.js"></script>
+<script src="js/lib/angularjs/angular-translate.js"></script>
+<script src="js/lib/angularjs/ui-utils.js"></script>
+<script src="js/lib/angularjs/angular-ui-router.js"></script>
+<script src="js/lib/angularjs/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="js/lib/angularjs/xml2json.js"></script>
+<script src="js/lib/angularjs/jquery-transit.js"></script>
+<script src="js/lib/angularjs/diffview.js"></script>
+<script src="js/lib/angularjs/difflib.js"></script>
+<script src="js/lib/angularjs/ng-context-menu.js"></script>
+ <script src="js/lib/angularjs/ui-bootstrap-typeahead.js"></script>
+<script src="js/lib/angularjs/angular-drag-and-drop-list.js"></script>
+<script src="js/lib/angularjs/ngPopover.js"></script>
+<script src="js/lib/angularjs/toaster.js"></script>
+<script src="js/lib/angularjs/ngclipboard.min.js"></script>
+
+
+<!-- app init -->
+<script src="js/app-config.js"></script>
+<script src="js/app-controller.js"></script>
+<script src="js/app.js"></script>
+
+<!-- i18n -->
+<script src="js/i18n/i18n-zh.js"></script>
+<script src="js/i18n/i18n-en.js"></script>
+
+<!-- services -->
+<!-- <script src="js/services/resource-service.js"></script> -->
+
+
+
+<!-- directives -->
+<!-- <script src="js/directives/files-model/files-model-directive.js"></script> -->
+
+<!-- api directives -->
+
+
+<!-- controllers -->
+<!-- <script src="js/views/management/management-controller.js"></script> -->
+
+
+
+<!-- util -->
+<script src="js/util/date-format-extension.js"></script>
+<script src="js/util/ng-visible-extension.js"></script>

@@ -28,7 +28,7 @@
 	<!--写入用户信息-->
 	<insert id="insertUserInfo" parameterType="com.zju.integration.monitor.model.User">
 	<selectKey resultType="long" order="AFTER" keyProperty="userId">
-		SELECT Identity() AS id
+		SELECT ident_current('USER_INFO') AS userId
 	</selectKey>
 	INSERT INTO
 		USER_INFO (
@@ -62,4 +62,10 @@
 	<delete id="deleteUserInfo" parameterType="com.zju.integration.monitor.model.User">
 		DELETE FROM USER_INFO WHERE USER_ID = #{userId,jdbcType=INTEGER}
 	</delete>
+	
+	<!--根据用户名和密码查询用户信息-->
+	<select id="getUserByUserNamePassWord" resultMap="UserInfoMap">
+	select * from USER_INFO where USER_NAME=#{userName,jdbcType=VARCHAR} 
+	and USER_PWD=#{passWord,jdbcType=VARCHAR}
+	</select>
 </mapper>

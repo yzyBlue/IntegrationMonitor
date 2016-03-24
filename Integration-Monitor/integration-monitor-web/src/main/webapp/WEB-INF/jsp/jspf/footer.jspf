@@ -1,0 +1,15 @@
+<!-- <footer style="position: fixed;bottom: 0px;width: 100%;"> -->
+<!-- 	<span class="pull-right">2014 ZheJiang University, BME, ChunKin.Lau&nbsp;&nbsp;</span> -->
+<!-- </footer> -->
+
+<div class="footer">
+		<ul>
+			<li><a href="#" target="_blank">官方网站</a></li>
+			<li class="divider"></li>
+			<li><a href="#" target="_blank">帮助中心</a></li>
+			<li class="divider"></li>
+			<li>
+				<p>Copyright © 2016 浙江大学</p>
+			</li>
+		</ul>
+</div>

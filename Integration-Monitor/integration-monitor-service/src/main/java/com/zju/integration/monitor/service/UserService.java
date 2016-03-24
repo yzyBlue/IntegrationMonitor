@@ -24,12 +24,32 @@ public class UserService {
 		return insertResult;
 	}
 	
+	public Integer updateUserInfo(User user){
+		Integer insertResult = 0;
+		try{
+			insertResult = userDao.updateUserInfo(user);
+		}catch(Exception e){
+			logger.error(e.toString());
+		}
+		return insertResult;
+	}
+	
 	public User getUserInfo(String userId){
 		User user = new User();
 		if (userId != null) {
 			user = userDao.getUserInfo(userId);
 		} else {
 			logger.info("用户ID为空！");
+		}
+		return user;
+	}
+	
+	public User getUserByUserNamePassWord(String userName,String passWord){
+		User user = new User();
+		if (userName != null) {
+			user = userDao.getUserByUserNamePassWord(userName, passWord);
+		} else {
+			logger.info("用户名称为空！");
 		}
 		return user;
 	}

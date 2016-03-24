@@ -57,8 +57,6 @@
 	</bean>
 
 	<mvc:resources location="/WEB-INF/" mapping="/**" />
-	<mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
-	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="1" />

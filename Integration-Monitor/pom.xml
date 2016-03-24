@@ -69,7 +69,7 @@
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.0.6.RELEASE</spring.version>
+		<spring.version>4.0.4.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>

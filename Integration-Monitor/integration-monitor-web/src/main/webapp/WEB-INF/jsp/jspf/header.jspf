@@ -1,0 +1,11 @@
+<div class="lang">
+		<strong class="lang-info"> <i class="iconfont large"></i> <span>{{getCurrentLanguage() | translate}}</span>
+			<i class="iconfont icon-arrowup"></i>
+		</strong>
+		<div class="dropdown-main" style="display: none;">
+			<ul>
+				<li ng-click="selectLanguage('zh')"><a data-lang="en" >{{'LANGUAGE_ZH' | translate}}</a></li>
+				<li ng-click="selectLanguage('en')"><a data-lang="zh_CN" >{{'LANGUAGE_EN' | translate}}</a></li>
+			</ul>
+		</div>
+</div>

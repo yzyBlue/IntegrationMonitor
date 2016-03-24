@@ -1208,7 +1208,11 @@ https://github.com/yahoo/pure/blob/master/LICENSE.md
 }
 .icon-monitor:before {
 	/*content: "\e616"*/
-	content:url(/images/logo.gif);
+	content:url(../../images/logo5.1.png);
+}
+.icon-brand:before {
+	/*content: "\e616"*/
+	content:url(../../images/logo2.png);
 }
 .icon-load:before {
 	content: "\e651"
@@ -3896,7 +3900,7 @@ table+.show-more {
 	content: "\e6c3"
 }
 .logo-center {
-	height: 110px;
+	height: 180px;
 	line-height: 110px;
 	font-size: 120px;
 	text-align: center
