@@ -1,0 +1,152 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div id="layout">
+	<div class="wrap clearfix">
+		<div class="page-title">
+			<h2>
+				集成平台<sub>集成通道监控列表</sub>
+			</h2>
+		</div>
+		<div class="content no-sidebar" id="root">
+			<div>
+				<div class="pure-g">
+					<div class="pure-u-1">
+						<div class="box">
+							<div class="widget-normal">
+								<div class="widget-content" style="display: block;">
+									<div>
+										<table class="table table-striped ">
+											<colgroup>
+												<col style="width: 15px;">
+												<col style="width: auto;">
+												<col style="width: 12%;">
+												<col style="width: 12%;">
+												<col style="width: 12%;">
+												<col style="width: 12%;">
+												<col style="width: 10%;">
+											</colgroup>
+											<thead>
+												<tr>
+													<th class="sortedth""><span
+														class="sortedtext"></span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">通道名称</span><span
+														class="sorted-arrow desc "></span></th>
+													<th class="sortedth">
+														<span class="sortedtext">部署时间</span>
+														<span class="sorted-arrow "></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">运行状态</span><span
+														class="sorted-arrow"></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">接收</span><span
+														class="sorted-arrow"></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">过滤</span><span
+														class="sorted-arrow"></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">处理中</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">发送</span><span
+														class="sorted-arrow"></span></th>
+													<th class="sortedth"><span
+														class="sortedtext">错误</span><span
+														class="sorted-arrow"></span></th>
+													<th style="width: 10%;" class=""></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class=""><i
+														class="iconfont  state-downtime"></i></td>
+													<td class=""><a
+														href="https://tpm.oneapm.com/tpm/account/723/server/8027/10698/main">CDR-Channel-Diagnoses-PPR</a></td>
+													<td class="" >2016-03-25 11:21:56</td>
+													<td class="" >STARTED</td>
+													<td class="" >48</td>
+													<td class="" >48</td>
+													<td class="" >0</td>
+													<td class="" >144</td>
+													<td class="" >0</td>
+													<td class="" ><div	class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+											<tbody>
+												<tr>
+													<td class=""><i
+														class="iconfont  state-downtime"></i></td>
+													<td class=""><a
+														href="https://tpm.oneapm.com/tpm/account/723/server/8027/10698/main"
+														>CDR-Channel-Diagnoses-PPR</a></td>
+													<td class="" >2016-03-25 11:21:56</td>
+													<td class="" >STARTED</td>
+													<td class="" >313</td>
+													<td class="" >8</td>
+													<td class="" >0</td>
+													<td class="" >507</td>
+													<td class="" >0</td>
+													<td class="" ><div
+															class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+
+											<tbody>
+												<tr>
+													<td class=""><i
+														class="iconfont  state-downtime"></i></td>
+													<td class=""><a
+														href="https://tpm.oneapm.com/tpm/account/723/server/8027/10698/main">CDR-Channel-DrugDispense-OMP</a></td>
+													<td class="" >2016-03-25 11:21:56</td>
+													<td class="" >STARTED</td>
+													<td class="" >313</td>
+													<td class="" >8</td>
+													<td class="" >0</td>
+													<td class="" >507</td>
+													<td class="" >0</td>
+													<td class="" >
+														<div class="operation">
+																<a class="iconfont" href="javascript:;"></a>
+																<a class="iconfont" href="javascript:;"></a>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+											<tbody>
+												<tr>
+													<td class="" ><i
+														class="iconfont  state-downtime"></i></td>
+													<td class="" ><a
+														href="https://tpm.oneapm.com/tpm/account/723/server/8027/10698/main">CDR-Channel-Order-ORM-New</a></td>
+													<td class="" >2016-03-25 11:21:56</td>
+													<td class="" >STARTED</td>
+													<td class="" >313</td>
+													<td class="" >8</td>
+													<td class="" >0</td>
+													<td class="" >507</td>
+													<td class="" >0</td>
+													<td class="" ><div
+															class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

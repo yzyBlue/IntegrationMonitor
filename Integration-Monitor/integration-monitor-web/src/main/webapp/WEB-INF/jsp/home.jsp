@@ -74,9 +74,6 @@
 				<a class="iconfont icon-brand" href="#" title="InteMonitor">
 					<span>InteMonitor</span>
 				</a>
-				<!-- <a class="iconfont icon-oneapmlogo" href="http://www.oneapm.com/" title="OneAPM">
-            <span>OneAPM</span>
-          </a> -->
 			</div>
 			<div class="account">
 				<strong class="account-info active"> <i
@@ -226,7 +223,7 @@
 								<a href="https://tpm.oneapm.com/tpm/account/723/servers"
 									class="product-link">
 									<div class="icon-box">
-										<div class="icon-bg si">
+										<div class="icon-bg hi">
 											<i class="icon iconfont"></i>
 										</div>
 									</div>

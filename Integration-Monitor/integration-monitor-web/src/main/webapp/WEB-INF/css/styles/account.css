@@ -2359,14 +2359,15 @@ p.note {
 	padding: 10px 20px
 }
 .header .logo {
-	float: left;
+	float: center;
 	width: 160px;
-	padding-left: 20px
+	padding-left: 10px;
+	padding-right: 10px
 }
 .header .logo a {
 	display: block;
 	height: 70px;
-	width: 70px;
+	width: 200px;
 	line-height: 1;
 	font-size: 70px;
 	color: rgba(51, 51, 51, .5)
@@ -2379,7 +2380,8 @@ p.note {
 }
 .header .nav, .header .nav .services {
 	float: left;
-	height: 70px
+	height: 70px;
+	padding-left: 30px;
 }
 .header .nav .services li {
 	float: left;
@@ -4167,6 +4169,13 @@ table+.show-more {
 	background-image: -moz-linear-gradient(top, #5bccff, #0096da);
 	background-image: -o-linear-gradient(top, #5bccff, #0096da);
 	background-image: linear-gradient(to bottom, #5bccff, #0096da)
+}
+.product-link .icon-box .icon-bg.hi {
+	background-image: url(../../images/help_document.png);
+	background-image: -webkit-linear-gradient(top, #FFD39B, #FF6347);
+	background-image: -moz-linear-gradient(top, #FFD39B, #FF6347);
+	background-image: -o-linear-gradient(top, #FFD39B, #FF6347);
+	background-image: linear-gradient(to bottom, #FFD39B, #FF6347)
 }
 .product-link .icon-box .icon-bg.si .icon {
 	color: #7fb333

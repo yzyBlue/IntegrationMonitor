@@ -1,16 +1,18 @@
-package com.zju.integration.monitor.controller;
+package com.zju.integration.monitor.rest;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;  
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.zju.integration.monitor.model.User;
 import com.zju.integration.monitor.service.UserService;
 
-@Controller
+@RestController
 @RequestMapping("/users/")
 public class UserController {
 
@@ -20,6 +22,7 @@ public class UserController {
 	protected static final Logger logger = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
 	public String getUserInfo(@PathVariable("userName") String userName, @PathVariable("passWord") String passWord) {
 		logger.debug("根据用户名和密码查询用户信息");
 		User user=new User();

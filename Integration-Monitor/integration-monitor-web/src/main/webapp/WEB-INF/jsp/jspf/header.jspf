@@ -1,11 +1,81 @@
-<div class="lang">
-		<strong class="lang-info"> <i class="iconfont large"></i> <span>{{getCurrentLanguage() | translate}}</span>
-			<i class="iconfont icon-arrowup"></i>
-		</strong>
-		<div class="dropdown-main" style="display: none;">
-			<ul>
-				<li ng-click="selectLanguage('zh')"><a data-lang="en" >{{'LANGUAGE_ZH' | translate}}</a></li>
-				<li ng-click="selectLanguage('en')"><a data-lang="zh_CN" >{{'LANGUAGE_EN' | translate}}</a></li>
-			</ul>
-		</div>
-</div>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="header">
+        <div class="logo">
+          <a class="iconfont icon-brand" href="#" title="Inte-Monitor">
+            <span>Inte-Monitor</span>
+          </a>
+    	</div>
+        <div class="account">
+		      <strong class="account-info">
+			      <i class="iconfont large"></i>
+			      <span> admin</span>
+			      <i class="iconfont icon-arrowup"></i>
+		      </strong>
+		      <div class="dropdown-main" style="display: none;">
+		       <ul>
+	              <li>
+	                <a href="#" target="_blank"><i class="iconfont"></i> 个人中心</a>
+	              </li>
+	              <li>
+	                <a href="#" target="_blank"><i class="iconfont"></i> 控制台</a>
+	              </li>
+	              <li>
+	                <a href="#"><i class="iconfont"></i> 团队信息</a>
+	              </li>
+			      <li>
+	                <a href="#"><i class="iconfont"></i> 退出</a>
+	              </li>
+		        </ul>
+		      </div>
+		    </div>
+		  <div class="order">
+            <strong class="order-title"><i class="iconfont"></i><span> 语言</span><i class="iconfont icon-arrowup"></i></strong>
+            <div class="dropdown-main" style="display: none;">
+              <ul>
+                <li><a href="#" target="_blank"><i class="iconfont"></i>中文</a></li>
+                <li><a href="#" target="_blank"><i class="iconfont"></i>英文</a></li>
+              </ul>
+            </div>
+          </div>
+        <div class="nav">
+          <div class="services">
+            <ul>
+				<li>
+                	<a class="active" href="http://localhost:8080/integration-monitor/server" data-tip="集成事务管理" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+              <li>
+                	<a class="" href="#" data-tip="真实用户体验监控" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+              <li>
+                	<a class="" href="#" data-tip="系统监控和中间件监控" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+              <li>
+                	<a class="" href="#" data-tip="模拟业务监控" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+              <li>
+                	<a class="" href="#" data-tip="移动应用性能管理平台" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+              <li>
+                	<a class="" href="#" data-tip="一站式告警管理平台" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+              <li>
+                	<a class="" href="#" data-tip="主机监控" data-place="bottom">
+                  		<i class="iconfont"></i>
+                	</a>
+              </li>
+            </ul>
+          </div>
+      </div>

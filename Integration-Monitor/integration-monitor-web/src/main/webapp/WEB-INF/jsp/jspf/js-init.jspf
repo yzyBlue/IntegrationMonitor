@@ -1,6 +1,6 @@
 <!-- js library -->
 <script src="js/lib/angularjs/require.js"></script>
-<script src="js/lib/angularjs/jquery-2.1.1.js"></script>
+<script src="js/lib/jquery/jquery-2.1.1.js"></script>
 <script src="js/lib/angularjs/angular.js"></script>
 <script src="js/lib/angularjs/angular-animate.js"></script>
 <script src="js/lib/angularjs/angular-translate.js"></script>
@@ -47,3 +47,6 @@
 <!-- util -->
 <script src="js/util/date-format-extension.js"></script>
 <script src="js/util/ng-visible-extension.js"></script>
+
+
+

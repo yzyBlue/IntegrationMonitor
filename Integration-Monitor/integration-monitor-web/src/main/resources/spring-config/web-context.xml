@@ -23,9 +23,10 @@
 	<import resource="classpath*:config/spring-context.xml" />
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.zju.integration.monitor.controller" />
+	<context:component-scan base-package="com.zju.integration.monitor" />
 	<!-- spring security config -->	
 	<sec:http pattern="/js/**" security="none" />
+	<sec:http pattern="/js/lib/**" security="none" />
 	<sec:http pattern="/css/styles/fonts/**" security="none" />
 	<sec:http pattern="/css/**" security="none" />
 <!-- 	<sec:http pattern="/font/**" security="none" /> -->
