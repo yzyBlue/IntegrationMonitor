@@ -21,8 +21,8 @@
 <link rel="icon" href="images/favicon.ico" />
 <!-- css init -->
 <%@ include file="jspf/css-init.jspf"%>
-<body style="font-family: Microsoft YaHei;">
 
+<body style="font-family: Microsoft YaHei;">
 
 	<%@ include file="jspf/header.jspf"%>
 
@@ -70,18 +70,19 @@
 			</div>
 		</div>
 		<div>
-			<div class="box" style="position: relative;">
-				<div class="topo-map widget-normal">
+			<div class="box" style="width: 98%; height: 90%;position: relative;padding-right: 10;padding-bottom: 100;">
+				<div class="topo-map widget-normal" >
 					<div class="widget-content" style="display: block;">
-						<div
-							style="width: 100%; height: 700px; position: relative; padding: 0;">
-							<svg width="100%" height="700">
-									<g >
-										<rect width="100%" height="700" style="fill: none; pointer-events: all;" />
+						<div style=" position: relative; padding: 0;">
+							<svg width="100%" height="100%">
+									<g>
+										<rect width="100%" height="100%" style="fill: none; pointer-events: all;" />
 											<g>
-												<rect width="80" height="80" style="fill: #99a3b2;; padding: 10;" />
-												
-												<circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+												<rect  width="80" height="80" style="fill: #99a3b2;; padding: 20;" />
+												<circle cx="200" cy="150" r="40" stroke="none" stroke-width="2" fill="red" />
+												<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2" fill="blue" />
+												<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2" fill="#99a3b2" />
+												<ellipse cx="200" cy="350" rx="100" ry="40"style="fill:rgb(200,100,50);stroke:none;stroke-width:2"/>
 											</g>
 										</rect>
 									</g>

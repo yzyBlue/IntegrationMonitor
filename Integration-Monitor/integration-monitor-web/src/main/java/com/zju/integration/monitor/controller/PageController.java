@@ -37,4 +37,8 @@ public class PageController {
 	public String getTopo() {
 		return "topo";
 	}
+	@RequestMapping("/message")
+	public String getMessage() {
+		return "message";
+	}
 }

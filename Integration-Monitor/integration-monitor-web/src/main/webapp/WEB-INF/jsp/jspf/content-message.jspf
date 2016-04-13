@@ -1,0 +1,176 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<div id="layout">
+	<div class="wrap clearfix">
+		<div class="page-title">
+			<h2>
+				消息监控<sub>消息事件监控列表</sub>
+			</h2>
+		</div>
+
+		<div class="content no-sidebar" id="root">
+			<div>
+				<div class="pure-g">
+					<div class="pure-u-1">
+						<div class="box">
+							<div class="widget-normal">
+								<div class="widget-content" style="display: block;">
+									<div>
+										<table class="table table-striped ">
+											<colgroup>
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+												<col style="width: auto;">
+											</colgroup>
+											<thead>
+												<tr>
+													<th class="sortedth"><span class="sortedtext"></span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">编号</span><span
+														class="sorted-arrow desc "></span></th>
+													<th class="sortedth"><span class="sortedtext">消息类型</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">事件类型</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">控制代码</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">事务类型</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">发生时间</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">消息索引号</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">病人号</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">就诊号</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">处理状态</span><span
+														class="sorted-arrow "></span></th>
+													<th class="sortedth"><span class="sortedtext">操作</span><span
+														class="sorted-arrow "></span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class="">1</td>
+													<td class="">ADT</td>
+													<td class="">A01</td>
+													<td class=""></td>
+													<td class="">PAM</td>
+													<td class="">2016-04-08 15:17:25</td>
+													<td class="">251634</td>
+													<td class="">M000391681</td>
+													<td class="">152295</td>
+													<td class=""><a class="btn-green" href="#">查看状态</a></td>
+													<td class=""><div class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+											<tbody>
+												<tr>
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class="">2</td>
+													<td class="">ORM</td>
+													<td class="">O01</td>
+													<td class="">NW</td>
+													<td class="">EXAM</td>
+													<td class="">2016-04-08 15:17:25</td>
+													<td class="">ER152295</td>
+													<td class="">M000391681</td>
+													<td class="">152295</td>
+													<td class=""><a class="btn-green" href="#">查看状态</a></td>
+													<td class=""><div class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+
+											<tbody>
+												<tr>
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class="">3</td>
+													<td class="">ADT</td>
+													<td class="">A02</td>
+													<td class="">NW</td>
+													<td class="">PAM</td>
+													<td class="">2016-04-08 15:17:25</td>
+													<td class="">251634</td>
+													<td class="">M000391681</td>
+													<td class="">152295</td>
+													<td class=""><a class="btn-green" href="#">查看状态</a></td>
+													<td class=""><div class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+											<tbody>
+												<tr>
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class="">4</td>
+													<td class="">ORM</td>
+													<td class="">O01</td>
+													<td class="">CA</td>
+													<td class="">EXAM</td>
+													<td class="">2016-04-08 15:17:25</td>
+													<td class="">ER152295</td>
+													<td class="">M000391681</td>
+													<td class="">152295</td>
+													<td class=""><a class="btn-green" href="#">查看状态</a></td>
+													<td class=""><div class="operation">
+															<a class="iconfont" href="javascript:;"></a><a
+																class="iconfont" href="javascript:;"></a>
+														</div></td>
+												</tr>
+											</tbody>
+<!-- 											<tbody> -->
+<!-- 												<tr> -->
+<!-- 													<td colspan="6" class="footer-container"> -->
+<!-- 														<div -->
+<!-- 															class="griddle-footer"> -->
+<!-- 															<div class="row"> -->
+<!-- 																<div class="paginate-info"> -->
+<!-- 																	<label class="pagination"></label> -->
+<!-- 																</div> -->
+<!-- 																<div class="paginate"> -->
+<!-- 																	<ul class="pagination"> -->
+<!-- 																		<li class="disabled"><a role="button" disabled="" -->
+<!-- 																			href=""><span aria-label="First">«</span></a></li> -->
+<!-- 																		<li class="disabled"><a role="button" disabled="" -->
+<!-- 																			href=""><span aria-label="Previous">‹</span></a></li> -->
+<!-- 																		<li class="active"><a role="button" href="">1</a></li> -->
+<!-- 																		<li class="disabled"><a role="button" disabled="" -->
+<!-- 																			href=""><span aria-label="Next">›</span></a></li> -->
+<!-- 																		<li class="disabled"><a role="button" disabled="" -->
+<!-- 																			href=""><span aria-label="Last">»</span></a></li> -->
+<!-- 																	</ul> -->
+<!-- 																</div> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
+<!-- 													</td> -->
+<!-- 												</tr> -->
+<!-- 											</tbody> -->
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

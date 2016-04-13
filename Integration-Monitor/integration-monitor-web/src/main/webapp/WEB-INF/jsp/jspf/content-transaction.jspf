@@ -31,7 +31,7 @@
 						<li><a class="iconfont icon"href="#">事务统计</a></li>
 					</ul>
 				</li>
-				<li><strong> <a	href="#"> <i class="iconfont icon-settings"></i>警报设置</a> </strong></li>
+				<li><strong> <a	href="#"> <i class="iconfont icon-settings"></i>警报记录</a> </strong></li>
 			</ul>
 		</div>
 	</div>
@@ -106,7 +106,7 @@
 <!-- 									</h4> -->
 <!-- 								</div> -->
 								<div class="widget-content">
-									<div id="container2" style=" margin: 0 auto"></div>
+									<div id="container2" style="width: 99%; margin: 0 auto"></div>
 								</div>
 							</div>
 						</div>

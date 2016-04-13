@@ -72,7 +72,7 @@
 									</div>
 									<div class="text-box">
 										<p class="name">Transaction Monitor</p>
-										<p class="desp">集成事务监控</p>
+										<p class="desp">事务监控</p>
 									</div>
 								</a>
 							</div>
@@ -98,12 +98,14 @@
 								<a href="/integration-monitor/server" class="product-link">
 									<div class="icon-box">
 										<div class="icon-bg ci">
-											<i class="icon iconfont"></i>
+<!-- 											<i class="icon iconfont">&#xe65c;</i> -->
+												<i class="icon iconfont">&#xe66f;</i>
+
 										</div>
 									</div>
 									<div class="text-box">
 										<p class="name">Server Monitor</p>
-										<p class="desp">服务器性能监控</p>
+										<p class="desp">服务器监控</p>
 									</div>
 								</a>
 							</div>
@@ -119,7 +121,7 @@
 									</div>
 									<div class="text-box">
 										<p class="name">Channel Monitor</p>
-										<p class="desp">集成通道监控</p>
+										<p class="desp">通道监控</p>
 									</div>
 								</a>
 							</div>
@@ -134,7 +136,7 @@
 									</div>
 									<div class="text-box">
 										<p class="name">Problem Manage</p>
-										<p class="desp">集成问题管理</p>
+										<p class="desp">问题管理</p>
 									</div>
 								</a>
 							</div>
@@ -151,7 +153,7 @@
 									</div>
 									<div class="text-box">
 										<p class="name">Transaction Manage</p>
-										<p class="desp">集成事务管理</p>
+										<p class="desp">事务管理</p>
 									</div>
 								</a>
 							</div>
@@ -167,7 +169,7 @@
 									</div>
 									<div class="text-box">
 										<p class="name">API Monitor</p>
-										<p class="desp">集成服务监控</p>
+										<p class="desp">服务监控</p>
 									</div>
 								</a>
 							</div>

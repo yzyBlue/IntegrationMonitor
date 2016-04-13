@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <div class="header">
 	<div class="logo">
-		<a class="iconfont icon-brand" href="/integration-monitor/" title="Inte-Monitor"> <span>Inte-Monitor</span>
+		<a class="iconfont icon-brand" href="/integration-monitor/"
+			title="Inte-Monitor"> <span>Inte-Monitor</span>
 		</a>
 	</div>
 	<div class="account">
@@ -11,8 +12,8 @@
 		</strong>
 		<div class="dropdown-main" style="display: none;">
 			<ul>
-				<li><a href="#" ><i	class="iconfont"></i>个人中心 </a></li>
-				<li><a href="#"><i	class="iconfont"></i>控制台</a></li>
+				<li><a href="#"><i class="iconfont"></i>个人中心 </a></li>
+				<li><a href="#"><i class="iconfont"></i>控制台</a></li>
 				<li><a href="#"><i class="iconfont"></i> 团队信息</a></li>
 				<li><a href="#"><i class="iconfont"></i> 退出</a></li>
 			</ul>
@@ -31,28 +32,34 @@
 	<div class="nav">
 		<div class="services">
 			<ul>
-				<li>
-					<a class=""	href="/integration-monitor/transaction"	data-tip="集成事务管理" data-place="bottom"> 
-						<i class="iconfont icon-applications"></i>
-					</a>
-				</li>
-				<li>
-					<a class=""	href="/integration-monitor/message"	data-tip="消息事件监控" data-place="bottom"> 
-						<i class="iconfont icon-cogs"></i>
-					</a>
-				</li>
-				<li><a class="" href="/integration-monitor/server" data-tip="server monitor" data-place="bottom"> <i class="iconfont"></i>
+				<li><a class="" href="/integration-monitor/transaction"
+					data-tip="集成事务管理" data-place="bottom"> <i
+						class="iconfont icon-ai"></i>
 				</a></li>
-				<li><a class="" href="/integration-monitor/channel" data-tip="channel monitor"	data-place="bottom"> <i class="iconfont"></i>
+				<li><a class="" href="/integration-monitor/message"
+					data-tip="消息事件监控" data-place="bottom"> <i
+						class="iconfont icon-bi"></i>
 				</a></li>
-				<li><a class="" href="#" data-tip="problem manage" ><i class="iconfont"></i>
+				<li><a class="" href="/integration-monitor/server"
+					data-tip="server monitor" data-place="bottom"> <i
+						class="iconfont">&#xe66f;</i>
 				</a></li>
-				<li><a class="" href="#" data-tip="transaction manage"	data-place="bottom"> <i class="iconfont"></i>
+				<li><a class="" href="/integration-monitor/channel"
+					data-tip="channel monitor" data-place="bottom"> <i
+						class="iconfont iconfont">&#xe689;</i>
 				</a></li>
-				<li><a class="" href="/integration-monitor/service" data-tip="api monitor"data-place="bottom"> <i class="iconfont"></i>
+				<li><a class="" href="#" data-tip="problem manage"><i
+						class="iconfont iconfont">&#xe63c;</i> 
 				</a></li>
-				<li><a class="" href="#" data-tip="help document" data-place="bottom">
-						<i class="iconfont"></i>
+				<li><a class="" href="#" data-tip="transaction manage"
+					data-place="bottom"> <i class="iconfont iconfont">&#xe675;</i>
+				</a></li>
+				<li><a class="" href="/integration-monitor/service"
+					data-tip="api monitor" data-place="bottom"> <i
+						class="iconfont iconfont">&#xe617;</i>
+				</a></li>
+				<li><a class="" href="#" data-tip="help document"
+					data-place="bottom"> <i class="iconfont">&#xe656;</i>
 				</a></li>
 			</ul>
 		</div>
