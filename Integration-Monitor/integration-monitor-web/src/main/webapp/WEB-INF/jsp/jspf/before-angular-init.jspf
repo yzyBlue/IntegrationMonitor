@@ -1,9 +1,11 @@
 <!-- <script src="js/lib/clipboard.js"></script> -->
-<script src="js/myjs/vendor.js" type="text/javascript"></script>
-<script src="js/myjs/account.js" type="text/javascript"></script>
+<!-- <script src="js/myjs/vendor.js" type="text/javascript"></script> -->
+<!-- <script src="js/myjs/account.js" type="text/javascript"></script> -->
+<!-- <script src="https://github.com/mixpanel/mixpanel-js" type="text/javascript"></script> -->
+
 <script>
     var BlueWare = {
-      siteDomain:'oneapm.com'
+      siteDomain:'zju.edu.com'
     }
     BlueWare['account'] = {
       resend:'重新发送',
@@ -32,7 +34,10 @@
       }
     }
 </script>
-<script type="text/javascript" charset="utf-8" 	src="js/myjs/ui-server.js"></script>
-<script type="text/javascript" charset="utf-8"  src="js/myjs/main-server.js"></script>
+<!-- <script type="text/javascript" charset="utf-8" 	src="js/myjs/ui-server.js"></script> -->
+<!-- <script type="text/javascript" charset="utf-8"  src="js/myjs/main-server.js"></script> -->
+<!-- <script src="js/myjs/modules.js"></script> -->
 
-<script src="js/myjs/modules.js"></script>
+
+<!-- <script src="js/myjs/utils.js"></script> -->
+<!-- <script src="js/myjs/index.js"></script> -->

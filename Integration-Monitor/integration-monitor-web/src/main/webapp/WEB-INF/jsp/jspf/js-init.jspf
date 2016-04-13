@@ -3,20 +3,20 @@
 <script src="js/lib/jquery/jquery-2.1.1.js"></script>
 <script src="js/lib/angularjs/angular.js"></script>
 <script src="js/lib/angularjs/angular-animate.js"></script>
-<script src="js/lib/angularjs/angular-translate.js"></script>
+<script src="js/lib/angularjs/angular-translate.min.js"></script>
 <script src="js/lib/angularjs/ui-utils.js"></script>
 <script src="js/lib/angularjs/angular-ui-router.js"></script>
 <script src="js/lib/angularjs/ui-bootstrap-tpls-0.12.0.js"></script>
-<script src="js/lib/angularjs/xml2json.js"></script>
+<!-- <script src="js/lib/angularjs/xml2json.js"></script> -->
 <script src="js/lib/angularjs/jquery-transit.js"></script>
 <script src="js/lib/angularjs/diffview.js"></script>
 <script src="js/lib/angularjs/difflib.js"></script>
-<script src="js/lib/angularjs/ng-context-menu.js"></script>
- <script src="js/lib/angularjs/ui-bootstrap-typeahead.js"></script>
-<script src="js/lib/angularjs/angular-drag-and-drop-list.js"></script>
-<script src="js/lib/angularjs/ngPopover.js"></script>
+<!-- <script src="js/lib/angularjs/ng-context-menu.js"></script> -->
+<script src="js/lib/angularjs/ui-bootstrap-typeahead.js"></script>
+<!-- <script src="js/lib/angularjs/angular-drag-and-drop-list.js"></script> -->
+<!-- <script src="js/lib/angularjs/ngPopover.js"></script> -->
 <script src="js/lib/angularjs/toaster.js"></script>
-<script src="js/lib/angularjs/ngclipboard.min.js"></script>
+<!-- <script src="js/lib/angularjs/ngclipboard.min.js"></script> -->
 
 
 <!-- app init -->
@@ -34,8 +34,8 @@
 
 
 <!-- directives -->
-<!-- <script src="js/directives/files-model/files-model-directive.js"></script> -->
-
+<script src="js/directives/slide-directive.js"></script>
+<script src="js/directives/carousel-directive.js"></script>
 <!-- api directives -->
 
 
@@ -45,8 +45,6 @@
 
 
 <!-- util -->
-<script src="js/util/date-format-extension.js"></script>
-<script src="js/util/ng-visible-extension.js"></script>
-
-
+<!-- <script src="js/util/date-format-extension.js"></script> -->
+<!-- <script src="js/util/ng-visible-extension.js"></script> -->
 

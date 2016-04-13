@@ -49,7 +49,7 @@
 						</div>
 						<div class="form-wrapper">
 							<form method="post"
-								action="../users/user?userName=admin&passWord=admin"
+								action="/integration-monitor/"
 								id="loginform" novalidate="novalidate">
 								<div class="input-box">
 									<input class="input-text valid" type="text" name="email"
@@ -67,12 +67,11 @@
 											<span class="iconfont check-in"></span>
 									</span> 自动登陆
 									</label> <a class="float-right"
-										href="http://user.oneapm.com/pages/v2/password/forget">忘记密码？</a>
+										href="#">忘记密码？</a>
 								</div>
 								<div class="input-box margin-min">
-									<input type="hidden" name="encode" value="false"> <input
-										class="btn btn-blue btn-block" type="submit" name="submit"
-										value="登录">
+									<input type="hidden" name="encode" value="false"> 
+									<input class="btn btn-blue btn-block" type="submit" name="submit" value="登录" >
 								</div>
 
 							</form>
@@ -85,9 +84,9 @@
 	</div>
 	<div class="footer">
 		<ul>
-			<li><a href="http://oneapm.com/" target="_blank">官方网站</a></li>
+			<li><a href="#" target="_blank">官方网站</a></li>
 			<li class="divider"></li>
-			<li><a href="http://support.oneapm.com/" target="_blank">帮助中心</a></li>
+			<li><a href="#" target="_blank">帮助中心</a></li>
 			<li class="divider"></li>
 			<li>
 				<p>Copyright © 2016 浙江大学</p>

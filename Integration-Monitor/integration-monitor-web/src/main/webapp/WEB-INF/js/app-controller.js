@@ -1,5 +1,12 @@
-angular.module('integration.monitor.controllers.app', []).controller('appCtrl', function($scope, $translate, $state, $window, $timeout) {
+angular.module('integration.monitor.controllers.app', []).controller('appCtrl', function($scope, $translate, $state, $window, $element,$timeout,authenticationService) {
 
+	$scope.isAuthenticated = false;
+	$scope.$watch(function() {
+		return authenticationService.isAuthenticated();
+	}, function(newValue) {
+		$scope.isAuthenticated = newValue;
+	});
+	
 	$scope.selectLanguage = function(key) {
 		$translate.use(key);
 	};
@@ -86,4 +93,26 @@ angular.module('integration.monitor.controllers.app', []).controller('appCtrl', 
 		$scope.containerHeight = $window.innerHeight - 100 < 400 ? 400 : $window.innerHeight - 100;
 		$scope.$apply();
 	});
+	
+	
+
+//    $scope.images = [
+//        'images/ai.png',
+//        'images/bi.png',
+//        'images/ci.png',
+//        'images/ct.png',
+//        'images/index.png'
+//    ];
+//    $scope.currentSlide = 1;
+//
+//    $scope.prev = function(){
+//        $scope.forward = false;
+//        $scope.currentSlide = ($scope.currentSlide + $scope.images.length - 1) % $scope.images.length;
+//    };
+//    $scope.next = function(){
+//        $scope.forward = true;
+//        $scope.currentSlide = ($scope.currentSlide + 1) % $scope.images.length;
+//    };
+
+	
 });

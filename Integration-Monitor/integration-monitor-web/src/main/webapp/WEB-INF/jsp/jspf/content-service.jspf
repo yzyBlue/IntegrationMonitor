@@ -1,0 +1,272 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="wrap clearfix">
+	<div class="content no-sidebar" id="root">
+		<div data-reactid=".3">
+			<div class="page-title" data-reactid=".3.0">
+				<div class="navbar" data-reactid=".3.0.0">
+					<ul data-reactid=".3.0.0.0">
+						<li data-reactid=".3.0.0.0.4"><a class="btn-green"
+							href="#" data-reactid=".3.0.0.0.4.0">添加监控</a></li>
+					</ul>
+				</div>
+				<h2 data-reactid=".3.0.1">
+					<span data-reactid=".3.0.1.0">服务监控列表</span><sub
+						data-reactid=".3.0.1.1">总览已建立的监控</sub>
+				</h2>
+			</div>
+			<div class="box" data-reactid=".3.1">
+				<div class="widget-tab" data-reactid=".3.1.0">
+					<div class="widget-title-tab" data-reactid=".3.1.0.0">
+						<ul data-reactid=".3.1.0.0.0">
+							<li class="active" data-reactid=".3.1.0.0.0.$0"><a
+								href="javascript:;" data-reactid=".3.1.0.0.0.$0.0">监控列表</a></li>
+							<li class="" data-reactid=".3.1.0.0.0.$1"><a
+								href="javascript:;" data-reactid=".3.1.0.0.0.$1.0">说明文档</a></li>
+						</ul>
+					</div>
+					<div class="widget-content" data-reactid=".3.1.0.1">
+						<div data-reactid=".3.1.0.1.0">
+							<div data-reactid=".3.1.0.1.0.0">
+								<table class="table table-striped table-layout"
+									data-reactid=".3.1.0.1.0.0.0">
+									<colgroup data-reactid=".3.1.0.1.0.0.0.0">
+										<col style="width: 30px;"
+											data-reactid=".3.1.0.1.0.0.0.0.$apdexScore">
+										<col style="width: 10%;"
+											data-reactid=".3.1.0.1.0.0.0.0.$description">
+										<col style="width: 10%;"
+											data-reactid=".3.1.0.1.0.0.0.0.$display_type">
+										<col style="width: 20%;" data-reactid=".3.1.0.1.0.0.0.0.$url">
+										<col style="width: auto;"
+											data-reactid=".3.1.0.1.0.0.0.0.$available_rate">
+										<col style="width: 15%;"
+											data-reactid=".3.1.0.1.0.0.0.0.$avg_response_time">
+										<col style="width: 10%;"
+											data-reactid=".3.1.0.1.0.0.0.0.$displayStatus">
+										<col style="width: auto;" data-reactid=".3.1.0.1.0.0.0.0.7">
+									</colgroup>
+									<thead data-reactid=".3.1.0.1.0.0.0.1">
+										<tr data-reactid=".3.1.0.1.0.0.0.1.$thead_tr">
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$0"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$0.0"></span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$0.1"></span></th>
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$1"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$1.0">名称</span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$1.1"></span></th>
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$2"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$2.0">类型</span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$2.1"></span></th>
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$3"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$3.0">URL</span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$3.1"></span></th>
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$4"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$4.0">可用性</span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$4.1"></span></th>
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$5"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$5.0">平均响应时间</span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$5.1"></span></th>
+											<th class="sortedth"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$6"><span
+												class="sortedtext"
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$6.0">状态</span><span
+												class="sorted-arrow "
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$6.1"></span></th>
+											<th style="width: auto;" class=""
+												data-reactid=".3.1.0.1.0.0.0.1.$thead_tr.$7"></th>
+										</tr>
+									</thead>
+									<tbody data-reactid=".3.1.0.1.0.0.0.2">
+										<tr data-reactid=".3.1.0.1.0.0.0.2.0:0:$0">
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$0"><i
+												class="iconfont  state-satisfied"
+												style="margin-right: 10px;"
+												data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$0.0"></i></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$1"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$1.0">
+													<a href="#"
+														data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$1.0.0">Baidu</a>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$2">单页面监控</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$3"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$3.0">https://www.baidu.com/</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$4"><div
+													class="progress"
+													data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$4.0">
+													<div class="progress-bar" style="width: 99.78%;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$4.0.0"></div>
+													<div class="progress-value"
+														data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$4.0.1">99.78%</div>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$5"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$5.0">517 ms</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$6">运行中</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$7"><div
+													class="operation"
+													data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$7.0">
+													<a class="iconfont" href="javascript:"
+														style="visibility: visible;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:0:$0.$7.0.0"></a>
+												</div></td>
+										</tr>
+										<tr data-reactid=".3.1.0.1.0.0.0.2.0:1:$1">
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$0"><i
+												class="iconfont  state-satisfied"
+												style="margin-right: 10px;"
+												data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$0.0"></i></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$1"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$1.0">
+													<a href="#"
+														data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$1.0.0">API demo</a>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$2">API
+												监控</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$3"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$3.0">http://hq.sinajs.cn/list=sh601006</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$4"><div
+													class="progress"
+													data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$4.0">
+													<div class="progress-bar" style="width: 100.00%;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$4.0.0"></div>
+													<div class="progress-value"
+														data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$4.0.1">100.00%</div>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$5"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$5.0">61 ms</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$6">运行中</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$7"><div
+													class="operation"
+													data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$7.0">
+													<a class="iconfont" href="javascript:"
+														style="visibility: visible;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:1:$1.$7.0.0"></a>
+												</div></td>
+										</tr>
+										<tr data-reactid=".3.1.0.1.0.0.0.2.0:2:$2">
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$0"><i
+												class="iconfont  state-satisfied"
+												style="margin-right: 10px;"
+												data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$0.0"></i></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$1"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$1.0">
+													<a href="#"
+														data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$1.0.0">Transaction
+														Demo</a>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$2">事务监控</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$3"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$3.0">www.baidu.com.json</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$4"><div
+													class="progress"
+													data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$4.0">
+													<div class="progress-bar" style="width: 100.00%;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$4.0.0"></div>
+													<div class="progress-value"
+														data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$4.0.1">100.00%</div>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$5"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$5.0">9.12 s</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$6">运行中</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$7"><div
+													class="operation"
+													data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$7.0">
+													<a class="iconfont" href="javascript:"
+														style="visibility: visible;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:2:$2.$7.0.0"></a>
+												</div></td>
+										</tr>
+										<tr data-reactid=".3.1.0.1.0.0.0.2.0:3:$3">
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$0"><i
+												class="iconfont  state-satisfied"
+												style="margin-right: 10px;"
+												data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$0.0"></i></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$1"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$1.0">
+													<a href="#"
+														data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$1.0.0">ping
+														demo</a>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$2">PING
+												监控</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$3"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$3.0">www.oneapm.com</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$4"><div
+													class="progress"
+													data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$4.0">
+													<div class="progress-bar" style="width: 100.00%;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$4.0.0"></div>
+													<div class="progress-value"
+														data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$4.0.1">100.00%</div>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$5"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$5.0">20 ms</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$6">运行中</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$7"><div
+													class="operation"
+													data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$7.0">
+													<a class="iconfont" href="javascript:"
+														style="visibility: visible;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:3:$3.$7.0.0"></a>
+												</div></td>
+										</tr>
+										<tr data-reactid=".3.1.0.1.0.0.0.2.0:4:$4">
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$0"><i
+												class="iconfont  state-satisfied"
+												style="margin-right: 10px;"
+												data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$0.0"></i></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$1"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$1.0">
+													<a href="#"
+														data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$1.0.0">DNS demo</a>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$2">DNS
+												监控</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$3"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$3.0">www.taobao.com</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$4"><div
+													class="progress"
+													data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$4.0">
+													<div class="progress-bar" style="width: 100.00%;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$4.0.0"></div>
+													<div class="progress-value"
+														data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$4.0.1">100.00%</div>
+												</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$5"><div
+													data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$5.0">112 ms</div></td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$6">运行中</td>
+											<td class="" data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$7"><div
+													class="operation"
+													data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$7.0">
+													<a class="iconfont" href="javascript:"
+														style="visibility: visible;"
+														data-reactid=".3.1.0.1.0.0.0.2.0:4:$4.$7.0.0"></a>
+												</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

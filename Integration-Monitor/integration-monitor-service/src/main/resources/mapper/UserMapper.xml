@@ -68,4 +68,10 @@
 	select * from USER_INFO where USER_NAME=#{userName,jdbcType=VARCHAR} 
 	and USER_PWD=#{passWord,jdbcType=VARCHAR}
 	</select>
+	
+	<!--根据用户名用户信息-->
+	<select id="findUserByName" resultMap="UserInfoMap">
+		select * from USER_INFO where USER_NAME=#{userName,jdbcType=VARCHAR}
+	</select>
+	
 </mapper>

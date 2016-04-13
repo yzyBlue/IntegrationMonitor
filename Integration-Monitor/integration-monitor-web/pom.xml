@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -10,11 +10,11 @@
 	</parent>
 	<artifactId>integration-monitor-web</artifactId>
 	<packaging>war</packaging>
-	<name>integration-monitor-web</name>
+	<name>integration-monitor</name>
 	<properties>
 		<servlet-api.version>3.1.0</servlet-api.version>
 		<jackson.version>2.2.1</jackson.version>
-		<tomcat.url>http://172.16.100.64:8080/manager/text</tomcat.url>
+		<tomcat.url>http://172.16.100.64:10646/manager/text</tomcat.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.name>integration-monitor-web</project.name>
 	</properties>
@@ -31,26 +31,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.0.5.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>4.0.4.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>4.0.4.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>4.0.4.RELEASE</version>
-		</dependency>
+
 
 		<dependency>
 			<groupId>com.zju.integration.monitor</groupId>
 			<artifactId>integration-monitor-service</artifactId>
-			<version>0.0.1</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -65,18 +51,40 @@
 	</dependencies>
 
 	<build>
+		<finalName>integration-monitor</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
+				<!-- 配置参数用法参考： http://tomcat.apache.org/maven-plugin-2.0/tomcat7-maven-plugin/plugin-info.html -->
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
+					<mode>war</mode>
+					<!--tomcat7:deploy,tomcat7:redeploy,tomcat7:undeploy时会用到url-->
 					<url>${tomcat.url}</url>
 					<username>admin</username>
 					<password>admin</password>
-					<path>/${project.artifactId}</path>
+					<server>tomcat</server>
+					<path>/${project.build.finalName}</path>
 					<charset>${project.build.sourceEncoding}</charset>
 					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
-					<port>${server.port}</port>
+					<!-- tomcat7:run时会用到port -->
+					<port>8080</port>
+					<update>true</update>
+					<enableNaming>true</enableNaming>
 				</configuration>
 			</plugin>
 		</plugins>

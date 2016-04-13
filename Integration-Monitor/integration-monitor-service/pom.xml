@@ -13,6 +13,7 @@
 		<log4j.version>1.2.16</log4j.version>
 		<project.name>integration-monitor-service</project.name>
 		<jackson.version>2.2.1</jackson.version>
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<dependencies>
 		<!-- mybatis核心包 -->

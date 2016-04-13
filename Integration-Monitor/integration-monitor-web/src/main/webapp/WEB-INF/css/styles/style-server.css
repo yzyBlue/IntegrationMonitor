@@ -1709,8 +1709,8 @@ div.vis-color-picker input.vis-range {
 }
 @font-face {
 	font-family: iconfont;
-	src: url(../iconfont/iconfont-eace0c5b0e.eot);
-	src: url(../iconfont/iconfont-eace0c5b0e.eot?#iefix) format('embedded-opentype'), url(../iconfont/iconfont-955ae25094.woff) format('woff'), url(../iconfont/iconfont-78bb2218ec.ttf) format('truetype'), url(../iconfont/iconfont-d273055584.svg#iconfont) format('svg')
+	src: url(../../font/iconfont.eot);
+	src: url(../../font/iconfont.eot?#iefix) format('embedded-opentype'), url(../../font/iconfont.woff) format('woff'), url(../../font/iconfont.ttf) format('truetype'), url(../../font/iconfont.svg#iconfont) format('svg')
 }
 .iconfont, .td-small-icon a {
 	font-family: iconfont !important;

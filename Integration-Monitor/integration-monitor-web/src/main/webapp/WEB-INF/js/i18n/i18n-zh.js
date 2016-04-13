@@ -1,4 +1,4 @@
-angular.module('integration.monitor.zh', ['pascalprecht.translate']).config(function($translateProvider) {
+angular.module('integration.monitor.i18n.zh', ['pascalprecht.translate']).config(function($translateProvider) {
     $translateProvider.translations('zh', {
         TITLE_WEBSITE: '集成监控平台',
         LANGUAGE: '语言',
@@ -18,5 +18,9 @@ angular.module('integration.monitor.zh', ['pascalprecht.translate']).config(func
         USERNAME:'用户名',
         AUTOLOGIN:'自动登陆',
         FORGET_PWD:'忘记密码？',
+        
+        CENTER:'个人中心',
+        CONSOLE:'控制台',
+        LOGOUT:'退出',
     });
 });

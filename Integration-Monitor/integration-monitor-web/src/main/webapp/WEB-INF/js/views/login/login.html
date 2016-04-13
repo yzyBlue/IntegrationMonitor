@@ -1,0 +1,41 @@
+<div id="layout">
+		<div class="wrap clearfix">
+			<div class="content no-sidebar form-middle" id="root">
+				<div class="logo-center">
+					<a id="logo-center" class="iconfont icon-monitor" href="#" title="Integration Monitor"></a>
+				</div>
+				<div class="container clearfix">
+					<div class="box login-box">
+						<div class="title">
+							<h2>登陆</h2>
+						</div>
+						<div class="form-wrapper">
+							<form method="post"	action="j_spring_security_check" id="loginform" novalidate="novalidate">
+								<div class="input-box">
+									<input class="input-text valid" type="text" name="username" ng-model="userName" placeholder="用户名">
+									<p class="error-top"></p>
+								</div>
+								<div class="input-box no-margin">
+									<input class="input-text" type="password" name="password" ng-model="password" placeholder="密   码">
+									<p class="error-top"></p>
+								</div>
+								<div class="remember-box">
+									<input type="checkbox" name="rememberPassword" value="false" id="remember"> 
+									<label> 
+										<span class="check-out">
+											<span class="iconfont check-in"></span>
+										</span> 自动登陆
+									</label> 
+									<a class="float-right"	href="#">忘记密码？</a>
+								</div>
+								<div class="input-box margin-min">
+									<input type="hidden" name="encode" value="false"> 
+									<input class="btn btn-blue btn-block" type="submit" name="submit" value="登录">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

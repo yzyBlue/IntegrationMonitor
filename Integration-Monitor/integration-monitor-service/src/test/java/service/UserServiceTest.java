@@ -30,11 +30,14 @@ public class UserServiceTest {
 //		userNew.setCreateDate(new Date());
 //		userNew.setCreatorId("admin");
 //		userNew.setModifyDate(new Date());
-//		userNew.setPassWord("yzyBlue");
+//		userNew.setPassWord("yzyBlue1991");
 //		userNew.setRoleCode("admin");
-//		userNew.setUserName("blue");
+//		userNew.setUserName("yzy");
 //		userNew.setVoidFlag("0");
 //		Integer insert=userService.saveUserInfo(userNew);
 //		logger.debug(userNew.getUserId());
+		
+//		String result=userService.saveUpdateUser();
+//		logger.debug(result);
 	}
 }

@@ -1,0 +1,115 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="bg">
+    <div class="bg-theme index index-bg-color">
+
+    </div><!-- headline-bg -->
+    <div class="bg-theme ai ai-bg-color">
+
+    </div><!-- headline-bg -->
+    <div class="bg-theme bi bi-bg-color carousel-bg">
+
+    </div><!-- headline-bg -->
+    <div class="bg-theme ci ci-bg-color">
+
+    </div><!-- headline-bg -->
+    <div class="bg-theme ct ct-bg-color">
+
+    </div><!-- headline-bg -->
+    <div class="bg-theme mi mi-bg-color">
+
+    </div><!-- headline-bg -->
+</div>
+<section class="features-video section section-on-bg feature-index carousel" id="middle" style="height: 819px; margin-top: 80px;">
+    <div class="container index slideimg" style="margin-top: 45.6667px;">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            </div>
+            <img class="index-headline-img" src="images/index.png">
+        </div>
+    </div>
+    <div class="container slideimg ai" style="margin-top: 45.6667px;">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-lg-offset-0 col-md-offset-0 col-sm-offset-0">
+                <img class="ilogo" src="images/svg/ailogo.svg">
+                <h2 class="title pro">10x 加速应用性能</h2>
+                <p class="intro hidden-xs">
+                    从业务角度提升运维报表质量；抓取缓慢的程序代码和 SQL 语句；<br class="hidden-sm">Service 性能监控。
+                </p>
+
+                <p class="ai-bi-ci-more">
+                   <!-- <a class="play-trigger btn-link ga" data-toggle="modal" data-target="#modal-video" id="video-btn" data-source="#ai-video" data="4"><i class="fa fa-youtube-play"></i> 观赏 Ai 介绍影片</a> -->
+                   <a href="#" class="btn btn-large btn-solid" style="color:#00a040;">了解详情</a>
+                   <a href="#" class="btn btn-large btn-demo" target="_blank">查看demo</a>
+                </p>
+            </div>
+            <img class="ai-bi-ci-headline-img" src="images/ai.png">
+        </div>
+    </div>
+    <div class="container slideimg bi" style="margin-top: 45.6667px;">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-lg-offset-0 col-md-offset-0 col-sm-offset-0">
+                <img class="ilogo" src="images/svg/8e890c6b.bilogo.svg">
+                <h2 class="title pro">基于真实用户数据的<br>网站监控平台</h2>
+                <p class="intro hidden-xs">
+                    分析真实用户数据；支持 HTML5 以及微信浏览页面；<br class="hidden-sm">定位网站在高并发下的性能瓶颈。
+                </p>
+                <p class="ai-bi-ci-more">
+                   <a href="#" class="btn btn-large btn-solid" style="color:#00adba;">了解详情</a>
+                   <a href="#" class="btn btn-large btn-demo" target="_blank">查看demo</a>
+                </p>
+            </div>
+            <img class="ai-bi-ci-headline-img" src="images/bi.png">
+        </div>
+    </div>
+    <div class="container slideimg ci" style="margin-top: 45.6667px;">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-lg-offset-0 col-md-offset-0 col-sm-offset-0">
+                <img class="ilogo" src="images/svg/32066a78.cilogo.svg">
+                <h2 class="title pro" style="white-space: nowrap;">用户参与产品设计的，<br>一次先锋性试验。</h2>
+                <p class="intro hidden-xs">
+                    除了基础设施和平台服务的监控之外， <br class="hidden-sm">Cloud Insight 下一版本的功能，完全由你们决定。
+                </p>
+                <p class="ai-bi-ci-more">
+                   <a href="#" class="btn btn-large btn-solid" style="color:#ea7300;">了解详情</a>
+                   <a href="#" class="btn btn-large btn-demo" target="_blank">查看demo</a>
+                </p>
+            </div>
+            <img class="ai-bi-ci-headline-img" src="images/ci.png">
+        </div>
+    </div>
+    <div class="container slideimg ct" style="margin-top: 45.6667px;">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-lg-offset-0 col-md-offset-0 col-sm-offset-0">
+                <img class="ilogo" src="images/svg/2ad2251b.ctlogo.svg">
+                <h2 class="title pro" style="white-space: nowrap;">持续监控，<br>让故障无所遁形。</h2>
+                <p class="intro hidden-xs">
+                    实时掌握系统运行状态，<br class="hidden-sm">故障问题从此再也不会是您业务增长的拦路虎。
+                </p>
+                <p class="ai-bi-ci-more">
+                   <a href="#" class="btn btn-large btn-solid" style="color:#ea7300;">免费注册</a>
+                   <a href="#" class="btn btn-large btn-demo">了解详情</a>
+                </p>
+            </div>
+            <img class="ai-bi-ci-headline-img" src="images/ct.png">
+        </div>
+    </div>
+    <div class="container slideimg mi" style="margin-top: 45.6667px;">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-lg-offset-0 col-md-offset-0 col-sm-offset-0">
+                <img class="ilogo" src="images/svg/be6779d3.milogo.svg">
+                <h2 class="title pro">让您全面了解<br>您的 APP</h2>
+                <p class="intro hidden-xs">
+                    重现崩溃轨迹、全方位组合分析页面加载缓慢、<br class="hidden-sm">网络缓慢等慢交互的性能问题;<br>提升客户留存率、降低运营成本。
+                </p>
+                <p class="ai-bi-ci-more">
+                   <a href="#" class="btn btn-large btn-solid" style="color:#00a0e9;">了解详情</a>
+                   <a href="#" class="btn btn-large btn-demo" target="_blank">查看demo</a>
+                </p>
+            </div>
+            <img class="ai-bi-ci-headline-img" src="images/mi.png">
+        </div>
+    </div>
+</section>
+<i class="iconfont left-button slide-button" style="top: 184.5px;" ></i>
+<i class="iconfont right-button slide-button" style="top: 184.5px;"></i>

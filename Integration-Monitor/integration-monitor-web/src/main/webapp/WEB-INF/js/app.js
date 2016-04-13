@@ -1,8 +1,8 @@
-angular.module('integration.monitor.controllers',['integration.monitor.controllers.app' ]);
-//angular.module('integration.monitor.i18n', ['integration.monitor.i18n.zh','integration.monitor.i18n.en' ]);
+angular.module('integration.monitor.controllers',['integration.monitor.controllers.app']);
+angular.module('integration.monitor.i18n', ['integration.monitor.i18n.zh','integration.monitor.i18n.en' ]);
 angular.module(
 		'inteMonitorApp',
-		['pascalprecht.translate', 'integration.monitor.controllers']).config(
+		['toaster','pascalprecht.translate','integration.monitor.i18n','integration.monitor.controllers']).config(
 		function($stateProvider, $urlRouterProvider, $translateProvider,
 				$controllerProvider, $compileProvider, $filterProvider,
 				$provide) {
@@ -17,55 +17,97 @@ angular.module(
 		        };
 		    });
 			
-			//$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|data|mias-iv|mias-cpoe|shine):/);
+			$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|data|mias-iv|mias-cpoe|shine):/);
 			
 		    // UI router config
 		    $urlRouterProvider.otherwise('/');
 			
-		    $stateProvider.when('home', {
+		    $stateProvider.state('home', {
 	            url: '/',
 	            templateUrl: 'js/views/home/home.html',
 	            resolve: {
                     deps: ['uiLoad',
                       function( uiLoad ){
                         return uiLoad.load(
-                          ['css/styles/account.css',
-                            'js/myjs/account.js',
+                          ['css/styles/vendor.css','css/styles/frame-all.css','css/styles/index.css',
+                            'js/myjs/utils.js',
                             'js/myjs/vendor.js',
-                            'js/myjs/modules.js']
+                            'js/myjs/index.js']
                         )
                     }]
                 }
 	        })
-	        .when('login', {
-	            url: '/login',
-	            templateUrl: 'js/views/login.html',
+	        .state('login', {
+	            url: '/login?errorType',
+	            templateUrl: 'js/views/login/login.html',
+	            controller: function($scope, $stateParams) {
+	                $scope.errorType = $stateParams.errorType;
+	                $scope.isErrorType = function(errorType) {
+	                    return $scope.errorType == errorType;
+	                };
+	            },
 	        })
-	        .when('server', {
+	        .state('server', {
 	            url: '/server',
 	            templateUrl: 'js/views/server/server.monitor.html',
 	        })
 
-
-		}).run(function($rootScope, $state, $stateParams,busyService) {
+	        $translateProvider.preferredLanguage('zh');
+		    
+		}).run(function($rootScope, $state, $stateParams,authenticationService,busyService) {
 
 			$rootScope.$state = $state;
 			$rootScope.$stateParams = $stateParams;
-			var isLoading;
+			
+			var authenticateWhiteList = ['home', 'login'];
+			
+			var id;
+			
+			$rootScope.authenticate = function() {
+		        authenticationService.validateAuthentication().then(function(result) {
+		            if (!result.isAuthenticated) {
+		                event.preventDefault();
+		                if (result.previousIsAuthenticated) {
+		                    $state.go('login', {
+		                        errorType: 'SessionExpired'
+		                    });
+		                } else {
+		                    $state.go('login', {
+		                        errorType: 'Unauthorized'
+		                    });
+		                }
+		            }
+		        });
+		    }();
+			
 			$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-//			if (isLoading) {
-//				 console.log(isLoading)		
-//				busyService.popBusy(isLoading);
-//			}
-//			isLoading = busyService.pushBusy('BUSY_LOADING');
-//			 console.log(isLoading);		
-		});
+		        if (id) {
+		            busyService.popBusy(id);
+		        }
+		        id = busyService.pushBusy('BUSY_LOADING');
+		        if (authenticateWhiteList.indexOf(toState.name) < 0) {
+		            authenticationService.validateAuthentication().then(function(result) {
+		                if (!result.isAuthenticated) {
+		                    event.preventDefault();
+		                    if (result.previousIsAuthenticated) {
+		                        $state.go('login', {
+		                            errorType: 'SessionExpired'
+		                        });
+		                    } else {
+		                        $state.go('login', {
+		                            errorType: 'Unauthorized'
+		                        });
+		                    }
+		                }
+		            });
+		        }
+		    });
 
 			$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-//				if (isLoading) {
-//					 console.log(isLoading)		
-//					busyService.popBusy(isLoading);
-//				}
+				if (id) {
+//					 console.log(id);		
+					busyService.popBusy(id);
+				}
 			});
 
 		});
