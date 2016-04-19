@@ -1,0 +1,380 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<script src="js/lib/jquery/jquery-2.1.1.js"></script>
+<script src="js/myjs/highcharts.js"></script>
+<script src="js/myjs/highcharts-3d.js"></script>
+<script language="JavaScript">
+	$(document).ready(
+			function() {
+				var chart = {
+					type : 'spline',
+					animation : Highcharts.svg, // don't animate in IE < IE 10.
+					backgroundColor : 'rgba(0,0,0,0)',
+					marginRight : 10,
+					events : {
+						load : function() {
+							// set up the updating of the chart each second
+							var series = this.series[0];
+							setInterval(function() {
+								var x = (new Date()).getTime(), // current time
+								y = Math.random();
+								series.addPoint([ x, y ], true, true);
+							}, 1000);
+						}
+					}
+				};
+				var title = {
+					text : '事务运行情况实时监控',
+					style : {
+						"color" : "#ffffff",
+						"fontSize" : "20px",
+						"letter-spacing" : ".03em"
+					}
+				};
+				var xAxis = {
+					type : 'datetime',
+					tickPixelInterval : 150,
+					labels : {
+						style : {
+							"color" : "#ffffff",
+							"fontWeight" : "bold",
+							"letter-spacing" : ".01em"
+						}
+					},
+					title : {
+						text : "时间",
+						style : {
+							"color" : "#ffffff",
+							"fontSize" : "20px",
+							"letter-spacing" : ".03em"
+						}
+					}
+
+				};
+				var yAxis = {
+					title : {
+						text : '消息数目',
+						style : {
+							"color" : "#ffffff",
+							"fontSize" : "20px",
+							"letter-spacing" : ".03em"
+						}
+					},
+					labels : {
+						style : {
+							"color" : "#ffffff",
+							"fontSize" : "20px",
+							"letter-spacing" : ".01em"
+						}
+					},
+					alternateGridColor : '#687589',
+					// 					gridLineDashStyle : 'longdash',
+					minorGridLineColor : '#C5EEFA',
+					minorGridLineDashStyle : 'longdash',
+					minorTickInterval : 'auto',
+					plotLines : [ {
+						value : 0,
+						width : 1,
+						color : '#808080',
+						style : {
+							"color" : "#ffffff",
+							"fontSize" : "10px"
+						}
+					} ]
+				};
+				var tooltip = {
+					backgroundColor : 'rgba(0,0,0,0)',
+					style : {
+						"color" : "#ffffff",
+						"fontSize" : "10px",
+						"letter-spacing" : "-.02em"
+					},
+					formatter : function() {
+						return '<b >'
+								+ this.series.name
+								+ '</b><br/>'
+								+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',
+										this.x) + '<br/>'
+								+ Highcharts.numberFormat(this.y, 2);
+					}
+				};
+				var plotOptions = {
+					area : {
+						pointStart : 1940,
+						marker : {
+							enabled : false,
+							symbol : 'circle',
+							radius : 2,
+							states : {
+								hover : {
+									enabled : true
+								}
+							}
+						}
+					}
+				};
+				var legend = {
+					enabled : false
+				};
+				var exporting = {
+					enabled : false
+				};
+				var series = [ {
+					name : 'Random data',
+					data : (function() {
+						// generate an array of random data
+						var data = [], time = (new Date()).getTime(), i;
+						for (i = -19; i <= 0; i += 1) {
+							data.push({
+								x : time + i * 1000,
+								y : Math.random(),
+								color : '#ffffff'
+							});
+						}
+						return data;
+					}())
+				} ];
+
+				var json = {};
+				json.chart = chart;
+				json.title = title;
+				json.tooltip = tooltip;
+				json.xAxis = xAxis;
+				json.yAxis = yAxis;
+				json.legend = legend;
+				json.exporting = exporting;
+				json.series = series;
+				json.plotOptions = plotOptions;
+
+				Highcharts.setOptions({
+					global : {
+						useUTC : false
+					}
+				});
+				$('#container2').highcharts(json);
+
+			});
+</script>
+
+<div class="wrap clearfix">
+	<div class="sidebar">
+		<div class="menu">
+			<ul>
+				<li><strong> <a><i class="iconfont icon-eye"></i>监控</a>
+				</strong>
+					<ul>
+						<li><a class="iconfont icon" href="#"> 总览详情 </a></li>
+						<li><a class="iconfont icon" href="/integration-monitor/topo">拓扑网络</a></li>
+						<li><a class="iconfont icon active"
+							href="/integration-monitor/adt">ADT事务 </a></li>
+						<li><a class="iconfont icon" href="#">检查事务</a></li>
+						<li><a class="iconfont icon" href="#">检验事务</a></li>
+						<li><a class="iconfont icon" href="#">医嘱事务</a></li>
+						<li><a class="iconfont icon" href="#">手术事务</a></li>
+						<li><a class="iconfont icon" href="#">摆药事务</a></li>
+						<li><a class="iconfont icon" href="#">费用事务</a></li>
+					</ul></li>
+				<li><strong><a href="#"><i
+							class="iconfont icon-flag"></i>事件</a> </strong>
+					<ul>
+						<li><a class="iconfont icon" href="#">错误信息</a></li>
+					</ul></li>
+				<li><strong><a href="#"><i
+							class="iconfont icon-table"></i> 报表</a> </strong>
+					<ul>
+						<li><a class="iconfont icon" href="#">事务统计</a></li>
+					</ul></li>
+				<li><strong> <a href="#"> <i
+							class="iconfont icon-settings"></i>警报记录
+					</a>
+				</strong></li>
+			</ul>
+		</div>
+	</div>
+	<div class="content" id="root">
+		<div>
+			<div class="page-title">
+				<div class="navbar">
+					<ul>
+
+						<li><div class="dropdown time-slider">
+								<strong><i class="iconfont icon-clock"></i><span>
+										最新一天</span><i class="iconfont icon-btn-arrow"></i></strong>
+							</div></li>
+					</ul>
+				</div>
+				<h2>
+					<span>病人管理</span><sub>病人入出转事务监控情况</sub>
+				</h2>
+			</div>
+			<div class="pure-g">
+				<div class="pure-u-1 pure-u-xl-1">
+					<div id="rt-chart" class="box">
+						<div class="widget-normal">
+							<div class="widget-content" style="display: block;">
+								<div data-highcharts-chart="3">
+									<div id="container2" style="margin: 0 auto; height: 300px"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content no-sidebar" id="root">
+				<div>
+					<div class="pure-g">
+						<div class="pure-u-1">
+							<div class="box">
+								<div class="widget-normal">
+									<div class="widget-content" style="display: block;">
+										<div>
+
+											<div class="widget-tools">
+												<h2>事务列表</h2>
+
+											</div>
+
+											<div class="widget-tools-msg">
+												<ul>
+													<li style="margin-right: 20px;"><label></label></li>
+													<li><label><span>病 人 号 :</span></label></li>
+													<li><input class="input-text" type="text" value=""
+														placeholder="M0000001"></li>
+													<li><label><span>就 诊 号 :</span></label></li>
+													<li><input class="input-text" type="text" value=""
+														placeholder="251634"></li>
+													<div class="text-align-right">
+														<button class="btn-blue btn-sm" type="button">下载报表</button>
+													</div>
+												</ul>
+												<ul>
+													<li style="margin-right: 20px;"><label></label></li>
+													<li><label><span>开始时间:</span></label></li>
+													<li><input class="input-text" type="text" value=""
+														placeholder="2016-04-01 12：25:56"></li>
+													<li><label><span>终止时间:</span></label></li>
+													<li><input class="input-text" type="text" value=""
+														placeholder="2016-04-11 12：25:56"></li>
+													<button class="btn-green" type="button">搜 索</button>
+												</ul>
+											</div>
+
+											<div class="widget-normal">
+												<div class="widget-content">
+													<table class="table table-striped ">
+														<colgroup>
+															<col style="width: auto;">
+															<col style="width: auto;">
+															<col style="width: auto;">
+															<col style="width: auto;">
+															<col style="width: auto;">
+															<col style="width: auto;">
+															<col style="width: auto;">
+															<col style="width: auto;">
+														</colgroup>
+														<thead>
+															<tr>
+																<th class="sortedth"><span class="sortedtext"></span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">编号</span><span
+																	class="sorted-arrow desc "></span></th>
+																<th class="sortedth"><span class="sortedtext">事务类型</span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">发生时间</span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">消息索引号</span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">病人号</span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">就诊号</span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">处理状态</span><span
+																	class="sorted-arrow "></span></th>
+																<th class="sortedth"><span class="sortedtext">操作</span><span
+																	class="sorted-arrow "></span></th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class=""><i class="iconfont  state-downtime"></i></td>
+																<td class="">1</td>
+																<td class="">PAM</td>
+																<td class="">2016-04-08 15:17:25</td>
+																<td class="">251634</td>
+																<td class="">M000391681</td>
+																<td class="">152295</td>
+																<td class=""><a class="btn-green" href="#">查看状态</a></td>
+																<td class=""><div class="operation">
+																		<a class="iconfont" href="javascript:;"></a><a
+																			class="iconfont" href="javascript:;"></a>
+																	</div></td>
+															</tr>
+														</tbody>
+														<tbody>
+															<tr>
+																<td class=""><i class="iconfont  state-downtime"></i></td>
+																<td class="">2</td>
+																<td class="">PAM</td>
+																<td class="">2016-04-08 15:17:25</td>
+																<td class="">ER152295</td>
+																<td class="">M000391681</td>
+																<td class="">152295</td>
+																<td class=""><a class="btn-green" href="#">查看状态</a></td>
+																<td class=""><div class="operation">
+																		<a class="iconfont" href="javascript:;"></a><a
+																			class="iconfont" href="javascript:;"></a>
+																	</div></td>
+															</tr>
+														</tbody>
+
+														<tbody>
+															<tr>
+																<td class=""><i class="iconfont  state-downtime"></i></td>
+																<td class="">3</td>
+																<td class="">PAM</td>
+																<td class="">2016-04-08 15:17:25</td>
+																<td class="">251634</td>
+																<td class="">M000391681</td>
+																<td class="">152295</td>
+																<td class=""><a class="btn-green" href="#">查看状态</a></td>
+																<td class=""><div class="operation">
+																		<a class="iconfont" href="javascript:;"></a><a
+																			class="iconfont" href="javascript:;"></a>
+																	</div></td>
+															</tr>
+														</tbody>
+														<tbody>
+															<tr>
+																<td class=""><i class="iconfont  state-downtime"></i></td>
+																<td class="">4</td>
+
+																<td class="">PAM</td>
+																<td class="">2016-04-08 15:17:25</td>
+																<td class="">ER152295</td>
+																<td class="">M000391681</td>
+																<td class="">152295</td>
+																<td class=""><a class="btn-green" href="#">查看状态</a></td>
+																<td class=""><div class="operation">
+																		<a class="iconfont" href="javascript:;"></a><a
+																			class="iconfont" href="javascript:;"></a>
+																	</div></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+</div>

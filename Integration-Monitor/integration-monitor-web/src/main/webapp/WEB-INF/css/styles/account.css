@@ -1405,6 +1405,17 @@ body {
 .content.no-sidebar {
 	margin-left: 0
 }
+.topo-content{
+/* 	height:90%; */
+	overflow:auto;
+    /*此处对容器设置了高度，一般不建议对容器设置高度，一般使用overflow:auto;属性设置容器根据内容自适应高度，如果不指定高度或不设置自适应高度，容器将默认为1个字符高度，容器下方的布局元素（footer）设置margin-top:属性将无效*/
+    margin-top:10px;
+    margin-left:10px;
+	margin-right:10px;
+	margin-bottom:10px;
+    background-color: rgba(51,51,51,.4);
+    border-radius:5px;
+}
 .float-position-relative {
 	position: relative
 }
@@ -1600,9 +1611,16 @@ body {
 .page-title {
 	padding: 0 15px
 }
+.topo-title {
+	padding: 0 15px
+}
 .page-title h2 {
 	line-height: 40px;
 	font-size: 30px
+}
+.topo-title h2 {
+	line-height: 40px;
+	font-size: 20px
 }
 .page-title h2 sub {
 	display: inline-block;
@@ -2215,6 +2233,9 @@ code, select {
 .widget-tools {
 	margin-bottom: 15px
 }
+.widget-tools-msg {
+	margin-bottom: 10px
+}
 .tabs-select, .tabs-title {
 	overflow: hidden;
 	margin-bottom: 10px
@@ -2224,6 +2245,19 @@ code, select {
 	padding-right: 10px;
 	height: 30px;
 	line-height: 30px
+}
+.widget-tools-msg li {
+	float: left;
+	padding-right: 20px;
+	height: 34px;
+	line-height: 34px
+}
+
+.widget-tools-msg ul {
+	float: top;
+	padding-bottom: 20px;
+	height: 34px;
+	line-height: 34px
 }
 .float-right .iconfont {
 	color: #9F9F9F;
@@ -3212,20 +3246,21 @@ code.code-copy .copied {
 	padding: 5px 10px;
 	background-color: #FFF;
 	border: 1px solid #d5d5d5;
+	border-color:rgba(93,149,242,.75);
 	color: #333;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
-	border-radius: 3px;
+	border-radius: 5px;
 	background-clip: padding-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-webkit-transition: -webkit-box-shadow .2s;
-	-moz-transition: -moz-box-shadow .2s;
-	-o-transition: box-shadow .2s;
-	transition: box-shadow .2s;
+	-webkit-box-shadow: inset 0 0px 8px rgba(0, 0, 0, .095);
+	-moz-box-shadow: inset 0 0px 8px rgba(0, 0, 0, .095);
+	box-shadow: inset 0 0px 8px rgba(0, 0, 0, .095);
+	-webkit-transition: -webkit-box-shadow .5s;
+	-moz-transition: -moz-box-shadow .5s;
+	-o-transition: box-shadow .5s;
+	transition: box-shadow .5s;
 	font-family: "Open Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif
 }
 .dialog .dialog-content, .input-box .input-text {

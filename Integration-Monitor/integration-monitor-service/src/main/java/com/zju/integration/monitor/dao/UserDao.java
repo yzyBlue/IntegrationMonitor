@@ -3,7 +3,8 @@ package com.zju.integration.monitor.dao;
 import com.zju.integration.monitor.model.User;
 
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public interface UserDao {
 	public Integer insertUserInfo(User user);
 	public Integer deleteUserInfo(User user);

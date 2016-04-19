@@ -38,7 +38,7 @@
 					<ul>
 						<li><a class="iconfont icon" href="/integration-monitor/transaction"> 总览详情 </a></li>
 						<li><a class="iconfont icon active"href="/integration-monitor/topo">拓扑网络</a></li>
-						<li><a class="iconfont icon"href="#">ADT事务 </a></li>
+						<li><a class="iconfont icon"href="/integration-monitor/adt">ADT事务 </a></li>
 						<li><a class="iconfont icon"href="#">检查事务</a></li>
 						<li><a class="iconfont icon"href="#">检验事务</a></li>
 						<li><a class="iconfont icon"href="#">医嘱事务</a></li>
@@ -57,7 +57,7 @@
 						<li><a class="iconfont icon"href="#">事务统计</a></li>
 					</ul>
 				</li>
-				<li><strong> <a	href="#"> <i class="iconfont icon-settings"></i>警报设置</a> </strong></li>
+				<li><strong> <a	href="#"> <i class="iconfont icon-settings"></i>警报记录</a> </strong></li>
 			</ul>
 		</div>
 	</div>
@@ -69,28 +69,60 @@
 				</h2>
 			</div>
 		</div>
-		<div>
-			<div class="box" style="width: 98%; height: 90%;position: relative;padding-right: 10;padding-bottom: 100;">
+		<div class="topo-content">
+			<div class="box" style="width: 20%; height: 60%;padding-right: 10;padding-bottom: 40;float:left">
+				<div class="topo-map widget-normal" >
+					<div class="topo-title">
+						<h2>
+							<span>集成信息系统</span>
+						</h2>
+					</div>
+					<div class="widget-content" style="display: block;">
+						<div style=" position: relative; padding: 0;">
+							<svg width="100%" height="92.6%">
+								<g>
+									<rect width="100%" height="100%" style="fill: none; pointer-events: all;" />
+									<g>
+										<rect x="0" y="0" rx="10" ry="10" width="98%" height="40" style="fill: #56BC76; padding: 20; fill-opacity:0.9;stroke:rgba(86, 188, 118,0.6)" />
+										<text x="50" y="20" dx="0.01em" dy="3em" fill="#fff">HIS</text>
+										<rect x="0" y="70" rx="10" ry="10" width="98%" height="40" style="fill: #c86432; padding: 20; fill-opacity:0.9;stroke:rgba(200,100,50,0.6)" />
+										<text x="50" y="90" dx="0.01em" dy="3em" fill="#fff">LIS</text>
+										<rect x="0" y="140" rx="10" ry="10" width="98%" height="40" style="fill: #88e85c; padding: 20; fill-opacity:0.9;stroke:rgba(136, 232, 92,0.6)" />
+										<text x="50" y="160" dx="0.01em" dy="3em" fill="#fff">CIS</text>
+										<rect x="0" y="210" rx="10" ry="10" width="98%" height="40" style="fill: #fce5cd; padding: 20; fill-opacity:0.9;stroke:rgba(252, 229, 205,0.6)" />
+										<text x="50" y="230" dx="0.01em" dy="3em" fill="#fff">RIS</text>
+										<rect x="0" y="280" rx="10" ry="10" width="98%" height="40" style="fill: #ead1dc; padding: 20; fill-opacity:0.9;stroke:rgba(234, 209, 220,0.6)" />
+										<text x="50" y="300" dx="0.01em" dy="3em" fill="#fff">CPOE</text>
+										<rect x="0" y="350" rx="10" ry="10" width="98%" height="40" style="fill: #CD69C9; padding: 20; fill-opacity:0.9;stroke:rgba(205, 105, 201,0.6)" />
+										<text x="50" y="370" dx="0.01em" dy="3em" fill="#fff">集成平台</text>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="box" style="width: 75%; height: 60%;padding-right: 10;padding-bottom: 40;float:left">
 				<div class="topo-map widget-normal" >
 					<div class="widget-content" style="display: block;">
 						<div style=" position: relative; padding: 0;">
 							<svg width="100%" height="100%">
 									<g>
 										<rect width="100%" height="100%" style="fill: none; pointer-events: all;" />
-											<g>
-												<rect  width="80" height="80" style="fill: #99a3b2;; padding: 20;" />
-												<circle cx="200" cy="150" r="40" stroke="none" stroke-width="2" fill="red" />
-												<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2" fill="blue" />
-												<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2" fill="#99a3b2" />
-												<ellipse cx="200" cy="350" rx="100" ry="40"style="fill:rgb(200,100,50);stroke:none;stroke-width:2"/>
-											</g>
-										</rect>
+										<g>
+											<rect  width="80" height="80" style="fill: #99a3b2;; padding: 20;" />
+											<circle cx="200" cy="150" r="40" stroke="none" stroke-width="2" fill="red" />
+											<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2" fill="blue" />
+											<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2" fill="#99a3b2" />
+											<ellipse cx="200" cy="350" rx="100" ry="40"style="fill:rgb(200,100,50);stroke:none;stroke-width:2"/>
+										</g>
 									</g>
 							</svg>
 						</div>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 

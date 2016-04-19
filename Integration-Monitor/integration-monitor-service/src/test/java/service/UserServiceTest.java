@@ -22,7 +22,7 @@ public class UserServiceTest {
 	protected final Logger logger = Logger.getLogger(this.getClass());
 	
 	@Test
-	public void serviceTest(){
+	public void serviceTest() throws Exception{
 		User user=userService.getUserByUserNamePassWord("blue", "yzyBlue");
 		logger.debug(user.toString());
 		

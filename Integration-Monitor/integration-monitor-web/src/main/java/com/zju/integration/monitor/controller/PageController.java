@@ -41,4 +41,8 @@ public class PageController {
 	public String getMessage() {
 		return "message";
 	}
+	@RequestMapping("/adt")
+	public String getAdtMessage() {
+		return "adt";
+	}
 }

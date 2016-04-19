@@ -40,7 +40,7 @@
 	<!-- <property name="maxIdleTime" value="60" /> -->
 	<!-- <property name="maxPoolSize" value="15" /> -->
 	<!-- </bean> -->
-	<bean name="dataSource" init-method="init" destroy-method="close"
+	<bean id="dataSource" name="dataSource" init-method="init" destroy-method="close"
 		class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="${database.drivername}" />
 		<property name="url" value="${database.url}" />
@@ -68,13 +68,13 @@
 	</bean>
 
 	<!-- spring与mybatis整合配置，扫描所有dao -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<bean id="mapperScannerConfigurer" name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.zju.integration.monitor.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
 	<!-- 使用spring的事务管理 -->
-	<bean name="transactionManager"
+	<bean id="transactionManager" name="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>

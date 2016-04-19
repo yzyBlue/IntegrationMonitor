@@ -5,7 +5,7 @@
 	<artifactId>integration-monitor</artifactId>
 	<version>0.0.1</version>
 	<packaging>pom</packaging>
-	<url> https://github.com/yzyBlue/IntegrationMonitor </url>
+	<url> https://github.com/yzyBlue/IntegrationMonitor</url>
 	<description> Integration monitor project is builded for integration engineer to monitor the message in the transaction work flows. </description>
 	<inceptionYear>2016</inceptionYear>
 
@@ -67,6 +67,14 @@
 		<!-- 组织主页的URL -->
 		<url> http://www.vico-lab.com/index.asp </url>
 	</organization>
+
+	<!-- SCM配置 -->
+	<scm>
+		<url>https://github.com/yzyBlue/IntegrationMonitor</url>
+		<connection>scm:git:git://github.com/yzyBlue/IntegrationMonitor.git</connection>
+		<developerConnection>scm:git:git://github.com/yzyBlue/IntegrationMonitor.git</developerConnection>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.0.4.RELEASE</spring.version>
@@ -226,7 +234,19 @@
 					</tags>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

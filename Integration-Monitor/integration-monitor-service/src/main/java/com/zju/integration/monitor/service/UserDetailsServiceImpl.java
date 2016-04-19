@@ -12,7 +12,7 @@ import com.zju.integration.monitor.dao.UserDao;
 import com.zju.integration.monitor.model.User;
 
 @Service("userDetailsService")
-@Transactional(rollbackFor = { Exception.class })
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());

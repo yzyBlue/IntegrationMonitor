@@ -52,7 +52,8 @@
 		USER_NAME=#{userName,jdbcType=VARCHAR},
 		USER_PWD=#{passWord,jdbcType=VARCHAR},
 		ROLE_CODE=#{roleCode,jdbcType=VARCHAR},
-		MODIFY_DATE=getDate() 
+		MODIFY_DATE=getDate(),
+		VOIDED_FLAG=#{voidFlag,jdbcType=VARCHAR} 
 		WHERE
 		USER_ID
 		=
