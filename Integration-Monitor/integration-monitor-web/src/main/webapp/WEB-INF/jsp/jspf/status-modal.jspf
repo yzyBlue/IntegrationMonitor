@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="css/styles/modal.css" type="text/css">
+<!-- <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!-- 				<button type="button" class="close" data-dismiss="modal" -->
+				<!-- 					aria-hidden="true">&times;</button> -->
+				<h4 class="modal-title" id="myModalLabel">事务状态流程</h4>
+			</div>
+			<div class="modal-body">
+				<div style="position: relative; padding: 0;width:100%;height:100%">
+					<svg width="100%" height="100%">
+						<g>
+							<rect width="100%" height="100%"style="fill: none; pointer-events: all;" />
+							<g>
+								<rect width="80" height="80"style="fill: #99a3b2;; padding: 20;" />
+								<circle cx="200" cy="150" r="40" stroke="none"stroke-width="2" fill="red" />
+								<circle cx="200" cy="250" r="40" stroke="none"stroke-width="2" fill="blue" />
+								<circle cx="200" cy="250" r="40" stroke="none"stroke-width="2" fill="#99a3b2" />
+								<ellipse cx="200" cy="350" rx="100" ry="40"	style="fill:rgb(200,100,50);stroke:none;stroke-width:2" />
+							</g>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+<!-- 				<button type="button" class="btn btn-default">提交更改</button> -->
+			</div>
+		</div>
+	</div>
+</div>

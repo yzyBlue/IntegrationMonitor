@@ -25,6 +25,7 @@ pageEncoding="UTF-8"%>
 		<%@ include file="jspf/header.jspf"%>
 		
 		<%@ include file="jspf/content-adt.jspf"%>
+		<%@ include file="jspf/status-modal.jspf"%>
 <%-- 		<%@ include file="jspf/content-body.jspf"%> --%>
 <%-- 		<%@ include file="jspf/content-server.jspf"%> --%>
 		

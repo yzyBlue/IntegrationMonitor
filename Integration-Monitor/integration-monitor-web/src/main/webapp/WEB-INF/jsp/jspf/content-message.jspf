@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script src="js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="js/lib/jquery/jquery-2.1.1.js"></script>
 <div id="layout">
 	<div class="wrap clearfix">
 		<div class="page-title">
@@ -119,7 +120,7 @@
 															<td class="">251634</td>
 															<td class="">M000391681</td>
 															<td class="">152295</td>
-															<td class=""><a class="btn-green" href="#">查看状态</a></td>
+															<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
 															<td class=""><div class="operation">
 																	<a class="iconfont" href="javascript:;"></a><a
 																		class="iconfont" href="javascript:;"></a>
@@ -138,7 +139,7 @@
 															<td class="">ER152295</td>
 															<td class="">M000391681</td>
 															<td class="">152295</td>
-															<td class=""><a class="btn-green" href="#">查看状态</a></td>
+															<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
 															<td class=""><div class="operation">
 																	<a class="iconfont" href="javascript:;"></a><a
 																		class="iconfont" href="javascript:;"></a>
@@ -158,7 +159,7 @@
 															<td class="">251634</td>
 															<td class="">M000391681</td>
 															<td class="">152295</td>
-															<td class=""><a class="btn-green" href="#">查看状态</a></td>
+															<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
 															<td class=""><div class="operation">
 																	<a class="iconfont" href="javascript:;"></a><a
 																		class="iconfont" href="javascript:;"></a>
@@ -177,7 +178,7 @@
 															<td class="">ER152295</td>
 															<td class="">M000391681</td>
 															<td class="">152295</td>
-															<td class=""><a class="btn-green" href="#">查看状态</a></td>
+															<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
 															<td class=""><div class="operation">
 																	<a class="iconfont" href="javascript:;"></a><a
 																		class="iconfont" href="javascript:;"></a>

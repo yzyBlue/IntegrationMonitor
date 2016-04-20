@@ -55,7 +55,7 @@
 				};
 				var yAxis = {
 					title : {
-						text : '消息数目',
+						text : '错误消息数目',
 						style : {
 							"color" : "#ffffff",
 							"fontSize" : "20px",
@@ -167,8 +167,7 @@
 					<ul>
 						<li><a class="iconfont icon" href="#"> 总览详情 </a></li>
 						<li><a class="iconfont icon" href="/integration-monitor/topo">拓扑网络</a></li>
-						<li><a class="iconfont icon active"
-							href="/integration-monitor/adt">ADT事务 </a></li>
+						<li><a class="iconfont icon" href="/integration-monitor/adt">ADT事务 </a></li>
 						<li><a class="iconfont icon" href="#">检查事务</a></li>
 						<li><a class="iconfont icon" href="#">检验事务</a></li>
 						<li><a class="iconfont icon" href="#">医嘱事务</a></li>
@@ -179,7 +178,7 @@
 				<li><strong><a href="#"><i
 							class="iconfont icon-flag"></i>事件</a> </strong>
 					<ul>
-						<li><a class="iconfont icon" href="/integration-monitor/errorinfo">错误信息</a></li>
+						<li><a class="iconfont icon active" href="/integration-monitor/errorifo">错误信息</a></li>
 					</ul></li>
 				<li><strong><a href="#"><i
 							class="iconfont icon-table"></i> 报表</a> </strong>
@@ -198,15 +197,33 @@
 			<div class="page-title">
 				<div class="navbar">
 					<ul>
-
-						<li><div class="dropdown time-slider">
-								<strong><i class="iconfont icon-clock"></i><span>
-										最新一天</span><i class="iconfont icon-btn-arrow"></i></strong>
-							</div></li>
+						<li>
+							<div class="dropdown time-slider">
+								<strong>
+									<i class="iconfont icon-clock"></i>
+									<span>最新一天</span>
+									<i class="iconfont icon-btn-arrow"></i>
+								</strong>
+<!-- 								<div class="timepicker-dropdown-main"> -->
+<!-- 									<ul> -->
+<!-- 										<li class="active">30分钟</li> -->
+<!-- 										<li class="">60分钟</li> -->
+<!-- 										<li class="">3小时</li> -->
+<!-- 										<li class="">6小时</li> -->
+<!-- 										<li class="">12小时</li> -->
+<!-- 										<li class="">1天</li> -->
+<!-- 										<li class="">3天</li> -->
+<!-- 										<li class="">7天</li> -->
+<!-- 										<li class="">15天</li> -->
+<!-- 										<li class="">自定义</li> -->
+<!-- 									</ul> -->
+<!-- 								</div> -->
+							</div>
+						</li>
 					</ul>
 				</div>
 				<h2>
-					<span>病人管理</span><sub>病人入出转事务监控情况</sub>
+					<span>事务错误</span><sub>事务错误监控情况</sub>
 				</h2>
 			</div>
 			<div class="pure-g">
@@ -232,32 +249,23 @@
 										<div>
 
 											<div class="widget-tools">
-												<h2>事务列表</h2>
+												<h2>错误事务列表</h2>
 
 											</div>
 
 											<div class="widget-tools-msg">
 												<ul>
 													<li style="margin-right: 20px;"><label></label></li>
-													<li><label><span>病 人 号 :</span></label></li>
+													<li><label><span>事务编号 :</span></label></li>
 													<li><input class="input-text" type="text" value=""
 														placeholder="M0000001"></li>
-													<li><label><span>就 诊 号 :</span></label></li>
-													<li><input class="input-text" type="text" value=""
-														placeholder="251634"></li>
-													<div class="text-align-right">
-														<button class="btn-blue btn-sm" type="button">下载报表</button>
-													</div>
-												</ul>
-												<ul>
-													<li style="margin-right: 20px;"><label></label></li>
-													<li><label><span>开始时间:</span></label></li>
+													<li><label><span>发生时间:</span></label></li>
 													<li><input class="input-text" type="text" value=""
 														placeholder="2016-04-01 12：25:56"></li>
-													<li><label><span>终止时间:</span></label></li>
-													<li><input class="input-text" type="text" value=""
-														placeholder="2016-04-11 12：25:56"></li>
 													<button class="btn-green" type="button">搜 索</button>
+													
+													<button class="btn-blue" type="button">导出报表</button>
+													
 												</ul>
 											</div>
 
@@ -280,17 +288,19 @@
 																	class="sorted-arrow "></span></th>
 																<th class="sortedth"><span class="sortedtext">编号</span><span
 																	class="sorted-arrow desc "></span></th>
-																<th class="sortedth"><span class="sortedtext">事务类型</span><span
+																	<th class="sortedth"><span class="sortedtext">错误来源</span><span
+																	class="sorted-arrow desc "></span></th>
+																<th class="sortedth"><span class="sortedtext">事件类型</span><span
 																	class="sorted-arrow "></span></th>
 																<th class="sortedth"><span class="sortedtext">发生时间</span><span
 																	class="sorted-arrow "></span></th>
-																<th class="sortedth"><span class="sortedtext">消息索引号</span><span
+																<th class="sortedth"><span class="sortedtext">事件索引号</span><span
 																	class="sorted-arrow "></span></th>
-																<th class="sortedth"><span class="sortedtext">病人号</span><span
+																<th class="sortedth"><span class="sortedtext">错误等级</span><span
 																	class="sorted-arrow "></span></th>
-																<th class="sortedth"><span class="sortedtext">就诊号</span><span
+																<th class="sortedth"><span class="sortedtext">错误描述</span><span
 																	class="sorted-arrow "></span></th>
-																<th class="sortedth"><span class="sortedtext">处理状态</span><span
+																<th class="sortedth"><span class="sortedtext">是否作废</span><span
 																	class="sorted-arrow "></span></th>
 																<th class="sortedth"><span class="sortedtext">操作</span><span
 																	class="sorted-arrow "></span></th>
@@ -300,12 +310,13 @@
 															<tr>
 																<td class=""><i class="iconfont  state-downtime"></i></td>
 																<td class="">1</td>
-																<td class="">PAM</td>
+																<td class="">HIS</td>
+																<td class="">病人入院</td>
 																<td class="">2016-04-08 15:17:25</td>
 																<td class="">251634</td>
-																<td class="">M000391681</td>
-																<td class="">152295</td>
-																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
+																<td class=""><a class="btn-red" href="#">警告</a></td>
+																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">错误描述</a></td>
+																<td class=""><a class="btn-blue" href="#">否</a></td>
 																<td class=""><div class="operation">
 																		<a class="iconfont" href="javascript:;"></a><a
 																			class="iconfont" href="javascript:;"></a>
@@ -316,12 +327,13 @@
 															<tr>
 																<td class=""><i class="iconfont  state-downtime"></i></td>
 																<td class="">2</td>
-																<td class="">PAM</td>
+																<td class="">CPOE</td>
+																<td class="">检查申请</td>
 																<td class="">2016-04-08 15:17:25</td>
-																<td class="">ER152295</td>
-																<td class="">M000391681</td>
-																<td class="">152295</td>
-																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
+																<td class="">251634</td>
+																<td class=""><a class="btn-red" href="#">警告</a></td>
+																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">错误描述</a></td>
+																<td class=""><a class="btn-blue" href="#">否</a></td>
 																<td class=""><div class="operation">
 																		<a class="iconfont" href="javascript:;"></a><a
 																			class="iconfont" href="javascript:;"></a>
@@ -333,12 +345,13 @@
 															<tr>
 																<td class=""><i class="iconfont  state-downtime"></i></td>
 																<td class="">3</td>
-																<td class="">PAM</td>
+																<td class="">SHINE</td>
+																<td class="">检验申请</td>
 																<td class="">2016-04-08 15:17:25</td>
 																<td class="">251634</td>
-																<td class="">M000391681</td>
-																<td class="">152295</td>
-																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
+																<td class=""><a class="btn-red" href="#">警告</a></td>
+																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">错误描述</a></td>
+																<td class=""><a class="btn-blue" href="#">否</a></td>
 																<td class=""><div class="operation">
 																		<a class="iconfont" href="javascript:;"></a><a
 																			class="iconfont" href="javascript:;"></a>
@@ -349,13 +362,13 @@
 															<tr>
 																<td class=""><i class="iconfont  state-downtime"></i></td>
 																<td class="">4</td>
-
-																<td class="">PAM</td>
+																<td class="">CIS</td>
+																<td class="">检验申请</td>
 																<td class="">2016-04-08 15:17:25</td>
-																<td class="">ER152295</td>
-																<td class="">M000391681</td>
-																<td class="">152295</td>
-																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
+																<td class="">251634</td>
+																<td class=""><a class="btn-red" href="#">警告</a></td>
+																<td class=""><a class="btn-green" data-toggle="modal" href="#myModal">错误描述</a></td>
+																<td class=""><a class="btn-blue" href="#">否</a></td>
 																<td class=""><div class="operation">
 																		<a class="iconfont" href="javascript:;"></a><a
 																			class="iconfont" href="javascript:;"></a>
@@ -374,28 +387,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
 		</div>
 	</div>
-	<!-- 模态框（Modal） -->
-<!-- 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" -->
-<!-- 		aria-labelledby="myModalLabel" aria-hidden="true"> -->
-<!-- 		<div class="modal-dialog"> -->
-<!-- 			<div class="modal-content"> -->
-<!-- 				<div class="modal-header"> -->
-<!-- 					<button type="button" class="close" data-dismiss="modal" -->
-<!-- 						aria-hidden="true">&times;</button> -->
-<!-- 					<h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4> -->
-<!-- 				</div> -->
-<!-- 				<div class="modal-body">在这里添加一些文本</div> -->
-<!-- 				<div class="modal-footer"> -->
-<!-- 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭 -->
-<!-- 					</button> -->
-<!-- 					<button type="button" class="btn btn-primary">提交更改</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
 </div>

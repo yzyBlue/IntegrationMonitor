@@ -23,7 +23,7 @@
 				</li>
 				<li><strong><a href="#"><i class="iconfont icon-flag"></i>事件</a> </strong>
 					<ul>
-						<li><a class="iconfont icon" href="#">错误信息</a></li>
+						<li><a class="iconfont icon" href="/integration-monitor/errorinfo">错误信息</a></li>
 					</ul>
 				</li>
 				<li><strong><a href="#"><i class="iconfont icon-table"></i> 报表</a> </strong>

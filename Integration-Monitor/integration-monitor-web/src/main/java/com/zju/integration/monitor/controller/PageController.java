@@ -45,4 +45,8 @@ public class PageController {
 	public String getAdtMessage() {
 		return "adt";
 	}
+	@RequestMapping("/errorinfo")
+	public String getErrorInfo() {
+		return "errorinfo";
+	}
 }

@@ -2,7 +2,6 @@
 <script src="js/myjs/vendor.js" type="text/javascript"></script>
 <script src="js/myjs/account.js" type="text/javascript"></script>
 <!-- <script src="https://github.com/mixpanel/mixpanel-js" type="text/javascript"></script> -->
-
 <script>
     var BlueWare = {
       siteDomain:'zju.edu.com'
