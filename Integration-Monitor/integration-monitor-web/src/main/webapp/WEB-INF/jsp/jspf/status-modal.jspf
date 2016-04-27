@@ -8,21 +8,52 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<!-- 				<button type="button" class="close" data-dismiss="modal" -->
-				<!-- 					aria-hidden="true">&times;</button> -->
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
 				<h4 class="modal-title" id="myModalLabel">事务状态流程</h4>
 			</div>
 			<div class="modal-body">
-				<div style="position: relative; padding: 0;width:100%;height:100%">
+				<div
+					style="position: relative; padding: 0; width: 100%; height: 100%">
 					<svg width="100%" height="100%">
 						<g>
 							<rect width="100%" height="100%"style="fill: none; pointer-events: all;" />
 							<g>
-								<rect width="80" height="80"style="fill: #99a3b2;; padding: 20;" />
-								<circle cx="200" cy="150" r="40" stroke="none"stroke-width="2" fill="red" />
-								<circle cx="200" cy="250" r="40" stroke="none"stroke-width="2" fill="blue" />
-								<circle cx="200" cy="250" r="40" stroke="none"stroke-width="2" fill="#99a3b2" />
-								<ellipse cx="200" cy="350" rx="100" ry="40"	style="fill:rgb(200,100,50);stroke:none;stroke-width:2" />
+								<defs>
+								    <marker id="markerArrow" markerWidth="13" markerHeight="13" refx="2" refy="6" orient="auto">
+								        <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #ffffff;" />
+								    </marker>
+								    
+								    <marker id="markerArrow2" markerWidth="13" markerHeight="13" refx="2" refy="6" orient="auto">
+								        <path d="M2,6 L10,11 L10,2 L2,6" style="fill: #ffffff;" />
+								    </marker>
+								</defs>
+								<rect x="20" y="0" width="80" height="50"style="fill: #99a3b2;padding:10px" />
+								<text x="30" y="30" dx="0.01em" dy="3em" fill="#fff">病人入院</text>
+								<line x1="110" y1="25" x2="200" y2="25"  stroke="white" stroke-width="1" marker-end="url(#markerArrow)"/>
+								
+								<rect x="220" y="0" width="80" height="50"style="fill: rgb(200,100,50);padding:10px" />
+								<text x="230" y="30" dx="0.01em" dy="3em" fill="#fff">病人入科</text>
+								<line x1="310" y1="25" x2="400" y2="25"  stroke="white" stroke-width="1" marker-end="url(#markerArrow)"/>
+								
+								<rect x="420" y="0" width="80" height="50"style="fill: rgb(200,100,50);padding:10px"/>
+								<text x="430" y="30" dx="0.01em" dy="3em" fill="#fff">病人转科</text>
+								<line x1="520" y1="25" x2="620" y2="25"  stroke="white" stroke-width="1" marker-end="url(#markerArrow)"/>
+								
+								<rect x="640" y="0" width="80" height="50"style="fill: rgb(200,100,50);padding:10px"/>
+								<text x="640" y="30" dx="0.01em" dy="3em" fill="#fff">病人取消转科</text>
+								<line x1="680" y1="80" x2="680" y2="180"  stroke="white" stroke-width="1" marker-end="url(#markerArrow)"/>
+								
+								<rect x="640" y="200" width="80" height="50"style="fill: rgb(200,100,50);padding:10px"/>
+								<text x="650" y="230" dx="0.01em" dy="3em" fill="#fff">病人转科</text>
+								<line x1="510" y1="225" x2="630" y2="225"  stroke="white" stroke-width="1" marker-start="url(#markerArrow2)"/>
+								
+								<circle cx="460" cy="225" r="40" stroke="none" stroke-width="2"	fill="red" />
+								<text x="430" y="245" dx="0.01em" dy="3em" fill="#fff">病人出院</text>
+								
+<!-- 								<circle cx="200" cy="150" r="40" stroke="none" stroke-width="2"	fill="red" /> -->
+<!-- 								<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2"	fill="blue" /> -->
+<!-- 								<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2"	fill="#99a3b2" /> -->
+<!-- 								<ellipse cx="200" cy="350" rx="100" ry="40"	style="fill:rgb(200,100,50);stroke:none;stroke-width:2" /> -->
 							</g>
 						</g>
 					</svg>
@@ -30,7 +61,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-<!-- 				<button type="button" class="btn btn-default">提交更改</button> -->
+				<!-- 				<button type="button" class="btn btn-default">提交更改</button> -->
 			</div>
 		</div>
 	</div>

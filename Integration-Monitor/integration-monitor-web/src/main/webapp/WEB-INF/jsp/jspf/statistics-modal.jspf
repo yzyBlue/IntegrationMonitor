@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="css/styles/modal.css" type="text/css">
+<!-- <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="statisticsModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">事务报表详情</h4>
+			</div>
+			<div class="modal-body">
+				事务报表详细描述
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<!-- 				<button type="button" class="btn btn-default">提交更改</button> -->
+			</div>
+		</div>
+	</div>
+</div>

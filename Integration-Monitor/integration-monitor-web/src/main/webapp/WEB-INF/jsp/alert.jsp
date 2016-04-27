@@ -32,9 +32,9 @@ pageEncoding="UTF-8"%>
 		<busy-model size="60"></busy-model>
 <%-- 		<%@ include file="jspf/content-channel.jspf"%> --%>
 <%-- 		<%@ include file="jspf/content-body.jspf"%> --%>
-<%-- 		<%@ include file="jspf/content-server.jspf"%> --%>
-		<%@ include file="jspf/content-errorinfo.jspf"%>
-		<%@ include file="jspf/error-modal.jspf"%>
+		
+		<%@ include file="jspf/content-alert.jspf"%>
+		<%@ include file="jspf/alert-modal.jspf"%>
      	
 
 		<!-- content -->

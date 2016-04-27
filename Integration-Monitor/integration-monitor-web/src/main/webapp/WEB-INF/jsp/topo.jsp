@@ -49,15 +49,15 @@
 				</li>
 				<li><strong><a href="#"><i class="iconfont icon-flag"></i>事件</a> </strong>
 					<ul>
-						<li><a class="iconfont icon" href="#">错误信息</a></li>
+						<li><a class="iconfont icon" href="/integration-monitor/errorinfo">错误信息</a></li>
 					</ul>
 				</li>
 				<li><strong><a href="#"><i class="iconfont icon-table"></i> 报表</a> </strong>
 					<ul>
-						<li><a class="iconfont icon"href="#">事务统计</a></li>
+						<li><a class="iconfont icon"href="/integration-monitor/statistics">事务统计</a></li>
 					</ul>
 				</li>
-				<li><strong> <a	href="#"> <i class="iconfont icon-settings"></i>警报记录</a> </strong></li>
+				<li><strong> <a	href="/integration-monitor/alert"> <i class="iconfont icon-settings"></i>警报记录</a> </strong></li>
 			</ul>
 		</div>
 	</div>

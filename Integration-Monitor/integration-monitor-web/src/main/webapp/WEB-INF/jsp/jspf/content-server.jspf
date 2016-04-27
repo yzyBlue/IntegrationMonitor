@@ -4,6 +4,11 @@
 <div id="layout">
 	<div class="wrap clearfix">
 		<div class="page-title">
+			<div class="navbar">
+				<ul >
+					<li><a class="btn-green" href="#">添加监控</a></li>
+				</ul>
+			</div>
 			<h2>
 				服务器监控<sub>服务器监控列表</sub>
 			</h2>
@@ -13,8 +18,8 @@
 			<div data-reactid=".0">
 				<div class="pure-g">
 					<div class="pure-u-1">
-						<div class="box" >
-							<div class="widget-normal" >
+						<div class="box">
+							<div class="widget-normal">
 								<div class="widget-content" style="display: block;">
 									<div>
 										<table class="table table-striped ">
@@ -29,32 +34,25 @@
 											</colgroup>
 											<thead>
 												<tr>
-													<th class="sortedth"><span
-														class="sortedtext"></span><span
+													<th class="sortedth"><span class="sortedtext"></span><span
 														class="sorted-arrow "></span></th>
-													<th class="sortedth"><span
-														class="sortedtext">服务器名称</span><span
+													<th class="sortedth"><span class="sortedtext">服务器名称</span><span
 														class="sorted-arrow desc "></span></th>
-													<th class="sortedth"><span
-														class="sortedtext">CPU使用率</span><span
+													<th class="sortedth"><span class="sortedtext">CPU使用率</span><span
 														class="sorted-arrow "></span></th>
-													<th class="sortedth"><span
-														class="sortedtext">磁盘IO利用率</span><span
+													<th class="sortedth"><span class="sortedtext">磁盘IO利用率</span><span
 														class="sorted-arrow "></span></th>
-													<th class="sortedth"><span
-														class="sortedtext">内存使用率</span><span
+													<th class="sortedth"><span class="sortedtext">内存使用率</span><span
 														class="sorted-arrow "></span></th>
-													<th class="sortedth"><span
-														class="sortedtext">磁盘使用率</span><span
+													<th class="sortedth"><span class="sortedtext">磁盘使用率</span><span
 														class="sorted-arrow "></span></th>
 													<th style="width: 10%;" class=""></th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-													<td class=""><i
-														class="iconfont  state-downtime"></i></td>
-													<td class=""><a	href="#">shine数据库服务器</a></td>
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class=""><a href="#">shine数据库服务器</a></td>
 													<td class="">66.3%</td>
 													<td class="">36.00%</td>
 													<td class="">60%</td>
@@ -67,14 +65,13 @@
 											</tbody>
 											<tbody>
 												<tr>
-													<td class=""><i
-														class="iconfont  state-downtime"></i></td>
-													<td class=""><a	href="#">CDR集成服务器</a></td>
-													<td class="" >66.3%</td>
-													<td class="" >36.00%</td>
-													<td class="" >60%</td>
-													<td class="" >45%</td>
-													<td class="" ><div	class="operation">
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class=""><a href="#">CDR集成服务器</a></td>
+													<td class="">66.3%</td>
+													<td class="">36.00%</td>
+													<td class="">60%</td>
+													<td class="">45%</td>
+													<td class=""><div class="operation">
 															<a class="iconfont" href="javascript:;"></a><a
 																class="iconfont" href="javascript:;"></a>
 														</div></td>
@@ -83,14 +80,13 @@
 
 											<tbody>
 												<tr>
-													<td class=""><i
-														class="iconfont  state-downtime"></i></td>
-													<td class="" ><a href="#">CDR数据库服务器</a></td>
-													<td class="" >66.3%</td>
-													<td class="" >36.00%</td>
-													<td class="" >60%</td>
-													<td class="" >45%</td>
-													<td class="" ><div class="operation">
+													<td class=""><i class="iconfont  state-downtime"></i></td>
+													<td class=""><a href="#">CDR数据库服务器</a></td>
+													<td class="">66.3%</td>
+													<td class="">36.00%</td>
+													<td class="">60%</td>
+													<td class="">45%</td>
+													<td class=""><div class="operation">
 															<a class="iconfont" href="javascript:;"></a><a
 																class="iconfont" href="javascript:;"></a>
 														</div></td>
@@ -98,19 +94,19 @@
 											</tbody>
 											<tbody>
 												<tr>
-													<td class=""><i	class="iconfont  state-downtime"></i></td>
+													<td class=""><i class="iconfont  state-downtime"></i></td>
 													<td class=""><a href="#">shine应用服务器</a></td>
-													<td class="" >66.3%</td>
-													<td class="" >36.00%</td>
-													<td class="" >60%</td>
-													<td class="" >45%</td>
-													<td class="" ><div class="operation">
+													<td class="">66.3%</td>
+													<td class="">36.00%</td>
+													<td class="">60%</td>
+													<td class="">45%</td>
+													<td class=""><div class="operation">
 															<a class="iconfont" href="javascript:;"></a><a
 																class="iconfont" href="javascript:;"></a>
 														</div></td>
 												</tr>
 											</tbody>
-											
+
 										</table>
 									</div>
 								</div>

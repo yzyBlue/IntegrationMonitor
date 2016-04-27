@@ -33,8 +33,8 @@ pageEncoding="UTF-8"%>
 <%-- 		<%@ include file="jspf/content-channel.jspf"%> --%>
 <%-- 		<%@ include file="jspf/content-body.jspf"%> --%>
 <%-- 		<%@ include file="jspf/content-server.jspf"%> --%>
-		<%@ include file="jspf/content-errorinfo.jspf"%>
-		<%@ include file="jspf/error-modal.jspf"%>
+		<%@ include file="jspf/content-statistics.jspf"%>
+		<%@ include file="jspf/statistics-modal.jspf"%>
      	
 
 		<!-- content -->

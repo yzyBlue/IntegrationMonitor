@@ -3434,7 +3434,8 @@ input[type=checkbox]:checked:after {
 }
 .sortedth .sorted-arrow {
 	display: none;
-	background: url(../images/sorted-arrow.png) no-repeat;
+/* 	background: url(../../images/sorted-arrow.png) no-repeat; */
+	background: url(https://static.oneapm.com/assets/ai/images/sorted-arrow.png) no-repeat;
 	background-size: 13px;
 	height: 13px;
 	width: 16px

@@ -1,0 +1,232 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<script src="js/lib/jquery/jquery-2.1.1.js"></script>
+<script src="js/lib/bootstrap/bootstrap.min.js"></script>
+
+<div id="layout">
+	<div class="wrap clearfix">
+		<div class="sidebar">
+			<div class="menu">
+				<ul>
+					<li><strong> <a><i class="iconfont icon-eye"></i>监控</a>
+					</strong>
+						<ul>
+							<li><a class="iconfont icon" href="/integration-monitor/transaction"> 总览详情 </a></li>
+							<li><a class="iconfont icon"
+								href="/integration-monitor/topo">拓扑网络</a></li>
+							<li><a class="iconfont icon" href="/integration-monitor/adt">ADT事务
+							</a></li>
+							<li><a class="iconfont icon" href="#">检查事务</a></li>
+							<li><a class="iconfont icon" href="#">检验事务</a></li>
+							<li><a class="iconfont icon" href="#">医嘱事务</a></li>
+							<li><a class="iconfont icon" href="#">手术事务</a></li>
+							<li><a class="iconfont icon" href="#">摆药事务</a></li>
+							<li><a class="iconfont icon" href="#">费用事务</a></li>
+						</ul></li>
+					<li><strong><a><i class="iconfont icon-flag"></i>事件</a>
+					</strong>
+						<ul>
+							<li><a class="iconfont icon"
+								href="/integration-monitor/errorinfo">错误信息</a></li>
+						</ul></li>
+					<li><strong><a><i class="iconfont icon-table"></i>
+								报表</a> </strong>
+						<ul>
+							<li><a class="iconfont icon " href="/integration-monitor/statistics">事务统计</a></li>
+						</ul></li>
+					<li><strong> <a href="/integration-monitor/alert"> <i
+								class="iconfont icon-settings active"></i>警报记录
+						</a>
+					</strong></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="content" id="root">
+			<div>
+				<div class="page-title">
+					<h2>
+						警报<sub>警报记录表详情</sub>
+					</h2>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-1">
+						<div class="box">
+							<div class="widget-normal">
+								<div class="widget-content" style="display: block;">
+										<div class="widget-normal">
+											<div class="widget-content">
+												<table class="table table-striped ">
+													<colgroup>
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+														<col style="width: auto;">
+													</colgroup>
+													<thead>
+														<tr>
+															<th class="sortedth"><span class="sortedtext"></span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">编号</span><span
+																class="sorted-arrow desc "></span></th>
+															<th class="sortedth"><span class="sortedtext">警报名称</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">事务代码</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">警报条件</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">警报状态</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">警报时间</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">通知用户</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">是否警用</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">详情</span><span
+																class="sorted-arrow "></span></th>
+															<th class="sortedth"><span class="sortedtext">设置策略</span><span
+																class="sorted-arrow "></span></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">1</td>
+															<td class="">Service Error</td>
+															<td class="">ADT</td>
+															<td class="">Handle Error</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">2</td>
+															<td class="">HL7 Error</td>
+															<td class="">EXAM</td>
+															<td class="">Time Out</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">3</td>
+															<td class="">Service Error</td>
+															<td class="">ADT</td>
+															<td class="">Handle Error</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">4</td>
+															<td class="">HL7 Error</td>
+															<td class="">EXAM</td>
+															<td class="">Time Out</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">5</td>
+															<td class="">Service Error</td>
+															<td class="">ADT</td>
+															<td class="">Handle Error</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">6</td>
+															<td class="">HL7 Error</td>
+															<td class="">EXAM</td>
+															<td class="">Time Out</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+													<tbody>
+														<tr>
+															<td class=""><i class="iconfont  state-downtime"></i></td>
+															<td class="">7</td>
+															<td class="">Service Error</td>
+															<td class="">ADT</td>
+															<td class="">Handle Error</td>
+															<td class=""><a class="btn-red">警告</a></td>
+															<td class="">2016-04-08 15:58:32</td>
+															<td class="">管理员</td>
+															<td class=""><a class="btn-blue btn-xs">否</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#alertModal">查看详情</a></td>
+															<td class=""><a class="btn-green"
+																data-toggle="modal" href="#myModal">设置策略</a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

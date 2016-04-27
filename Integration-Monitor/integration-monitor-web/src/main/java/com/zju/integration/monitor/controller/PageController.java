@@ -49,4 +49,12 @@ public class PageController {
 	public String getErrorInfo() {
 		return "errorinfo";
 	}
+	@RequestMapping("/statistics")
+	public String getStatistics() {
+		return "statistics";
+	}
+	@RequestMapping("/alert")
+	public String getAlert() {
+		return "alert";
+	}
 }

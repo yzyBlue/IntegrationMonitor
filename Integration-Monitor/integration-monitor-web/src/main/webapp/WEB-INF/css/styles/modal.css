@@ -4,10 +4,10 @@
     font-size: 21px;
     font-weight: 700;
     line-height: 1;
-    color: #000;
+    color: #ffffff;
     text-shadow: 0 1px 0 #fff;
     filter: alpha(opacity=20);
-    opacity: .2
+    opacity: 0.9
 }
 
 .close:focus,
