@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import com.zju.integration.monitor.dao.UserDao;
 import com.zju.integration.monitor.exception.UserServiceException;
 import com.zju.integration.monitor.model.User;
-
+/**
+ * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
+ * @since 2016-03-22
+ * @version v0.0.1
+ * @date 2016-04-29
+ * @description User Service implements object
+ */
 @Service("userService")
-@Transactional(rollbackFor=UserServiceException.class)
+@Transactional(rollbackFor=UserServiceException.class,propagation=Propagation.NESTED)
 public class UserServiceImpl implements UserService{
 	
 	@Autowired(required=false)
@@ -42,9 +47,9 @@ public class UserServiceImpl implements UserService{
 		return insertResult;
 	}
 	
-	public User getUserInfo(String userId){
+	public User getUserInfo(long userId){
 		User user = new User();
-		if (userId != null) {
+		if (userId>0) {
 			user = userDao.getUserInfo(userId);
 		} else {
 			logger.info("用户ID为空！");

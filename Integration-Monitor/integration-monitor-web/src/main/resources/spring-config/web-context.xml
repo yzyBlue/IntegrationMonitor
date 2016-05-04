@@ -41,32 +41,32 @@
 	<sec:http pattern="/vendor/**" security="none" />
 	<sec:http pattern="/login.html" security="none" />
 	
-	<sec:http auto-config="true" use-expressions="true"
-		entry-point-ref="restAuthenticationEntryPoint">
-		<sec:intercept-url pattern="/**" access="permitAll" />
+<!-- 	<sec:http auto-config="true" use-expressions="true" -->
+<!-- 		entry-point-ref="restAuthenticationEntryPoint"> -->
+<!-- 		<sec:intercept-url pattern="/**" access="permitAll" /> -->
 <!-- 		<sec:intercept-url pattern="/**" access="isAuthenticated()" /> -->
-		<sec:form-login login-page="/#/login"
-			authentication-success-handler-ref="authenticationSuccessHandler"
-			authentication-failure-handler-ref="authenticationFailureHandler"
-			username-parameter="username" password-parameter="password" />
-		<sec:logout logout-url="/logout" invalidate-session="true"
-			delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler" />
-		<sec:remember-me remember-me-parameter="remember-me" />
-		<sec:session-management>
-			<sec:concurrency-control max-sessions="1"
-				error-if-maximum-exceeded="false" expired-url="/#/login" />
-		</sec:session-management>
-	</sec:http>
+<!-- 		<sec:form-login login-page="/#/login" -->
+<!-- 			authentication-success-handler-ref="authenticationSuccessHandler" -->
+<!-- 			authentication-failure-handler-ref="authenticationFailureHandler" -->
+<!-- 			username-parameter="username" password-parameter="password" /> -->
+<!-- 		<sec:logout logout-url="/logout" invalidate-session="true" -->
+<!-- 			delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler" /> -->
+<!-- 		<sec:remember-me remember-me-parameter="remember-me" /> -->
+<!-- 		<sec:session-management> -->
+<!-- 			<sec:concurrency-control max-sessions="1" -->
+<!-- 				error-if-maximum-exceeded="false" expired-url="/#/login" /> -->
+<!-- 		</sec:session-management> -->
+<!-- 	</sec:http> -->
 	
-	<bean id="logoutSuccessHandler"
-		class="com.zju.integration.monitor.util.LogoutSuccessHandlerImpl">
-		<constructor-arg value="/" />
-	</bean>
+<!-- 	<bean id="logoutSuccessHandler" -->
+<!-- 		class="com.zju.integration.monitor.util.LogoutSuccessHandlerImpl"> -->
+<!-- 		<constructor-arg value="/" /> -->
+<!-- 	</bean> -->
 	
-	<sec:authentication-manager alias="authenticationManager">
-		<sec:authentication-provider
-			user-service-ref="userDetailsService">
-		</sec:authentication-provider>
-	</sec:authentication-manager>
+<!-- 	<sec:authentication-manager alias="authenticationManager"> -->
+<!-- 		<sec:authentication-provider -->
+<!-- 			user-service-ref="userDetailsService"> -->
+<!-- 		</sec:authentication-provider> -->
+<!-- 	</sec:authentication-manager> -->
 
 </beans>

@@ -1,27 +1,29 @@
 package com.zju.integration.monitor.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
- * @author Yuan.Ziyang
+ * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
  * @since 2016-03-22
  * @version v0.0.1
  * @date 2016-03-22
  * @description User information object
  */
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 991494537508911522L;
 	private long userId;
 	private String userName;
 	private String passWord;
 	private String roleCode;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	private String creatorId;
 	private String voidedBy;
 	private String voidFlag;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")
 	private Date modifyDate;
 
 	public User() {
@@ -84,6 +86,10 @@ public class User {
 	}
 
 	public String getCreatorId() {
+		if (creatorId == null) {
+			creatorId = "";
+		}
+		creatorId = creatorId.trim();
 		return creatorId;
 	}
 
@@ -92,6 +98,10 @@ public class User {
 	}
 
 	public String getVoidedBy() {
+		if (voidedBy == null) {
+			voidedBy = "";
+		}
+		voidedBy = voidedBy.trim();
 		return voidedBy;
 	}
 

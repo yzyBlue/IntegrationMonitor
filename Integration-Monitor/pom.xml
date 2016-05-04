@@ -78,8 +78,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.0.4.RELEASE</spring.version>
+		<fastjson.version>1.2.7</fastjson.version>
+		<jasypt.version>1.9.2</jasypt.version>
+		<log4j.version>1.2.16</log4j.version>
 	</properties>
-
+<dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -144,8 +147,29 @@
 		<!-- <artifactId>spring-webmvc</artifactId> -->
 		<!-- <version>${spring.version}</version> -->
 		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>${jasypt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt-spring31</artifactId>
+			<version>${jasypt.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
 	</dependencies>
-
+</dependencyManagement>
 	<repositories>
 		<repository>
 			<releases>
@@ -252,6 +276,7 @@
 
 	<modules>
 		<module>integration-monitor-common</module>
+		<module>integration-monitor-mirthclient</module>
 		<module>integration-monitor-service</module>
 		<module>integration-monitor-web</module>
 	</modules>

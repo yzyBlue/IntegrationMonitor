@@ -165,7 +165,7 @@
 				<li><strong> <a><i class="iconfont icon-eye"></i>监控</a>
 				</strong>
 					<ul>
-						<li><a class="iconfont icon" href="#"> 总览详情 </a></li>
+						<li><a class="iconfont icon" href="/integration-monitor/transaction"> 总览详情 </a></li>
 						<li><a class="iconfont icon" href="/integration-monitor/topo">拓扑网络</a></li>
 						<li><a class="iconfont icon active"
 							href="/integration-monitor/adt">ADT事务 </a></li>

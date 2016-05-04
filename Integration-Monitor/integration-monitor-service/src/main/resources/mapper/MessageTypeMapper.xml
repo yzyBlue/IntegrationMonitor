@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.MessageTypeDao">
+	<resultMap id="messageTypeMap" type="com.zju.integration.monitor.model.MessageType">
+		<id column="TYPE_ID" property="typeId" jdbcType="INTEGER" />
+		<result column="MESSAGE_TYPE" property="mesageType" jdbcType="VARCHAR" />
+		<result column="EVENT_TYPE" property="eventType" jdbcType="VARCHAR" />
+		<result column="CONTROL_CODE" property="controlCode" jdbcType="VARCHAR" />
+		<result column="PROFILE_CODE" property="transCode" jdbcType="VARCHAR" />
+		<result column="MSG_TYPE_DESC" property="messageTypeDesc" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE_TIME" property="createDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="messageTypeInfo">
+		MESSAGE_TYPE,EVENT_TYPE,CONTROL_CODE,PROFILE_CODE,MSG_TYPE_DESC,CREATE_DATE_TIME  
+	</sql>
+	
+	<!--查询事务类型字典表信息-->
+	<select id="select" resultMap="messageTypeMap">
+		SELECT
+		<include refid="messageTypeInfo"></include>
+		FROM
+		MSG_EVENT_TYPE
+		WHERE TYPE_ID = #{typeId,jdbcType=INTEGER}
+	</select>
+	<!--写入用户信息-->
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.MessageType">
+	<selectKey resultType="long" order="AFTER" keyProperty="typeId">
+		SELECT ident_current('MSG_EVENT_TYPE') AS typeId
+	</selectKey>
+	INSERT INTO
+		MSG_EVENT_TYPE (
+		<include refid="messageTypeInfo"></include>
+		 ) VALUES ( 
+		#{mesageType,jdbcType=VARCHAR},
+		#{eventType,jdbcType=VARCHAR},
+		#{controlCode,jdbcType=VARCHAR},
+		#{transCode,jdbcType=VARCHAR},
+		#{messageTypeDesc,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP} 
+		)
+	</insert>
+	<!--更新用户信息-->
+	<update id="update" parameterType="com.zju.integration.monitor.model.MessageType">
+		UPDATE 
+		MSG_EVENT_TYPE 
+		SET 
+		MESSAGE_TYPE=#{mesageType,jdbcType=VARCHAR},
+		EVENT_TYPE=#{eventType,jdbcType=VARCHAR},
+		CONTROL_CODE=#{controlCode,jdbcType=VARCHAR},
+		PROFILE_CODE=#{transCode,jdbcType=VARCHAR},
+		MSG_TYPE_DESC=#{messageTypeDesc,jdbcType=VARCHAR}  
+		WHERE 
+		TYPE_ID = #{typeId,jdbcType=INTEGER}
+	</update>
+	<!--删除用户信息-->
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.MessageType">
+		DELETE FROM MSG_EVENT_TYPE WHERE TYPE_ID = #{typeId,jdbcType=INTEGER}
+	</delete>
+	
+</mapper>

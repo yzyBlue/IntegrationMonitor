@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.TransactionStatusDao">
+	<resultMap id="transactionStatusMap" type="com.zju.integration.monitor.model.TransactionStatus">
+		<id column="SERIAL_NO" property="serialNo" jdbcType="INTEGER" />
+		<result column="PROFILE_CODE" property="transCode" jdbcType="VARCHAR" />
+		<result column="PROFILE_NAME" property="transName" jdbcType="VARCHAR" />
+		<result column="TRANS_STATUS_CODE" property="transStatusCode" jdbcType="VARCHAR" />
+		<result column="TRANS_STATUS_NAME" property="transStatusName" jdbcType="VARCHAR" />
+		<result column="TRANS_STATUS_DESC" property="transStatusDesc" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE_TIME" property="createDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="transactionStatusInfo">
+		PROFILE_CODE,PROFILE_NAME,TRANS_STATUS_CODE,TRANS_STATUS_NAME,TRANS_STATUS_DESC,CREATE_DATE_TIME  
+	</sql>
+	
+	<!--查询事务状态字典表信息-->
+	<select id="select" resultMap="transactionStatusMap">
+		SELECT
+		<include refid="transactionStatusInfo"></include>
+		FROM
+		TRANSACTION_STATUS
+		WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</select>
+	<!--写入状态字典信息-->
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.TransactionStatus">
+	<selectKey resultType="long" order="AFTER" keyProperty="serialNo">
+		SELECT ident_current('TRANSACTION_STATUS') AS serialNo
+	</selectKey>
+	INSERT INTO
+		TRANSACTION_STATUS (
+		<include refid="transactionInfo"></include>
+		 ) VALUES ( 
+		#{transCode,jdbcType=VARCHAR},
+		#{transName,jdbcType=VARCHAR},
+		#{transStatusCode,jdbcType=VARCHAR},
+		#{transStatusName,jdbcType=VARCHAR},
+		#{transStatusDesc,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP} 
+		)
+	</insert>
+	<!--更新状态字典信息-->
+	<update id="update" parameterType="com.zju.integration.monitor.model.TransactionStatus">
+		UPDATE
+		TRANSACTION_STATUS
+		SET
+		PROFILE_CODE=#{transCode,jdbcType=VARCHAR},
+		PROFILE_NAME=#{transName,jdbcType=VARCHAR},
+		TRANS_STATUS_CODE=#{transStatusCode,jdbcType=VARCHAR},
+		TRANS_STATUS_NAME=#{transStatusName,jdbcType=VARCHAR}，
+		TRANS_STATUS_DESC=#{transStatusDesc,jdbcType=VARCHAR} 
+		WHERE 
+		SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</update>
+	<!--删除用户信息-->
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.TransactionStatus">
+		DELETE FROM TRANSACTION_STATUS WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</delete>
+	
+</mapper>
