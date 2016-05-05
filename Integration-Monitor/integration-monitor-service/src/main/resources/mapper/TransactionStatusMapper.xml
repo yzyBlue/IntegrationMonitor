@@ -30,7 +30,7 @@
 	</selectKey>
 	INSERT INTO
 		TRANSACTION_STATUS (
-		<include refid="transactionInfo"></include>
+		<include refid="transactionStatusInfo"></include>
 		 ) VALUES ( 
 		#{transCode,jdbcType=VARCHAR},
 		#{transName,jdbcType=VARCHAR},

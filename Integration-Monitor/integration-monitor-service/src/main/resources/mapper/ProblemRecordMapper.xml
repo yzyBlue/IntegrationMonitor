@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.ProblemActionDao">
+	<resultMap id="problemActionMap" type="com.zju.integration.monitor.model.ProblemAction">
+		<id column="SERIAL_NO" property="serialNo" jdbcType="INTEGER" />
+		<result column="PROBLEM_CODE" property="problemCode" jdbcType="VARCHAR" />
+		<result column="PROBLEM_THEME" property="problemTheme" jdbcType="VARCHAR" />
+		<result column="ACTOR_CODE" property="actorCode" jdbcType="VARCHAR" />
+		<result column="ACTOR_NAME" property="actorName" jdbcType="VARCHAR" />
+		<result column="ACTION_TYPE" property="actionType" jdbcType="VARCHAR" />
+		<result column="ACTION_DATE" property="actionDate" jdbcType="TIMESTAMP" />
+		<result column="ACTION_CONTENT" property="actionContent" jdbcType="VARCHAR" />
+		<result column="ACTION_MEMO" property="actionMemo" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="problemActionInfo">
+		PROBLEM_CODE,PROBLEM_THEME,ACTOR_CODE,ACTOR_NAME,ACTION_TYPE,ACTION_DATE,ACTION_CONTENT,ACTION_MEMO 
+	</sql>
+	
+	<!--查询集成问题操作记录表信息-->
+	<select id="select" resultMap="problemActionMap">
+		SELECT
+		<include refid="problemActionInfo"></include>
+		FROM
+		INTE_PROBLEM_ACTION 
+		WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</select>
+	<!--写入集成问题操作记录表信息-->
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.ProblemAction">
+	<selectKey resultType="long" order="AFTER" keyProperty="serialNo">
+		SELECT ident_current('INTE_PROBLEM_ACTION') AS serialNo
+	</selectKey>
+	INSERT INTO
+		INTE_PROBLEM_ACTION (
+		<include refid="problemActionInfo"></include>
+		 ) VALUES ( 
+		#{problemCode,jdbcType=VARCHAR},
+		#{problemTheme,jdbcType=VARCHAR},
+		#{actorCode,jdbcType=VARCHAR},
+		#{actorName,jdbcType=VARCHAR},
+		#{actionType,jdbcType=VARCHAR},
+		#{actionDate,jdbcType=TIMESTAMP},
+		#{actionContent,jdbcType=VARCHAR},
+		#{actionMemo,jdbcType=VARCHAR} 
+		)
+	</insert>
+	<!--更新集成问题操作记录表信息-->
+	<update id="update" parameterType="com.zju.integration.monitor.model.ProblemAction">
+		UPDATE
+		INTE_PROBLEM_ACTION
+		SET
+		PROBLEM_CODE=#{problemCode,jdbcType=VARCHAR},
+		PROBLEM_THEME=#{problemTheme,jdbcType=VARCHAR},
+		ACTOR_CODE=#{actorCode,jdbcType=VARCHAR},
+		ACTOR_NAME=#{actorName,jdbcType=VARCHAR}，
+		ACTION_TYPE=#{actionType,jdbcType=VARCHAR},
+		ACTION_DATE=#{actionDate,jdbcType=TIMESTAMP},
+		ACTION_CONTENT=#{actionContent,jdbcType=VARCHAR}，
+		ACTION_MEMO=#{actionMemo,jdbcType=VARCHAR}  
+		WHERE
+		SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</update>
+	<!--删除集成问题操作记录表信息-->
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.ProblemAction">
+		DELETE FROM INTE_PROBLEM_ACTION WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</delete>
+	
+</mapper>

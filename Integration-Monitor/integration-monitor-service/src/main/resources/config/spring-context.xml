@@ -15,4 +15,13 @@
 	<import resource="classpath:config/spring-mybatis.xml" />
 	<context:annotation-config />
 	<context:component-scan base-package="com.zju.integration.monitor.service" />
+	
+	<bean id="restClient" class="org.integration.monitor.mirthclient.MirthClientImpl">
+		<constructor-arg value="172.16.100.64" />
+		<constructor-arg value="8445" />
+		<constructor-arg value="user" />
+		<constructor-arg value="user" />
+		<constructor-arg value="3.2.0" />
+	</bean>
+	
 </beans>

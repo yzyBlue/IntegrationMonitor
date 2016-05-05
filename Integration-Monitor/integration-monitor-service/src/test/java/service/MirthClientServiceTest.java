@@ -1,6 +1,7 @@
 package service;
 
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,45 +26,15 @@ import com.zju.integration.monitor.util.EncryptionUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/spring-context.xml" }) 
-public class UserServiceTest {
-	@Autowired
-	private UserService userService;
+public class MirthClientServiceTest {
 	
 	@Autowired
 	private MirthClient mirthClient;
 	protected final Logger logger = Logger.getLogger(this.getClass());
 	
-	//@Test
-	public void serviceTest() throws Exception{
-		User userNew=new User();
-		userNew.setCreateDate(new Date());
-		userNew.setCreatorId("admin");
-		userNew.setModifyDate(null);
-		userNew.setPassWord(EncryptionUtil.encrypt("yzyBlue1991"));
-		userNew.setRoleCode("admin");
-		userNew.setUserName("blue");
-		userNew.setVoidFlag("0");
-		//去除空值
-		logger.error(JSON.toJSONString(userNew));
-		//保留空值
-		logger.error(JSON.toJSONString(userNew,SerializerFeature.WriteMapNullValue));
-		Integer insert=userService.saveUserInfo(userNew);
-		logger.debug(userNew.getUserId());
-		
-		User user=userService.getUserInfo(1);
-		logger.debug(user.toString());
-		logger.debug(user.getPassWord());
-		logger.debug(EncryptionUtil.decrypt(user.getPassWord()));
-		logger.debug(JSON.toJSONString(user,SerializerFeature.WriteMapNullValue));
-//		String result=userService.saveUpdateUser();
-//		logger.debug(result);
-//		List<User> userlist=new ArrayList<User>();
-//		userlist.add(user);
-//		userlist.add(userNew);
-//		logger.debug(JSON.toJSONString(userlist,SerializerFeature.WriteMapNullValue));
-	}
 	@Test
 	public void mirthClientTest() throws ClientException{
+		logger.info("********************  mirthClientTest  start   ********************************");
 		List<DashboardStatus> dashboardStatusList =new ArrayList<DashboardStatus>();
 		dashboardStatusList=mirthClient.getStatistics();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
@@ -77,5 +48,20 @@ public class UserServiceTest {
 		logger.info(dashboardStatusList.get(0).getStatusType());
 		logger.info(dashboardStatusList.get(0).getChannelId());
 		logger.info(dashboardStatusList.get(0).getChildStatuses().toString());
+		logger.info("********************  mirthClientTest  end   ********************************");
+	}
+	@Test
+	public void gettConnectionInfoLogsTest() throws ClientException{
+		logger.info("********************  gettConnectionInfoLogsTest  start   ********************************");
+		LinkedList<String[]> connectionInfoLogsReceived=mirthClient.getConnectionInfoLogs();
+		for(int i=0;i<connectionInfoLogsReceived.size();i++){
+			logger.info(connectionInfoLogsReceived.get(i)[0]);
+			logger.info(connectionInfoLogsReceived.get(i)[1]);
+			logger.info(connectionInfoLogsReceived.get(i)[2]);
+			logger.info(connectionInfoLogsReceived.get(i)[3]);
+			logger.info(connectionInfoLogsReceived.get(i)[4]);
+			logger.info(connectionInfoLogsReceived.get(i)[5]);
+		}
+		logger.info("********************  gettConnectionInfoLogsTest  end   ********************************");
 	}
 }

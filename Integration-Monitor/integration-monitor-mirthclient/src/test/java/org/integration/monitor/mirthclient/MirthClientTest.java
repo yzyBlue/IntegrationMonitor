@@ -34,7 +34,7 @@ public class MirthClientTest {
 		mirthClient=new Client(mirthUrl,6000);
 		
 		try {
-			loginStatus = mirthClient.login("admin", "admin", "3.2.0");
+			loginStatus = mirthClient.login("user", "user", "3.2.0");
 			if (loginStatus.getStatus() == Status.FAIL) {
 				mirthClient = null;
 			}

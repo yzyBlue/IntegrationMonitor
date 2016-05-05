@@ -49,7 +49,7 @@
 		<property name="password" value="${database.password}" />
 		<property name="initialSize" value="0" />
 		<property name="maxActive" value="20" />
-		<property name="maxIdle" value="20" />
+<!-- 		<property name="maxIdle" value="20" /> -->
 		<property name="minIdle" value="0" />
 		<property name="maxWait" value="60000" />
 		<property name="testOnBorrow" value="false" />
@@ -61,6 +61,7 @@
 		<property name="removeAbandonedTimeout" value="1800" />
 		<property name="logAbandoned" value="true" />
 		<property name="filters" value="mergeStat" />
+		<property name="validationQuery" value="${database.validationQuery}"></property>
 	</bean>
 	<!-- 使用spring的会话管理 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

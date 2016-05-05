@@ -84,11 +84,7 @@
 			<artifactId>integration-monitor-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.zju.integration.monitor</groupId>
-			<artifactId>integration-monitor-mirthclient</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
