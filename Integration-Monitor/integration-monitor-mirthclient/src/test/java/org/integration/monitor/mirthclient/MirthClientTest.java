@@ -22,6 +22,7 @@ import com.mirth.connect.model.converters.ObjectXMLSerializer;
 public class MirthClientTest {
 	protected final Logger logger = Logger.getLogger(this.getClass());
 	private static final String mirthUrl="https://172.16.100.64:8445/";
+	private static final String mirthv2Url="https://172.16.100.54:8443/";
 	private static Client mirthClient;
 	private static final String DASHBOARD_SERVICE_PLUGINPOINT = "Dashboard Connector Service";
 	private static final String GET_CONNECTION_INFO_LOGS = "getConnectionInfoLogs";
@@ -31,12 +32,16 @@ public class MirthClientTest {
 	
 	@Before
 	public void connectMirth(){
-		mirthClient=new Client(mirthUrl,6000);
+		mirthClient=new Client(mirthv2Url,6000);
 		
 		try {
-			loginStatus = mirthClient.login("user", "user", "3.2.0");
+			loginStatus = mirthClient.login("admin", "admin", "2.2.1");
+			
 			if (loginStatus.getStatus() == Status.FAIL) {
 				mirthClient = null;
+				logger.info("login fail");
+			}else{
+				logger.info("login success");
 			}
 		} catch (ClientException e) {
 			logger.error(e.getCause().getMessage());
@@ -97,7 +102,7 @@ public class MirthClientTest {
 			e.printStackTrace();
 		}
 	}
-	@Test
+	//@Test
 	public void getStatisticsTest() throws ClientException{
 		List<DashboardStatus> dashboardStatusList =new ArrayList<DashboardStatus>();
 		if (loginStatus.getStatus() == Status.SUCCESS) {
@@ -124,6 +129,21 @@ public class MirthClientTest {
 		logger.info(dashboardStatusList.get(0).getStatusType());
 		logger.info(dashboardStatusList.get(0).getChannelId());
 		logger.info(dashboardStatusList.get(0).getChildStatuses().toString());
+	}
+	@Test
+	public void connectMirthV2Test(){
+		try {
+			LinkedList<String[]> serverLogReceived=new LinkedList<String[]>();
+			if (loginStatus.getStatus() == Status.SUCCESS) {
+				logger.debug("Login Success");
+				serverLogReceived =(LinkedList<String[]>) mirthClient.invokePluginMethod("Server Log","getMirthServerLogs",null);
+			}
+			logger.info(serverLogReceived.get(0).clone()[0]);
+			logger.info(serverLogReceived.get(0).clone()[1]);
+		} catch (ClientException e) {
+			logger.error(e.getCause().getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 }

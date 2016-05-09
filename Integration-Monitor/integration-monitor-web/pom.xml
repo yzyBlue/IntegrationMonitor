@@ -84,7 +84,11 @@
 			<artifactId>integration-monitor-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.zju.integration.monitor</groupId>
+			<artifactId>integration-monitor-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -120,7 +124,7 @@
 				<version>2.2</version>
 				<configuration>
 					<mode>war</mode>
-					<!--tomcat7:deploy,tomcat7:redeploy,tomcat7:undeploy时会用到url-->
+					<!--tomcat7:deploy,tomcat7:redeploy,tomcat7:undeploy时会用到url -->
 					<url>${tomcat.url}</url>
 					<username>admin</username>
 					<password>admin</password>

@@ -12,8 +12,8 @@ import java.io.Serializable;
  * @date 2016-04-29
  * @description Result information object
  */
-public class IntegrationResult implements Serializable{
-	
+public class IntegrationResult implements Serializable {
+
 	private static final long serialVersionUID = 3189310499310275246L;
 	public static final int SUCCESSCODE = 0;
 	public static final String SUCCESSDESC = "成功";
@@ -21,6 +21,7 @@ public class IntegrationResult implements Serializable{
 	public static final String INTERNALDESC = "服务内部错误";
 	private int resultCode;
 	private String resultDesc;
+	private Object object;
 
 	/**
 	 * 
@@ -37,7 +38,8 @@ public class IntegrationResult implements Serializable{
 	}
 
 	/**
-	 * @param resultCode the resultCode to set
+	 * @param resultCode
+	 *            the resultCode to set
 	 */
 	public void setResultCode(int resultCode) {
 		this.resultCode = resultCode;
@@ -51,25 +53,46 @@ public class IntegrationResult implements Serializable{
 	}
 
 	/**
-	 * @param resultDesc the resultDesc to set
+	 * @param resultDesc
+	 *            the resultDesc to set
 	 */
 	public void setResultDesc(String resultDesc) {
 		this.resultDesc = resultDesc;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return the object
+	 */
+	public Object getObject() {
+		return object;
+	}
+
+	/**
+	 * @param object
+	 *            the object to set
+	 */
+	public void setObject(Object object) {
+		this.object = object;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((object == null) ? 0 : object.hashCode());
 		result = prime * result + resultCode;
 		result = prime * result + ((resultDesc == null) ? 0 : resultDesc.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -84,6 +107,13 @@ public class IntegrationResult implements Serializable{
 			return false;
 		}
 		IntegrationResult other = (IntegrationResult) obj;
+		if (object == null) {
+			if (other.object != null) {
+				return false;
+			}
+		} else if (!object.equals(other.object)) {
+			return false;
+		}
 		if (resultCode != other.resultCode) {
 			return false;
 		}
@@ -97,12 +127,15 @@ public class IntegrationResult implements Serializable{
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "IntegrationResult [resultCode=" + resultCode + ", resultDesc=" + resultDesc + "]";
+		return "IntegrationResult [resultCode=" + resultCode + ", resultDesc=" + resultDesc + ", object="
+				+ object.toString() + "]";
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.integration.monitor.mirthclient;
+package com.integration.monitor.mirthclient;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -20,7 +20,7 @@ import com.mirth.connect.model.converters.ObjectXMLSerializer;
 
 /**
  * @author Yuan.Ziyang
- *
+ * @since 2016-05-05
  */
 public class MirthClientImpl implements MirthClient {
 
@@ -28,7 +28,7 @@ public class MirthClientImpl implements MirthClient {
 
 	private static final String HTTP_PREFIX = "https://";
 
-	private static final String mirthUrl = "https://172.16.100.64:8445/";
+	//private static final String mirthUrl = "https://172.16.100.64:8445/";
 	private static Client mirthClient;
 	private String userName;
 	private String password;
