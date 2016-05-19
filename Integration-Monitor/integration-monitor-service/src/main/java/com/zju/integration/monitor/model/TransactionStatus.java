@@ -6,6 +6,8 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 /**
@@ -15,6 +17,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2016-04-29
  * @description Transaction Status information object
  */
+@XmlRootElement(name = "DataBaseInfo")
 public class TransactionStatus implements Serializable {
 
 	private static final long serialVersionUID = 5287729446970546907L;
@@ -31,7 +34,7 @@ public class TransactionStatus implements Serializable {
 
 	private String transStatusDesc;
 
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 
 	/**

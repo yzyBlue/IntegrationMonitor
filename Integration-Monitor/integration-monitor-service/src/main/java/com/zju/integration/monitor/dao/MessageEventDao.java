@@ -3,6 +3,9 @@
  */
 package com.zju.integration.monitor.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,5 +21,7 @@ import com.zju.integration.monitor.model.MessageEvent;
 @Repository
 @Transactional
 public interface MessageEventDao extends AbstractGenericDao<MessageEvent, Integer> {
+
+	public List<MessageEvent> getMessageByCondition(Map paramMap);
 
 }

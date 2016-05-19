@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zju.integration.monitor.dao.MessageEventDao">
 	<resultMap id="messageEventMap" type="com.zju.integration.monitor.model.MessageEvent">
-		<id column="MESSAGE_ID" property="messageId" jdbcType="INTEGER" />
+		<id column="MESSAGE_ID" property="sequenceId" jdbcType="INTEGER" />
 		<result column="MSG_EVENT_CODE" property="msgTypeId" jdbcType="VARCHAR" />
 		<result column="MSG_SUB_TYPE" property="msgSubType" jdbcType="VARCHAR" />
 		<result column="MSG_SOURCE_CODE" property="msgSourceCode" jdbcType="VARCHAR" />
 		<result column="CHANNEL_CODE" property="channelCode" jdbcType="VARCHAR" />
+		<result column="SOURCE_MSG_UID" property="sourceMsgUid" jdbcType="VARCHAR" />
 		<result column="EVENT_DATE_TIME" property="eventDateTime" jdbcType="TIMESTAMP" />
 		<result column="PATIENT_ID" property="patientId" jdbcType="VARCHAR" />
 		<result column="VISIT_ID" property="visitId" jdbcType="VARCHAR" />
@@ -22,10 +23,11 @@
 	</resultMap>
 	
 	<sql id="messageEventInfo">
-		MSG_EVENT_CODE,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,EVENT_DATE_TIME,PATIENT_ID,
+		MSG_EVENT_CODE,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,SOURCE_MSG_UID,EVENT_DATE_TIME,PATIENT_ID,
 		VISIT_ID,MSG_INDEX,MSG_SUB_INDEX,TRANSACTION_STATUS,HANDLE_RESULT_STATUS,EVENT_HANDLE_TIME,
 		HANDLE_RESULT_DESC,MSG_RAW_DATA,RAW_DATA_PROTOCOL,IS_ENCRYPTED 
 	</sql>
+	
 	
 	<!--查询事件内容表信息-->
 	<select id="select" resultMap="messageEventMap">
@@ -33,12 +35,143 @@
 		<include refid="messageEventInfo"></include>
 		FROM
 		MSG_EVENT_LOG
-		WHERE MESSAGE_ID = #{messageId,jdbcType=INTEGER}
+		WHERE SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
 	</select>
+	
+	<!-- 动态查询消息事件内容 -->
+	<select id="getMessageByCondition" parameterType="java.util.Map" resultMap="messageEventMap">
+		SELECT 
+		<include refid="messageEventInfo"></include> 
+		FROM MSG_EVENT_LOG 
+		where 1=1
+		<if test="msgTypeId != null"> 
+ 			and MSG_EVENT_CODE =#{msgTypeId,jdbcType=VARCHAR}
+		</if> 
+		<if test="msgSubType != null"> 
+ 			and MSG_SUB_TYPE =#{msgSubType,jdbcType=VARCHAR}
+		</if> 
+		<if test="msgSourceCode != null"> 
+ 			and MSG_SOURCE_CODE =#{msgSourceCode,jdbcType=VARCHAR}
+		</if> 
+		<if test="channelCode != null"> 
+ 			and CHANNEL_CODE =#{channelCode,jdbcType=VARCHAR}
+		</if> 
+		<if test="sourceMsgUid != null"> 
+ 			and SOURCE_MSG_UID =#{sourceMsgUid,jdbcType=VARCHAR}
+		</if> 
+		<if test="eventDateTime != null"> 
+ 			and EVENT_DATE_TIME =#{eventDateTime,jdbcType=TIMESTAMP}
+		</if> 
+		<if test="patientId != null"> 
+ 			and PATIENT_ID =#{patientId,jdbcType=VARCHAR}
+		</if> 
+		<if test="visitId != null"> 
+ 			and VISIT_ID =#{visitId,jdbcType=VARCHAR}
+		</if> 
+		<if test="messageIndex != null"> 
+ 			and MSG_INDEX =#{messageIndex,jdbcType=VARCHAR}
+		</if> 
+		<if test="messageSubIndex != null"> 
+ 			and MSG_SUB_INDEX =#{messageSubIndex,jdbcType=VARCHAR}
+		</if> 
+		<if test="transactionStatus != null"> 
+ 			and TRANSACTION_STATUS =#{transactionStatus,jdbcType=VARCHAR}
+		</if> 
+		<if test="handleResultStatus != null"> 
+ 			and HANDLE_RESULT_STATUS =#{handleResultStatus,jdbcType=VARCHAR}
+		</if> 
+		<if test="eventHandleTime != null"> 
+ 			and EVENT_HANDLE_TIME =#{eventHandleTime,jdbcType=TIMESTAMP}
+		</if> 
+		<if test="handleResultDesc != null"> 
+ 			and HANDLE_RESULT_DESC =#{handleResultDesc,jdbcType=VARCHAR}
+		</if> 
+		<if test="rawData != null"> 
+ 			and MSG_RAW_DATA =#{rawData,jdbcType=VARCHAR}
+		</if> 
+		<if test="rawDataProtocol != null"> 
+ 			and RAW_DATA_PROTOCOL =#{rawDataProtocol,jdbcType=VARCHAR}
+		</if> 
+		<if test="isEncrypted != null"> 
+ 			and IS_ENCRYPTED =#{isEncrypted,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null">
+			and EVENT_DATE_TIME <![CDATA[ >= ]]> CONVERT(DATETIME,#{startDate,jdbcType=TIMESTAMP},120)
+		</if>
+		<if test="endDate != null">
+			and EVENT_DATE_TIME <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
+		</if>
+	</select>
+	
+	<!-- 动态查询消息事件内容 -->
+	<select id="findByCondition" parameterType="java.util.Map" resultMap="messageEventMap">
+		SELECT 
+		<include refid="messageEventInfo"></include> 
+		FROM MSG_EVENT_LOG 
+		where 1=1
+		<if test="msgTypeId != null"> 
+ 			and MSG_EVENT_CODE =#{msgTypeId,jdbcType=VARCHAR}
+		</if> 
+		<if test="msgSubType != null"> 
+ 			and MSG_SUB_TYPE =#{msgSubType,jdbcType=VARCHAR}
+		</if> 
+		<if test="msgSourceCode != null"> 
+ 			and MSG_SOURCE_CODE =#{msgSourceCode,jdbcType=VARCHAR}
+		</if> 
+		<if test="channelCode != null"> 
+ 			and CHANNEL_CODE =#{channelCode,jdbcType=VARCHAR}
+		</if> 
+		<if test="sourceMsgUid != null"> 
+ 			and SOURCE_MSG_UID =#{sourceMsgUid,jdbcType=VARCHAR}
+		</if> 
+		<if test="eventDateTime != null"> 
+ 			and EVENT_DATE_TIME =#{eventDateTime,jdbcType=TIMESTAMP}
+		</if> 
+		<if test="patientId != null"> 
+ 			and PATIENT_ID =#{patientId,jdbcType=VARCHAR}
+		</if> 
+		<if test="visitId != null"> 
+ 			and VISIT_ID =#{visitId,jdbcType=VARCHAR}
+		</if> 
+		<if test="messageIndex != null"> 
+ 			and MSG_INDEX =#{messageIndex,jdbcType=VARCHAR}
+		</if> 
+		<if test="messageSubIndex != null"> 
+ 			and MSG_SUB_INDEX =#{messageSubIndex,jdbcType=VARCHAR}
+		</if> 
+		<if test="transactionStatus != null"> 
+ 			and TRANSACTION_STATUS =#{transactionStatus,jdbcType=VARCHAR}
+		</if> 
+		<if test="handleResultStatus != null"> 
+ 			and HANDLE_RESULT_STATUS =#{handleResultStatus,jdbcType=VARCHAR}
+		</if> 
+		<if test="eventHandleTime != null"> 
+ 			and EVENT_HANDLE_TIME =#{eventHandleTime,jdbcType=TIMESTAMP}
+		</if> 
+		<if test="handleResultDesc != null"> 
+ 			and HANDLE_RESULT_DESC =#{handleResultDesc,jdbcType=VARCHAR}
+		</if> 
+		<if test="rawData != null"> 
+ 			and MSG_RAW_DATA =#{rawData,jdbcType=VARCHAR}
+		</if> 
+		<if test="rawDataProtocol != null"> 
+ 			and RAW_DATA_PROTOCOL =#{rawDataProtocol,jdbcType=VARCHAR}
+		</if> 
+		<if test="isEncrypted != null"> 
+ 			and IS_ENCRYPTED =#{isEncrypted,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null">
+			and EVENT_DATE_TIME <![CDATA[ >= ]]> CONVERT(DATETIME,#{startDate,jdbcType=TIMESTAMP},120)
+		</if>
+		<if test="endDate != null">
+			and EVENT_DATE_TIME <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
+		</if>
+	</select>
+	
 	<!--写入消息事件内容信息-->
 	<insert id="insert" parameterType="com.zju.integration.monitor.model.MessageEvent">
-	<selectKey resultType="long" order="AFTER" keyProperty="messageId">
-		SELECT ident_current('MSG_EVENT_LOG') AS messageId
+	<selectKey resultType="long" order="AFTER" keyProperty="sequenceId">
+		SELECT ident_current('MSG_EVENT_LOG') AS sequenceId
 	</selectKey>
 	INSERT INTO
 		MSG_EVENT_LOG (
@@ -48,6 +181,7 @@
 		#{msgSubType,jdbcType=VARCHAR},
 		#{msgSourceCode,jdbcType=VARCHAR},
 		#{channelCode,jdbcType=VARCHAR},
+		#{sourceMsgUid,jdbcType=VARCHAR},
 		#{eventDateTime,jdbcType=TIMESTAMP},
 		#{patientId,jdbcType=VARCHAR}, 
 		#{visitId,jdbcType=VARCHAR},
@@ -71,6 +205,7 @@
 		MSG_SUB_TYPE=#{msgSubType,jdbcType=VARCHAR},
 		MSG_SOURCE_CODE=#{msgSourceCode,jdbcType=VARCHAR},
 		CHANNEL_CODE=#{channelCode,jdbcType=VARCHAR},
+		SOURCE_MSG_UID=#{sourceMsgUid,jdbcType=VARCHAR},
 		EVENT_DATE_TIME=#{eventDateTime,jdbcType=TIMESTAMP},
 		PATIENT_ID=#{patientId,jdbcType=VARCHAR},
 		VISIT_ID=#{visitId,jdbcType=VARCHAR},
@@ -84,11 +219,13 @@
 		RAW_DATA_PROTOCOL=#{rawDataProtocol,jdbcType=VARCHAR},
 		IS_ENCRYPTED=#{isEncrypted,jdbcType=VARCHAR} 
 		WHERE 
-		MESSAGE_ID = #{messageId,jdbcType=INTEGER}
+		SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
 	</update>
 	<!--删除消息内容信息-->
 	<delete id="delete" parameterType="com.zju.integration.monitor.model.MessageEvent">
-		DELETE FROM MSG_EVENT_LOG WHERE MESSAGE_ID = #{messageId,jdbcType=INTEGER}
+		DELETE FROM MSG_EVENT_LOG WHERE SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
 	</delete>
+	
+	
 	
 </mapper>

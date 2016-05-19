@@ -2,33 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zju.integration.monitor.dao.TransactionDao">
 	<resultMap id="transactionMap" type="com.zju.integration.monitor.model.Transaction">
-		<id column="PROFILE_ID" property="transId" jdbcType="INTEGER" />
-		<result column="PROFILE_CODE" property="transCode" jdbcType="VARCHAR" />
-		<result column="PROFILE_NAME" property="transName" jdbcType="VARCHAR" />
-		<result column="PROFILE_CHINESE_NAME" property="transChineseName" jdbcType="VARCHAR" />
-		<result column="PROFILE_MEMO" property="transMemo" jdbcType="VARCHAR" />
+		<id column="TRANS_ID" property="transId" jdbcType="INTEGER" />
+		<result column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+		<result column="TRANS_NAME" property="transName" jdbcType="VARCHAR" />
+		<result column="TRANS_CHINESE_NAME" property="transChineseName" jdbcType="VARCHAR" />
+		<result column="TRANS_MEMO" property="transMemo" jdbcType="VARCHAR" />
 		<result column="CREATE_DATE_TIME" property="createDate" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<sql id="transactionInfo">
-		PROFILE_CODE,PROFILE_NAME,PROFILE_CHINESE_NAME,PROFILE_MEMO,CREATE_DATE_TIME  
+		TRANS_CODE,TRANS_NAME,TRANS_CHINESE_NAME,TRANS_MEMO,CREATE_DATE_TIME  
 	</sql>
 	
 	<!--查询事务类型字典表信息-->
-	<select id="select" resultMap="transactionMap">
+	<select id="select" parameterType="com.zju.integration.monitor.model.Transaction" resultMap="transactionMap">
 		SELECT
-		<include refid="transactionInfo"></include>
+		*
 		FROM
-		PROFILE_TYPE
-		WHERE PROFILE_ID = #{transId,jdbcType=INTEGER}
+		TRANS_TYPE
+		WHERE 
+		<if test="transCode != null">
+			TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+		</if>
+		<if test="transId != null and transId !=0 ">
+			and TRANS_ID = #{transId,jdbcType=INTEGER}
+		</if>
 	</select>
+	
 	<!--写入用户信息-->
 	<insert id="insert" parameterType="com.zju.integration.monitor.model.Transaction">
 	<selectKey resultType="long" order="AFTER" keyProperty="transId">
-		SELECT ident_current('PROFILE_TYPE') AS transId
+		SELECT ident_current('TRANS_TYPE') AS transId
 	</selectKey>
 	INSERT INTO
-		PROFILE_TYPE (
+		TRANS_TYPE (
 		<include refid="transactionInfo"></include>
 		 ) VALUES ( 
 		#{transCode,jdbcType=VARCHAR},
@@ -38,23 +45,52 @@
 		#{createDate,jdbcType=TIMESTAMP} 
 		)
 	</insert>
+	
 	<!--更新用户信息-->
 	<update id="update" parameterType="com.zju.integration.monitor.model.Transaction">
 		UPDATE
-		PROFILE_TYPE
+		TRANS_TYPE
 		SET
-		PROFILE_CODE=#{transCode,jdbcType=VARCHAR},
-		PROFILE_NAME=#{transName,jdbcType=VARCHAR},
-		PROFILE_CHINESE_NAME=#{transChineseName,jdbcType=VARCHAR},
-		PROFILE_MEMO=#{transMemo,jdbcType=VARCHAR} 
-		WHERE
-		PROFILE_ID
-		=
-		#{transId,jdbcType=INTEGER}
+		TRANS_CODE=#{transCode,jdbcType=VARCHAR},
+		TRANS_NAME=#{transName,jdbcType=VARCHAR},
+		TRANS_CHINESE_NAME=#{transChineseName,jdbcType=VARCHAR},
+		TRANS_MEMO=#{transMemo,jdbcType=VARCHAR} 
+		WHERE 
+		<if test="transCode != null">
+			TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+		</if>
+		<if test="transId != null and transId !=0 ">
+			and TRANS_ID = #{transId,jdbcType=INTEGER}
+		</if>
 	</update>
+	
 	<!--删除用户信息-->
 	<delete id="delete" parameterType="com.zju.integration.monitor.model.Transaction">
-		DELETE FROM PROFILE_TYPE WHERE PROFILE_ID = #{transId,jdbcType=INTEGER}
+		DELETE FROM TRANS_TYPE WHERE 
+		<if test="transCode != null">
+			TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+		</if>
+		<if test="transId != null and transId !=0 ">
+			and TRANS_ID = #{transId,jdbcType=INTEGER}
+		</if>
 	</delete>
 	
+	<!-- 动态查询消息事件内容 -->
+	<select id="findByCondition" parameterType="java.util.Map" resultMap="transactionMap">
+		SELECT 	* 
+		FROM TRANS_TYPE 
+		where 1=1 
+		<if test="transId != null and transId !=0 "> 
+ 			and TRANS_ID =#{transId,jdbcType=VARCHAR}
+		</if> 
+		<if test="transCode != null"> 
+ 			and TRANS_CODE =#{transCode,jdbcType=VARCHAR}
+		</if> 
+		<if test="transName != null"> 
+ 			and TRANS_NAME =#{transName,jdbcType=VARCHAR}
+		</if> 
+		<if test="transChineseName != null"> 
+ 			and TRANS_CHINESE_NAME =#{transChineseName,jdbcType=VARCHAR}
+		</if> 
+	</select>
 </mapper>

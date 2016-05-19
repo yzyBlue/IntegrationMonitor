@@ -5,6 +5,8 @@ package com.zju.integration.monitor.model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
  * @since 2016-03-22
@@ -12,6 +14,7 @@ import java.io.Serializable;
  * @date 2016-04-29
  * @description Result information object
  */
+@XmlRootElement(name = "DataBaseInfo")
 public class IntegrationResult implements Serializable {
 
 	private static final long serialVersionUID = 3189310499310275246L;
@@ -21,7 +24,6 @@ public class IntegrationResult implements Serializable {
 	public static final String INTERNALDESC = "服务内部错误";
 	private int resultCode;
 	private String resultDesc;
-	private Object object;
 
 	/**
 	 * 
@@ -60,21 +62,6 @@ public class IntegrationResult implements Serializable {
 		this.resultDesc = resultDesc;
 	}
 
-	/**
-	 * @return the object
-	 */
-	public Object getObject() {
-		return object;
-	}
-
-	/**
-	 * @param object
-	 *            the object to set
-	 */
-	public void setObject(Object object) {
-		this.object = object;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -84,7 +71,6 @@ public class IntegrationResult implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((object == null) ? 0 : object.hashCode());
 		result = prime * result + resultCode;
 		result = prime * result + ((resultDesc == null) ? 0 : resultDesc.hashCode());
 		return result;
@@ -107,13 +93,6 @@ public class IntegrationResult implements Serializable {
 			return false;
 		}
 		IntegrationResult other = (IntegrationResult) obj;
-		if (object == null) {
-			if (other.object != null) {
-				return false;
-			}
-		} else if (!object.equals(other.object)) {
-			return false;
-		}
 		if (resultCode != other.resultCode) {
 			return false;
 		}
@@ -134,8 +113,7 @@ public class IntegrationResult implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "IntegrationResult [resultCode=" + resultCode + ", resultDesc=" + resultDesc + ", object="
-				+ object.toString() + "]";
+		return "IntegrationResult [resultCode=" + resultCode + ", resultDesc=" + resultDesc + "]";
 	}
 
 }

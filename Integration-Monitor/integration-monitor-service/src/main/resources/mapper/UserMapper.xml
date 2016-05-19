@@ -12,28 +12,30 @@
 		<result column="VOIDED_FLAG" property="voidFlag" jdbcType="VARCHAR" />
 		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
 	</resultMap>
-	
+
 	<sql id="userInfo">
 		USER_NAME,USER_PWD,ROLE_CODE,CREATE_DATE,CREATOR_ID,VOIDED_BY,VOIDED_FLAG,MODIFY_DATE
 	</sql>
-	
-	<!--查询用户信息-->
-	<select id="getUserInfo" resultMap="UserInfoMap">
+
+	<!--查询用户信息 -->
+	<select id="select" parameterType="com.zju.integration.monitor.model.User"
+		resultMap="UserInfoMap">
 		SELECT
-		<include refid="userInfo"></include>
+		*
 		FROM
 		USER_INFO
-		WHERE USER_ID = #{userId,jdbcType=INTEGER}
+		WHERE USER_ID =
+		#{userId,jdbcType=INTEGER}
 	</select>
-	<!--写入用户信息-->
-	<insert id="insertUserInfo" parameterType="com.zju.integration.monitor.model.User">
-	<selectKey resultType="long" order="AFTER" keyProperty="userId">
-		SELECT ident_current('USER_INFO') AS userId
-	</selectKey>
-	INSERT INTO
+	<!--写入用户信息 -->
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.User">
+		<selectKey resultType="long" order="AFTER" keyProperty="userId">
+			SELECT ident_current('USER_INFO') AS userId
+		</selectKey>
+		INSERT INTO
 		USER_INFO (
 		<include refid="userInfo"></include>
-		 ) VALUES ( 
+		) VALUES (
 		#{userName,jdbcType=VARCHAR},
 		#{passWord,jdbcType=VARCHAR},
 		#{roleCode,jdbcType=VARCHAR},
@@ -44,8 +46,8 @@
 		#{modifyDate,jdbcType=TIMESTAMP}
 		)
 	</insert>
-	<!--更新用户信息-->
-	<update id="updateUserInfo" parameterType="com.zju.integration.monitor.model.User">
+	<!--更新用户信息 -->
+	<update id="update" parameterType="com.zju.integration.monitor.model.User">
 		UPDATE
 		USER_INFO
 		SET
@@ -53,26 +55,46 @@
 		USER_PWD=#{passWord,jdbcType=VARCHAR},
 		ROLE_CODE=#{roleCode,jdbcType=VARCHAR},
 		MODIFY_DATE=getDate(),
-		VOIDED_FLAG=#{voidFlag,jdbcType=VARCHAR} 
+		VOIDED_FLAG=#{voidFlag,jdbcType=VARCHAR}
 		WHERE
 		USER_ID
 		=
 		#{userId,jdbcType=INTEGER}
 	</update>
-	<!--删除用户信息-->
-	<delete id="deleteUserInfo" parameterType="com.zju.integration.monitor.model.User">
-		DELETE FROM USER_INFO WHERE USER_ID = #{userId,jdbcType=INTEGER}
+	<!--删除用户信息 -->
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.User">
+		DELETE FROM USER_INFO WHERE
+		USER_ID = #{userId,jdbcType=INTEGER}
 	</delete>
-	
-	<!--根据用户名和密码查询用户信息-->
+
+	<select id="findByCondition" parameterType="java.util.Map"
+		resultMap="UserInfoMap">
+		select * from USER_INFO
+		where 1=1
+		<if test="userName != null">
+			and USER_NAME=#{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="roleCode != null">
+			and ROLE_CODE=#{roleCode,jdbcType=VARCHAR}
+		</if>
+		<if test="voidFlag != null">
+			and VOIDED_FLAG=#{voidFlag,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+
+	<!--根据用户名和密码查询用户信息 -->
 	<select id="getUserByUserNamePassWord" resultMap="UserInfoMap">
-	select * from USER_INFO where USER_NAME=#{userName,jdbcType=VARCHAR} 
-	and USER_PWD=#{passWord,jdbcType=VARCHAR}
-	</select>
-	
-	<!--根据用户名用户信息-->
-	<select id="findUserByName" resultMap="UserInfoMap">
 		select * from USER_INFO where USER_NAME=#{userName,jdbcType=VARCHAR}
+		and USER_PWD=#{passWord,jdbcType=VARCHAR}
 	</select>
-	
+
+	<!--根据用户名用户信息 -->
+	<select id="findUserByName" resultMap="UserInfoMap">
+		select * from USER_INFO
+		where USER_NAME=#{userName,jdbcType=VARCHAR}
+	</select>
+
+
+
 </mapper>

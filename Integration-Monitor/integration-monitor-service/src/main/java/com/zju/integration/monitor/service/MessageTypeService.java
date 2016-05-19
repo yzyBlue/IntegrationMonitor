@@ -3,6 +3,9 @@
  */
 package com.zju.integration.monitor.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.zju.integration.monitor.exception.MessageTypeServiceException;
 import com.zju.integration.monitor.model.IntegrationResult;
 import com.zju.integration.monitor.model.MessageType;
@@ -15,8 +18,14 @@ import com.zju.integration.monitor.model.MessageType;
  * @description MessageType service interface
  */
 public interface MessageTypeService {
+
 	public IntegrationResult saveMessageType(MessageType messageType) throws MessageTypeServiceException;
-	public IntegrationResult updateMessageType(MessageType messageType);
+
+	public IntegrationResult updateMessageType(MessageType messageType) throws MessageTypeServiceException;
+
 	public MessageType selectMessageType(MessageType messageType);
-	public IntegrationResult deleteMessageType(MessageType messageType);
+
+	public IntegrationResult deleteMessageType(MessageType messageType) throws MessageTypeServiceException;
+
+	public List<MessageType> findByCondition(Map paramMap);
 }

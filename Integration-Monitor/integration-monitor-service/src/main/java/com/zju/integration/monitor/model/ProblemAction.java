@@ -6,8 +6,9 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
@@ -16,29 +17,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @date 2016-04-29
  * @description Problem Action information object
  */
+@XmlRootElement(name = "DataBaseInfo")
 public class ProblemAction implements Serializable {
 
 	private static final long serialVersionUID = 289617498387417989L;
 
 	private long serialNo;
-	
+
 	private String problemCode;
-	
+
 	private String problemTheme;
-	
+
 	private String actorCode;
-	
+
 	private String actorName;
-	
+
 	private String actionType;
-	
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date actionDate;
-	
+
 	private String actionContent;
-	
+
 	private String actionMemo;
-	
+
 	/**
 	 * 
 	 */
@@ -54,7 +56,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param serialNo the serialNo to set
+	 * @param serialNo
+	 *            the serialNo to set
 	 */
 	public void setSerialNo(long serialNo) {
 		this.serialNo = serialNo;
@@ -68,7 +71,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param problemCode the problemCode to set
+	 * @param problemCode
+	 *            the problemCode to set
 	 */
 	public void setProblemCode(String problemCode) {
 		this.problemCode = problemCode;
@@ -82,7 +86,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param problemTheme the problemTheme to set
+	 * @param problemTheme
+	 *            the problemTheme to set
 	 */
 	public void setProblemTheme(String problemTheme) {
 		this.problemTheme = problemTheme;
@@ -96,7 +101,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param actorCode the actorCode to set
+	 * @param actorCode
+	 *            the actorCode to set
 	 */
 	public void setActorCode(String actorCode) {
 		this.actorCode = actorCode;
@@ -110,7 +116,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param actorName the actorName to set
+	 * @param actorName
+	 *            the actorName to set
 	 */
 	public void setActorName(String actorName) {
 		this.actorName = actorName;
@@ -124,7 +131,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param actionType the actionType to set
+	 * @param actionType
+	 *            the actionType to set
 	 */
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
@@ -138,7 +146,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param actionDate the actionDate to set
+	 * @param actionDate
+	 *            the actionDate to set
 	 */
 	public void setActionDate(Date actionDate) {
 		this.actionDate = actionDate;
@@ -152,7 +161,8 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param actionContent the actionContent to set
+	 * @param actionContent
+	 *            the actionContent to set
 	 */
 	public void setActionContent(String actionContent) {
 		this.actionContent = actionContent;
@@ -166,13 +176,16 @@ public class ProblemAction implements Serializable {
 	}
 
 	/**
-	 * @param actionMemo the actionMemo to set
+	 * @param actionMemo
+	 *            the actionMemo to set
 	 */
 	public void setActionMemo(String actionMemo) {
 		this.actionMemo = actionMemo;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -191,7 +204,9 @@ public class ProblemAction implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -268,7 +283,9 @@ public class ProblemAction implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

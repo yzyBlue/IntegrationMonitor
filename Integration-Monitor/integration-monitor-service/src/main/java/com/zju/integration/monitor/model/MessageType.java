@@ -6,8 +6,10 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zju.integration.monitor.util.DataValidate;
 
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
@@ -16,16 +18,23 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @date 2016-04-29
  * @description Message Type information object
  */
+@XmlRootElement(name = "MessageType")
 public class MessageType implements Serializable {
 
 	private static final long serialVersionUID = 9107473270454435651L;
 	private long typeId;
+	@DataValidate(description = "消息类型代码", nullable = false)
 	private String mesageType;
+	@DataValidate(description = "事件类型代码", nullable = false)
 	private String eventType;
+	@DataValidate(description = "控制代码", nullable = true)
 	private String controlCode;
+	@DataValidate(description = "事务类型代码", nullable = false)
 	private String transCode;
+	@DataValidate(description = "消息事件描述", nullable = true)
 	private String messageTypeDesc;
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
+	@DataValidate(description = "创建时间", nullable = true)
 	private Date createDate;
 
 	/**

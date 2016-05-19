@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.IntegrationActorDao">
+	<resultMap id="integrationActorMap"
+		type="com.zju.integration.monitor.model.IntegrationActor">
+		<id column="SERIAL_NO" property="serialNo" jdbcType="INTEGER" />
+		<result column="INTE_ACTOR_CODE" property="actorCode" jdbcType="VARCHAR" />
+		<result column="INTE_ACTOR_NAME" property="actorName" jdbcType="VARCHAR" />
+		<result column="DATABASE_ADDRESS" property="dataBaseAddress"
+			jdbcType="VARCHAR" />
+		<result column="SERVICE_ADDRESS" property="serviceAddress"
+			jdbcType="VARCHAR" />
+		<result column="LLP_ADDRESS" property="llpAddress" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="integrationActorInfo">
+		INTE_ACTOR_CODE,INTE_ACTOR_NAME,DATABASE_ADDRESS,SERVICE_ADDRESS,LLP_ADDRESS,CREATE_DATE,MEMO
+	</sql>
+
+	<!--查询集成问题记录表信息 -->
+	<select id="select" parameterType="com.zju.integration.monitor.model.IntegrationActor"
+		resultMap="integrationActorMap">
+		SELECT
+		*
+		FROM
+		INTE_ACTOR
+		WHERE INTE_ACTOR_CODE = #{actorCode,jdbcType=VARCHAR}
+	</select>
+	<!--写入集成问题记录表信息 -->
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.IntegrationActor">
+		<selectKey resultType="long" order="AFTER" keyProperty="serialNo">
+			SELECT ident_current('INTE_ACTOR') AS serialNo
+		</selectKey>
+		INSERT INTO
+		INTE_ACTOR (
+		<include refid="integrationActorInfo"></include>
+		) VALUES (
+		#{actorCode,jdbcType=VARCHAR},
+		#{actorName,jdbcType=VARCHAR},
+		#{dataBaseAddress,jdbcType=VARCHAR},
+		#{serviceAddress,jdbcType=VARCHAR},
+		#{llpAddress,jdbcType=VARCHAR},
+		getDate(),
+		#{memo,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!--更新集成问题记录表信息 -->
+	<update id="update" parameterType="com.zju.integration.monitor.model.IntegrationActor">
+		UPDATE
+		INTE_ACTOR
+		SET
+		INTE_ACTOR_CODE=#{actorCode,jdbcType=VARCHAR},
+		INTE_ACTOR_NAME=#{actorName,jdbcType=VARCHAR},
+		DATABASE_ADDRESS=#{dataBaseAddress,jdbcType=VARCHAR},
+		SERVICE_ADDRESS=#{serviceAddress,jdbcType=VARCHAR},
+		LLP_ADDRESS=#{llpAddress,jdbcType=VARCHAR},
+		MEMO=#{memo,jdbcType=TIMESTAMP}
+		WHERE
+		INTE_ACTOR_CODE = #{actorCode,jdbcType=VARCHAR}
+	</update>
+	<!--删除集成问题记录表信息 -->
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.IntegrationActor">
+		DELETE FROM INTE_ACTOR WHERE
+		INTE_ACTOR_CODE = #{actorCode,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="findByCondition" parameterType="java.util.Map"
+		resultMap="integrationActorMap">
+		SELECT
+		 * 
+		FROM
+		INTE_ACTOR
+		where 1=1
+		<if test="actorCode != null">
+			and INTE_ACTOR_CODE =#{actorCode,jdbcType=VARCHAR}
+		</if>
+		<if test="actorName != null">
+			and INTE_ACTOR_NAME =#{actorName,jdbcType=VARCHAR}
+		</if>
+		<if test="dataBaseAddress != null">
+			and DATABASE_ADDRESS =#{dataBaseAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="serviceAddress != null">
+			and SERVICE_ADDRESS =#{serviceAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="llpAddress != null">
+			and LLP_ADDRESS =#{llpAddress,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+</mapper>

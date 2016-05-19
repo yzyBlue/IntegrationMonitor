@@ -14,7 +14,7 @@
 	<properties>
 		<servlet-api.version>3.1.0</servlet-api.version>
 		<jackson.version>2.2.1</jackson.version>
-		<tomcat.url>http://172.16.100.64:10646/manager/text</tomcat.url>
+		<tomcat.url>http://172.16.100.64:8888/manager/text</tomcat.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.name>integration-monitor-web</project.name>
 	</properties>

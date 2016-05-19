@@ -6,6 +6,8 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 /**
@@ -15,27 +17,28 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2016-04-29
  * @description Database information object
  */
+@XmlRootElement(name = "DataBaseInfo")
 public class DataBaseInfo implements Serializable {
 
 	private static final long serialVersionUID = -5980970087262121171L;
-	
+
 	private long serialNo;
-	
+
 	private String databaseCode;
-	
+
 	private String databaseName;
-	
+
 	private String hostIp;
-	
+
 	private String instanceName;
-	
+
 	private String portNo;
-	
+
 	private String userName;
-	
+
 	private String passWord;
-	
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 
 	/**
@@ -53,7 +56,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param serialNo the serialNo to set
+	 * @param serialNo
+	 *            the serialNo to set
 	 */
 	public void setSerialNo(long serialNo) {
 		this.serialNo = serialNo;
@@ -67,7 +71,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param databaseCode the databaseCode to set
+	 * @param databaseCode
+	 *            the databaseCode to set
 	 */
 	public void setDatabaseCode(String databaseCode) {
 		this.databaseCode = databaseCode;
@@ -81,7 +86,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param databaseName the databaseName to set
+	 * @param databaseName
+	 *            the databaseName to set
 	 */
 	public void setDatabaseName(String databaseName) {
 		this.databaseName = databaseName;
@@ -95,7 +101,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param hostIp the hostIp to set
+	 * @param hostIp
+	 *            the hostIp to set
 	 */
 	public void setHostIp(String hostIp) {
 		this.hostIp = hostIp;
@@ -109,7 +116,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param instanceName the instanceName to set
+	 * @param instanceName
+	 *            the instanceName to set
 	 */
 	public void setInstanceName(String instanceName) {
 		this.instanceName = instanceName;
@@ -123,7 +131,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param portNo the portNo to set
+	 * @param portNo
+	 *            the portNo to set
 	 */
 	public void setPortNo(String portNo) {
 		this.portNo = portNo;
@@ -137,7 +146,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -151,7 +161,8 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param passWord the passWord to set
+	 * @param passWord
+	 *            the passWord to set
 	 */
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
@@ -165,13 +176,16 @@ public class DataBaseInfo implements Serializable {
 	}
 
 	/**
-	 * @param createDate the createDate to set
+	 * @param createDate
+	 *            the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -190,7 +204,9 @@ public class DataBaseInfo implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -267,7 +283,9 @@ public class DataBaseInfo implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

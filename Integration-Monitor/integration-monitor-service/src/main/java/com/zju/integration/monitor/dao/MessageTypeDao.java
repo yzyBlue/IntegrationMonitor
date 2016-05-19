@@ -19,4 +19,5 @@ import com.zju.integration.monitor.model.MessageType;
 @Transactional
 public interface MessageTypeDao extends AbstractGenericDao<MessageType, Integer> {
 
+	public MessageType findMessageType(MessageType messageType);
 }

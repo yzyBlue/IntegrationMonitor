@@ -3,8 +3,10 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zju.integration.monitor.util.DataValidate;
 
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
@@ -13,44 +15,47 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @date 2016-04-29
  * @description Message Event Content information object
  */
+@XmlRootElement(name = "MessageEvent")
 public class MessageEvent implements Serializable {
 
 	private static final long serialVersionUID = 6486053870579782040L;
 
-	private long messageId;
-
+	private long sequenceId;
+	@DataValidate(description = "消息类型Id", nullable = false)
 	private String msgTypeId;
-
+	@DataValidate(description = "消息类型子代码", nullable = true)
 	private String msgSubType;
-
+	@DataValidate(description = "消息来源", nullable = false)
 	private String msgSourceCode;
-
+	@DataValidate(description = "通道ID", nullable = false)
 	private String channelCode;
-
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@DataValidate(description = "源消息UID", nullable = false)
+	private String sourceMsgUid;
+	@DataValidate(description = "发生时间", nullable = false)
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date eventDateTime;
-
+	@DataValidate(description = "病人号", nullable = false)
 	private String patientId;
-
+	@DataValidate(description = "就诊号", nullable = false)
 	private String visitId;
-
+	@DataValidate(description = "消息索引号", nullable = false)
 	private String messageIndex;
-
+	@DataValidate(description = "消息子索引号", nullable = true)
 	private String messageSubIndex;
-
+	@DataValidate(description = "事务状态", nullable = true)
 	private String transactionStatus;
-
+	@DataValidate(description = "消息处理状态", nullable = false)
 	private String handleResultStatus;
-
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@DataValidate(description = "消息处理时间", nullable = true)
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date eventHandleTime;
-
+	@DataValidate(description = "消息结果描述", nullable = true)
 	private String handleResultDesc;
-
+	@DataValidate(description = "消息源数据", nullable = true)
 	private String rawData;
-
+	@DataValidate(description = "消息协议", nullable = true)
 	private String rawDataProtocol;
-
+	@DataValidate(description = "消息加密", nullable = true)
 	private String isEncrypted;
 
 	public MessageEvent() {
@@ -58,18 +63,18 @@ public class MessageEvent implements Serializable {
 	}
 
 	/**
-	 * @return the messageId
+	 * @return the sequenceId
 	 */
-	public long getMessageId() {
-		return messageId;
+	public long getSequenceId() {
+		return sequenceId;
 	}
 
 	/**
-	 * @param messageId
-	 *            the messageId to set
+	 * @param sequenceId
+	 *            the sequenceId to set
 	 */
-	public void setMessageId(long messageId) {
-		this.messageId = messageId;
+	public void setSequenceId(long sequenceId) {
+		this.sequenceId = sequenceId;
 	}
 
 	/**
@@ -130,6 +135,21 @@ public class MessageEvent implements Serializable {
 	 */
 	public void setChannelCode(String channelCode) {
 		this.channelCode = channelCode;
+	}
+
+	/**
+	 * @return the sourceMsgUid
+	 */
+	public String getSourceMsgUid() {
+		return sourceMsgUid;
+	}
+
+	/**
+	 * @param sourceMsgUid
+	 *            the sourceMsgUid to set
+	 */
+	public void setSourceMsgUid(String sourceMsgUid) {
+		this.sourceMsgUid = sourceMsgUid;
 	}
 
 	/**
@@ -327,7 +347,6 @@ public class MessageEvent implements Serializable {
 		result = prime * result + ((handleResultDesc == null) ? 0 : handleResultDesc.hashCode());
 		result = prime * result + ((handleResultStatus == null) ? 0 : handleResultStatus.hashCode());
 		result = prime * result + ((isEncrypted == null) ? 0 : isEncrypted.hashCode());
-		result = prime * result + (int) (messageId ^ (messageId >>> 32));
 		result = prime * result + ((messageIndex == null) ? 0 : messageIndex.hashCode());
 		result = prime * result + ((messageSubIndex == null) ? 0 : messageSubIndex.hashCode());
 		result = prime * result + ((msgSourceCode == null) ? 0 : msgSourceCode.hashCode());
@@ -336,6 +355,8 @@ public class MessageEvent implements Serializable {
 		result = prime * result + ((patientId == null) ? 0 : patientId.hashCode());
 		result = prime * result + ((rawData == null) ? 0 : rawData.hashCode());
 		result = prime * result + ((rawDataProtocol == null) ? 0 : rawDataProtocol.hashCode());
+		result = prime * result + (int) (sequenceId ^ (sequenceId >>> 32));
+		result = prime * result + ((sourceMsgUid == null) ? 0 : sourceMsgUid.hashCode());
 		result = prime * result + ((transactionStatus == null) ? 0 : transactionStatus.hashCode());
 		result = prime * result + ((visitId == null) ? 0 : visitId.hashCode());
 		return result;
@@ -400,9 +421,6 @@ public class MessageEvent implements Serializable {
 		} else if (!isEncrypted.equals(other.isEncrypted)) {
 			return false;
 		}
-		if (messageId != other.messageId) {
-			return false;
-		}
 		if (messageIndex == null) {
 			if (other.messageIndex != null) {
 				return false;
@@ -459,6 +477,16 @@ public class MessageEvent implements Serializable {
 		} else if (!rawDataProtocol.equals(other.rawDataProtocol)) {
 			return false;
 		}
+		if (sequenceId != other.sequenceId) {
+			return false;
+		}
+		if (sourceMsgUid == null) {
+			if (other.sourceMsgUid != null) {
+				return false;
+			}
+		} else if (!sourceMsgUid.equals(other.sourceMsgUid)) {
+			return false;
+		}
 		if (transactionStatus == null) {
 			if (other.transactionStatus != null) {
 				return false;
@@ -483,13 +511,13 @@ public class MessageEvent implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "MessageEvent [messageId=" + messageId + ", msgTypeId=" + msgTypeId + ", msgSubType=" + msgSubType
-				+ ", msgSourceCode=" + msgSourceCode + ", channelCode=" + channelCode + ", eventDateTime="
-				+ eventDateTime + ", patientId=" + patientId + ", visitId=" + visitId + ", messageIndex=" + messageIndex
-				+ ", messageSubIndex=" + messageSubIndex + ", transactionStatus=" + transactionStatus
-				+ ", handleResultStatus=" + handleResultStatus + ", eventHandleTime=" + eventHandleTime
-				+ ", handleResultDesc=" + handleResultDesc + ", rawData=" + rawData + ", rawDataProtocol="
-				+ rawDataProtocol + ", isEncrypted=" + isEncrypted + "]";
+		return "MessageEvent [sequenceId=" + sequenceId + ", msgTypeId=" + msgTypeId + ", msgSubType=" + msgSubType
+				+ ", msgSourceCode=" + msgSourceCode + ", channelCode=" + channelCode + ", sourceMsgUid=" + sourceMsgUid
+				+ ", eventDateTime=" + eventDateTime + ", patientId=" + patientId + ", visitId=" + visitId
+				+ ", messageIndex=" + messageIndex + ", messageSubIndex=" + messageSubIndex + ", transactionStatus="
+				+ transactionStatus + ", handleResultStatus=" + handleResultStatus + ", eventHandleTime="
+				+ eventHandleTime + ", handleResultDesc=" + handleResultDesc + ", rawData=" + rawData
+				+ ", rawDataProtocol=" + rawDataProtocol + ", isEncrypted=" + isEncrypted + "]";
 	}
 
 }

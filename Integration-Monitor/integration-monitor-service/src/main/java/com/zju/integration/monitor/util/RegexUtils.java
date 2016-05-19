@@ -1,19 +1,48 @@
-/**
- * 
- */
 package com.zju.integration.monitor.util;
 
 /**
- * @author Yuan.Ziyang
- *
+ * 所需要的正则表达式
+ * 
+ * @author Wang.Feifei
+ * 
  */
 public class RegexUtils {
 
 	/**
+	 * 判断是否是正确的身份证号
 	 * 
+	 * @param idNumber
+	 * @return boolean true,通过，false，没通过
 	 */
-	public RegexUtils() {
-		// TODO Auto-generated constructor stub
+	public static boolean isIdNumber(String idNumber) {
+		if (idNumber == null || "".equals(idNumber))
+			return true;
+		int length = idNumber.length();
+		String idRegex15 = "^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$";
+		String idRegex18 = "^[1-9]\\d{5}[1-9]\\d{3}((0[1-9])|(1[0-2]))((0[1-9])|([1|2]\\d)|(3[0-1]))\\d{3}([0-9]|X|x)$";
+		// Pattern idPattern15 = Pattern.compile(idRegex15);
+		// Pattern idPattern18 = Pattern.compile(idRegex18);
+		if (length == 15)
+			return idNumber.matches(idRegex15);
+		else if (length == 18)
+			return idNumber.matches(idRegex18);
+		else
+			return false;
+	}
+
+	/**
+	 * 判断是否是正确的性别Code
+	 * 
+	 * @param sex
+	 * @return boolean true,通过，false，没通过
+	 */
+	public static boolean isSexCode(String sexCode) {
+		int length = sexCode.length();
+		String sexRegex = "^([M|F|U|O])$";
+		if (length != 1)
+			return false;
+		else
+			return sexCode.matches(sexRegex);
 	}
 
 	/**

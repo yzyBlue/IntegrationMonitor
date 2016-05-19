@@ -6,8 +6,9 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
@@ -16,37 +17,38 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @date 2016-04-29
  * @description Problem Record information object
  */
+@XmlRootElement(name = "DataBaseInfo")
 public class ProblemRecord implements Serializable {
 
 	private static final long serialVersionUID = 4817644950122627980L;
-	
+
 	private long serialNo;
-	
+
 	private String problemCode;
-	
+
 	private String problemTheme;
-	
+
 	private String problemType;
-	
+
 	private String problemStatus;
-	
+
 	private String priority;
-	
+
 	private String memo;
-	
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
-	
+
 	private String creator;
-	
+
 	private String operator;
-	
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyDate;
-	
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date deadLine;
-	
+
 	private String fileRelated;
 
 	/**
@@ -64,7 +66,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param serialNo the serialNo to set
+	 * @param serialNo
+	 *            the serialNo to set
 	 */
 	public void setSerialNo(long serialNo) {
 		this.serialNo = serialNo;
@@ -78,7 +81,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param problemCode the problemCode to set
+	 * @param problemCode
+	 *            the problemCode to set
 	 */
 	public void setProblemCode(String problemCode) {
 		this.problemCode = problemCode;
@@ -92,7 +96,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param problemTheme the problemTheme to set
+	 * @param problemTheme
+	 *            the problemTheme to set
 	 */
 	public void setProblemTheme(String problemTheme) {
 		this.problemTheme = problemTheme;
@@ -106,7 +111,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param problemType the problemType to set
+	 * @param problemType
+	 *            the problemType to set
 	 */
 	public void setProblemType(String problemType) {
 		this.problemType = problemType;
@@ -120,7 +126,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param problemStatus the problemStatus to set
+	 * @param problemStatus
+	 *            the problemStatus to set
 	 */
 	public void setProblemStatus(String problemStatus) {
 		this.problemStatus = problemStatus;
@@ -134,7 +141,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param priority the priority to set
+	 * @param priority
+	 *            the priority to set
 	 */
 	public void setPriority(String priority) {
 		this.priority = priority;
@@ -148,7 +156,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param memo the memo to set
+	 * @param memo
+	 *            the memo to set
 	 */
 	public void setMemo(String memo) {
 		this.memo = memo;
@@ -162,7 +171,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param createDate the createDate to set
+	 * @param createDate
+	 *            the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -176,7 +186,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param creator the creator to set
+	 * @param creator
+	 *            the creator to set
 	 */
 	public void setCreator(String creator) {
 		this.creator = creator;
@@ -190,7 +201,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param operator the operator to set
+	 * @param operator
+	 *            the operator to set
 	 */
 	public void setOperator(String operator) {
 		this.operator = operator;
@@ -204,7 +216,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param modifyDate the modifyDate to set
+	 * @param modifyDate
+	 *            the modifyDate to set
 	 */
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
@@ -218,7 +231,8 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param deadLine the deadLine to set
+	 * @param deadLine
+	 *            the deadLine to set
 	 */
 	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
@@ -232,13 +246,16 @@ public class ProblemRecord implements Serializable {
 	}
 
 	/**
-	 * @param fileRelated the fileRelated to set
+	 * @param fileRelated
+	 *            the fileRelated to set
 	 */
 	public void setFileRelated(String fileRelated) {
 		this.fileRelated = fileRelated;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -261,7 +278,9 @@ public class ProblemRecord implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -366,7 +385,9 @@ public class ProblemRecord implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

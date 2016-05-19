@@ -3,6 +3,9 @@
  */
 package com.zju.integration.monitor.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.zju.integration.monitor.exception.TransactionServiceException;
 import com.zju.integration.monitor.model.IntegrationResult;
 import com.zju.integration.monitor.model.Transaction;
@@ -15,8 +18,14 @@ import com.zju.integration.monitor.model.Transaction;
  * @description Transaction service interface
  */
 public interface TransactionService {
+
 	public IntegrationResult insertTransaction(Transaction transaction) throws TransactionServiceException;
-	public IntegrationResult updateTransaction(Transaction transaction);
+
+	public IntegrationResult updateTransaction(Transaction transaction) throws TransactionServiceException;
+
 	public Transaction selectTransaction(Transaction transaction);
-	public IntegrationResult deleteTransaction(Transaction transaction);
+
+	public IntegrationResult deleteTransaction(Transaction transaction) throws TransactionServiceException;
+
+	public List<Transaction> findTransactionByCondition(Map paramMap);
 }

@@ -3,7 +3,10 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
+import com.zju.integration.monitor.util.DataValidate;
 
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
@@ -12,27 +15,29 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2016-03-22
  * @description User information object
  */
+@XmlRootElement(name = "DataBaseInfo")
 public class User implements Serializable {
 	private static final long serialVersionUID = 991494537508911522L;
 	private long userId;
+	@DataValidate(description = "用户名", nullable = false)
 	private String userName;
+	@DataValidate(description = "密码", nullable = false)
 	private String passWord;
 	private String roleCode;
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	private String creatorId;
 	private String voidedBy;
 	private String voidFlag;
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyDate;
 
 	public User() {
 		super();
 	}
 
-	public User(long userId, String userName, String passWord, String roleCode,
-			Date createDate, String creatorId, String voidedBy,
-			String voidFlag, Date modifyDate) {
+	public User(long userId, String userName, String passWord, String roleCode, Date createDate, String creatorId,
+			String voidedBy, String voidFlag, Date modifyDate) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -127,34 +132,24 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName
-				+ ", passWord=" + passWord + ", roleCode=" + roleCode
-				+ ", createDate=" + createDate + ", creatorId=" + creatorId
-				+ ", voidedBy=" + voidedBy + ", voidFlag=" + voidFlag
-				+ ", modifyDate=" + modifyDate + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", passWord=" + passWord + ", roleCode=" + roleCode
+				+ ", createDate=" + createDate + ", creatorId=" + creatorId + ", voidedBy=" + voidedBy + ", voidFlag="
+				+ voidFlag + ", modifyDate=" + modifyDate + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result
-				+ ((creatorId == null) ? 0 : creatorId.hashCode());
-		result = prime * result
-				+ ((modifyDate == null) ? 0 : modifyDate.hashCode());
-		result = prime * result
-				+ ((passWord == null) ? 0 : passWord.hashCode());
-		result = prime * result
-				+ ((roleCode == null) ? 0 : roleCode.hashCode());
+		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((creatorId == null) ? 0 : creatorId.hashCode());
+		result = prime * result + ((modifyDate == null) ? 0 : modifyDate.hashCode());
+		result = prime * result + ((passWord == null) ? 0 : passWord.hashCode());
+		result = prime * result + ((roleCode == null) ? 0 : roleCode.hashCode());
 		result = prime * result + (int) (userId ^ (userId >>> 32));
-		result = prime * result
-				+ ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result
-				+ ((voidFlag == null) ? 0 : voidFlag.hashCode());
-		result = prime * result
-				+ ((voidedBy == null) ? 0 : voidedBy.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((voidFlag == null) ? 0 : voidFlag.hashCode());
+		result = prime * result + ((voidedBy == null) ? 0 : voidedBy.hashCode());
 		return result;
 	}
 

@@ -34,6 +34,17 @@
 		content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters register-defaults="true">
 			<bean class="com.zju.integration.monitor.util.UTF8StringHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+                <property name="objectMapper">  
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">  
+                        <property name="dateFormat">  
+                            <bean class="java.text.SimpleDateFormat">  
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />  
+                            </bean>  
+                        </property>  
+                    </bean>  
+                </property>  
+            </bean>  
 		</mvc:message-converters>
 		<mvc:path-matching registered-suffixes-only="true" />
 	</mvc:annotation-driven>

@@ -6,7 +6,10 @@ package com.zju.integration.monitor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.alibaba.fastjson.annotation.JSONField;
+import com.zju.integration.monitor.util.DataValidate;
 
 /**
  * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
@@ -15,15 +18,21 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2016-04-29
  * @description Transaction information object
  */
+@XmlRootElement(name = "TransactionInfo")
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 8054950152234665600L;
 	private long transId;
+	@DataValidate(description = "事务类型代码", nullable = false)
 	private String transCode;
+	@DataValidate(description = "事务类型名称", nullable = false)
 	private String transName;
+	@DataValidate(description = "事务类型中文名称", nullable = false)
 	private String transChineseName;
+	@DataValidate(description = "事务类型备注", nullable = true)
 	private String transMemo;
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
+	@DataValidate(description = "创建时间", nullable = true)
 	private Date createDate;
 
 	/**

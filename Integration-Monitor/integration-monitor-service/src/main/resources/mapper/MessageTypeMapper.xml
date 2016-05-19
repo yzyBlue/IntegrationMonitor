@@ -6,24 +6,38 @@
 		<result column="MESSAGE_TYPE" property="mesageType" jdbcType="VARCHAR" />
 		<result column="EVENT_TYPE" property="eventType" jdbcType="VARCHAR" />
 		<result column="CONTROL_CODE" property="controlCode" jdbcType="VARCHAR" />
-		<result column="PROFILE_CODE" property="transCode" jdbcType="VARCHAR" />
+		<result column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
 		<result column="MSG_TYPE_DESC" property="messageTypeDesc" jdbcType="VARCHAR" />
 		<result column="CREATE_DATE_TIME" property="createDate" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<sql id="messageTypeInfo">
-		MESSAGE_TYPE,EVENT_TYPE,CONTROL_CODE,PROFILE_CODE,MSG_TYPE_DESC,CREATE_DATE_TIME  
+		MESSAGE_TYPE,EVENT_TYPE,CONTROL_CODE,TRANS_CODE,MSG_TYPE_DESC,CREATE_DATE_TIME  
 	</sql>
 	
-	<!--查询事务类型字典表信息-->
-	<select id="select" resultMap="messageTypeMap">
+	
+	<select id="select"  resultMap="messageTypeMap">
 		SELECT
-		<include refid="messageTypeInfo"></include>
+		*
 		FROM
 		MSG_EVENT_TYPE
 		WHERE TYPE_ID = #{typeId,jdbcType=INTEGER}
 	</select>
-	<!--写入用户信息-->
+	
+	<select id="findMessageType" parameterType="com.zju.integration.monitor.model.MessageType" resultMap="messageTypeMap">
+		SELECT
+		*
+		FROM
+		MSG_EVENT_TYPE 
+		WHERE 
+		MESSAGE_TYPE=#{mesageType,jdbcType=VARCHAR}
+		and EVENT_TYPE=#{eventType,jdbcType=VARCHAR}
+		<if test="controlCode !=null and controlCode !=''">
+			and CONTROL_CODE=#{controlCode,jdbcType=VARCHAR}
+		</if>
+		and TRANS_CODE=#{transCode,jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="insert" parameterType="com.zju.integration.monitor.model.MessageType">
 	<selectKey resultType="long" order="AFTER" keyProperty="typeId">
 		SELECT ident_current('MSG_EVENT_TYPE') AS typeId
@@ -48,7 +62,7 @@
 		MESSAGE_TYPE=#{mesageType,jdbcType=VARCHAR},
 		EVENT_TYPE=#{eventType,jdbcType=VARCHAR},
 		CONTROL_CODE=#{controlCode,jdbcType=VARCHAR},
-		PROFILE_CODE=#{transCode,jdbcType=VARCHAR},
+		TRANS_CODE=#{transCode,jdbcType=VARCHAR},
 		MSG_TYPE_DESC=#{messageTypeDesc,jdbcType=VARCHAR}  
 		WHERE 
 		TYPE_ID = #{typeId,jdbcType=INTEGER}
@@ -58,4 +72,20 @@
 		DELETE FROM MSG_EVENT_TYPE WHERE TYPE_ID = #{typeId,jdbcType=INTEGER}
 	</delete>
 	
+	<select id="findByCondition" parameterType="java.util.Map" resultMap="messageTypeMap">
+		select * from MSG_EVENT_TYPE
+		where 1=1
+		<if test="mesageType !=null and mesageType !=''">
+			and MESSAGE_TYPE=#{mesageType,jdbcType=VARCHAR}
+		</if>
+		<if test="eventType !=null and eventType !=''">
+			and EVENT_TYPE=#{eventType,jdbcType=VARCHAR}
+		</if>
+		<if test="controlCode !=null and controlCode !=''">
+			and CONTROL_CODE=#{controlCode,jdbcType=VARCHAR}
+		</if>
+		<if test="transCode !=null and transCode !=''">
+			and TRANS_CODE=#{transCode,jdbcType=VARCHAR}
+		</if>
+	</select>
 </mapper>
