@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.log4j.Logger;
@@ -33,6 +32,7 @@ public class MirthClientTest {
 	private static final String CHANNELS_DEPLOYED = "channelsDeployed";
 	private ObjectXMLSerializer serializer = new ObjectXMLSerializer();
 	private LoginStatus loginStatus;
+	private static final boolean tempEnabled = false;
 
 	@Before
 	public void connectMirth() {
@@ -194,30 +194,34 @@ public class MirthClientTest {
 
 	}
 
-	// @Test
+	@Test
 	public void getMessage() throws ClientException {
 		MessageObjectFilter messageObjectFilter = new MessageObjectFilter();
-		messageObjectFilter.setCorrelationId("a1223351-2925-45e2-9d7e-9db35a0f51eb");
-		messageObjectFilter.setChannelId("f39071e3-4070-4a3b-b2b5-25d64684a943");
-		// MessageListHandler messageListHandler =
-		// mirthClient.getMessageListHandler(messageObjectFilter, 10, true);
-		UUID uuid = UUID.randomUUID();
-		NameValuePair[] params = { (new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
-				new NameValuePair("page", String.valueOf(10)), new NameValuePair("pageSize", String.valueOf(10)),
-				new NameValuePair("maxMessages", String.valueOf(100)), new NameValuePair("uid", "uid"),
-				new NameValuePair("filter", serializer.toXML(messageObjectFilter)) };
+		messageObjectFilter.setCorrelationId("dfb82c1f-e720-4497-9c4e-53a43a2c14d8");
+		messageObjectFilter.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");
+
+		NameValuePair[] params = {
+				(tempEnabled ? new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE.getName())
+						: new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
+				new NameValuePair("page", String.valueOf("0")), new NameValuePair("pageSize", String.valueOf("20")),
+				new NameValuePair("maxMessages", String.valueOf("200")), new NameValuePair("uid", ""),
+				(tempEnabled ? new NameValuePair("filter", "")
+						: new NameValuePair("filter", serializer.toXML(messageObjectFilter))) };
+
 		try {
 			List<MessageObject> messageObjectList = (List<MessageObject>) serializer
 					.fromXML(mirthClient.getServerConnection().executePostMethod(Client.MESSAGE_SERVLET, params));
+			logger.debug(messageObjectList.size());
 			for (MessageObject messageObject : messageObjectList) {
-				logger.debug(messageObject.toAuditString());
+				logger.debug(messageObject.getChannelId() + " [ " + messageObject.getCorrelationId() + " : "
+						+ messageObject.getId() + " ] ");
 			}
 		} catch (ClientException e) {
 			logger.debug(e.getCause().getMessage());
 		}
 	}
 
-	@Test
+	// @Test
 	public void processMessage() throws ClientException {
 		MessageObject messageObject = new MessageObject();
 		messageObject.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");

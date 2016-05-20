@@ -8,16 +8,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.log4j.Logger;
 
 import com.integration.monitor.model.MirthConnectResult;
 import com.mirth.connect.client.core.Client;
 import com.mirth.connect.client.core.ClientException;
+import com.mirth.connect.client.core.Operations;
 import com.mirth.connect.model.Channel;
 import com.mirth.connect.model.ChannelStatus;
 import com.mirth.connect.model.LoginStatus;
 import com.mirth.connect.model.LoginStatus.Status;
 import com.mirth.connect.model.MessageObject;
+import com.mirth.connect.model.converters.ObjectXMLSerializer;
+import com.mirth.connect.model.filters.MessageObjectFilter;
 
 /**
  * @author Yuan.Ziyang
@@ -36,6 +40,7 @@ public class MirthClientImpl implements MirthClient {
 	private int port;
 	private String version;
 	private final LoginStatus loginStatus;
+	private ObjectXMLSerializer serializer = new ObjectXMLSerializer();
 
 	public MirthClientImpl(String server, int port, String userName, String password, String version)
 			throws ClientException {
@@ -112,5 +117,24 @@ public class MirthClientImpl implements MirthClient {
 		}
 
 		return result;
+	}
+
+	public List<MessageObject> getMessageById(MessageObjectFilter messageObjectFilter) throws ClientException {
+		logger.debug("get message by message object uid ");
+		// messageObjectFilter.setCorrelationId("dfb82c1f-e720-4497-9c4e-53a43a2c14d8");
+		// messageObjectFilter.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");
+		NameValuePair[] params = { (new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
+				new NameValuePair("page", String.valueOf("0")), new NameValuePair("pageSize", String.valueOf("20")),
+				new NameValuePair("maxMessages", String.valueOf("200")), new NameValuePair("uid", ""),
+				(new NameValuePair("filter", serializer.toXML(messageObjectFilter))) };
+		List<MessageObject> messageObjectList = (List<MessageObject>) serializer
+				.fromXML(mirthClient.getServerConnection().executePostMethod(Client.MESSAGE_SERVLET, params));
+		// logger.debug(messageObjectList.size());
+		// for (MessageObject messageObject : messageObjectList) {
+		// logger.debug(messageObject.getChannelId() + " [ " +
+		// messageObject.getCorrelationId() + " : "
+		// + messageObject.getId() + " ] ");
+		// }
+		return messageObjectList;
 	}
 }
