@@ -68,12 +68,12 @@
 	<!-- <sec:authentication-provider -->
 	<!-- user-service-ref="userDetailsService"> -->
 	<!-- </sec:authentication-provider> -->
-	<!-- </sec:authentication-manager> -->
-<!-- 	<bean id="mirthClient" class="com.integration.monitor.mirthclient.MirthClientImpl"> -->
-<!-- 		<constructor-arg value="172.16.100.54" /> -->
-<!-- 		<constructor-arg value="8443" /> -->
-<!-- 		<constructor-arg value="monitor" /> -->
-<!-- 		<constructor-arg value="monitor" /> -->
-<!-- 		<constructor-arg value="2.2.1" /> -->
-<!-- 	</bean> -->
+<!-- 	</sec:authentication-manager> -->
+	<bean id="mirthClient" class="com.integration.monitor.mirthclient.MirthClientImpl">
+		<constructor-arg value="172.16.100.54" />
+		<constructor-arg value="8443" />
+		<constructor-arg value="monitor" />
+		<constructor-arg value="monitor" />
+		<constructor-arg value="2.2.1" />
+	</bean>
 </beans>

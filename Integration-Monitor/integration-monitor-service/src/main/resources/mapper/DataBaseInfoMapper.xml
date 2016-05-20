@@ -20,10 +20,10 @@
 	<!--查询数据库字典表信息-->
 	<select id="select" resultMap="dataBaseInfoMap">
 		SELECT
-		<include refid="dataBaseInfo"></include>
+		*
 		FROM
 		DATABASE_DICT
-		WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+		WHERE DATABASE_CODE = #{databaseCode,jdbcType=VARCHAR}
 	</select>
 	<!--写入数据库信息-->
 	<insert id="insert" parameterType="com.zju.integration.monitor.model.DataBaseInfo">
@@ -49,19 +49,42 @@
 		UPDATE
 		DATABASE_DICT
 		SET
-		DATABASE_CODE=#{transCode,jdbcType=VARCHAR},
-		DATABASE_NAME=#{transName,jdbcType=VARCHAR},
-		HOST_IP=#{transChineseName,jdbcType=VARCHAR},
-		INSTANCE_NAME=#{transMemo,jdbcType=VARCHAR}，
-		PORT_NO=#{transCode,jdbcType=VARCHAR},
-		USER_NAME=#{transName,jdbcType=VARCHAR},
-		PASS_WORD=#{transChineseName,jdbcType=VARCHAR} 
+		DATABASE_CODE=#{databaseCode,jdbcType=VARCHAR},
+		DATABASE_NAME=#{databaseName,jdbcType=VARCHAR},
+		HOST_IP=#{hostIp,jdbcType=VARCHAR},
+		INSTANCE_NAME=#{instanceName,jdbcType=VARCHAR}，
+		PORT_NO=#{portNo,jdbcType=VARCHAR},
+		USER_NAME=#{userName,jdbcType=VARCHAR},
+		PASS_WORD=#{passWord,jdbcType=VARCHAR} 
 		WHERE
-		SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+		DATABASE_CODE = #{databaseCode,jdbcType=VARCHAR}
 	</update>
 	<!--删除数据库信息-->
 	<delete id="delete" parameterType="com.zju.integration.monitor.model.DataBaseInfo">
 		DELETE FROM DATABASE_DICT WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
 	</delete>
-	
+	<select id="findByCondition" parameterType="java.util.Map" resultMap="dataBaseInfoMap">
+		select * from DATABASE_DICT where 1=1
+		<if test="databaseCode != null and databaseCode !=''">
+			and DATABASE_CODE=#{databaseCode,jdbcType=VARCHAR}
+		</if>
+		<if test="databaseName != null and databaseName !=''">
+			and DATABASE_NAME=#{databaseName,jdbcType=VARCHAR}
+		</if>
+		<if test="hostIp != null and hostIp !=''">
+			and HOST_IP=#{hostIp,jdbcType=VARCHAR}
+		</if>
+		<if test="instanceName != null and instanceName !=''">
+			and INSTANCE_NAME=#{instanceName,jdbcType=VARCHAR}
+		</if>
+		<if test="portNo != null and portNo !=''">
+			and PORT_NO=#{portNo,jdbcType=VARCHAR}
+		</if>
+		<if test="userName != null and userName !=''">
+			and USER_NAME=#{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="passWord != null and passWord !=''">
+			and PASS_WORD=#{passWord,jdbcType=VARCHAR}
+		</if>
+	</select>
 </mapper>

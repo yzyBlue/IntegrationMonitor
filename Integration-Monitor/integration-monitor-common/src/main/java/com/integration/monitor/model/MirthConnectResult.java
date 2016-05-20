@@ -1,35 +1,23 @@
-/**
- * 
- */
-package com.zju.integration.monitor.model;
+package com.integration.monitor.model;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-/**
- * @author <a href="mailto:bluedelta9192@gmail.com">Yuan.Ziyang</a>
- * @since 2016-03-22
- * @version v0.0.1
- * @date 2016-04-29
- * @description Result information object
- */
-@XmlRootElement(name = "IntegrationResult")
-public class IntegrationResult implements Serializable {
+@XStreamAlias("messageObject")
+public class MirthConnectResult implements Serializable {
 
-	private static final long serialVersionUID = 3189310499310275246L;
+	private static final long serialVersionUID = 7760693433671272965L;
+
 	public static final int SUCCESSCODE = 0;
-	public static final String SUCCESSDESC = "成功";
-	public static final int INTERNALERROR = -500;
-	public static final String INTERNALDESC = "服务内部错误";
+	public static final String SUCCESSDESC = "MIRTH接口调用成功";
+	public static final int MIRTHCLIENTERROR = -500;
+	public static final String MIRTHCLIENTDESC = "MIRTH接口调用错误";
 	private int resultCode;
 	private String resultDesc;
 
-	/**
-	 * 
-	 */
-	public IntegrationResult() {
-		super();
+	public MirthConnectResult() {
+
 	}
 
 	/**
@@ -89,10 +77,10 @@ public class IntegrationResult implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof IntegrationResult)) {
+		if (!(obj instanceof MirthConnectResult)) {
 			return false;
 		}
-		IntegrationResult other = (IntegrationResult) obj;
+		MirthConnectResult other = (MirthConnectResult) obj;
 		if (resultCode != other.resultCode) {
 			return false;
 		}
@@ -113,7 +101,7 @@ public class IntegrationResult implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "IntegrationResult [resultCode=" + resultCode + ", resultDesc=" + resultDesc + "]";
+		return "MirthConnectResult [resultCode=" + resultCode + ", resultDesc=" + resultDesc + "]";
 	}
 
 }

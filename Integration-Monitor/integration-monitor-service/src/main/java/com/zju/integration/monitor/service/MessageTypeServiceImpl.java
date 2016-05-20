@@ -49,6 +49,7 @@ public class MessageTypeServiceImpl implements MessageTypeService {
 				result.setResultDesc("写入消息类型记录" + insert + "条");
 			} else {
 				logger.info("已有相同记录");
+				messageType.setTypeId(messageTypeFind.getTypeId());
 				Integer update = messageTypeDao.update(messageType);
 				logger.debug("更新消息类型记录" + update + "条");
 				result.setResultCode(IntegrationResult.SUCCESSCODE);
@@ -78,6 +79,7 @@ public class MessageTypeServiceImpl implements MessageTypeService {
 				result.setResultDesc("写入消息类型记录" + insert + "条");
 			} else {
 				logger.info("已有相同记录");
+				messageType.setTypeId(messageTypeFind.getTypeId());
 				Integer update = messageTypeDao.update(messageType);
 				logger.debug("更新消息类型记录" + update + "条");
 				result.setResultCode(IntegrationResult.SUCCESSCODE);
@@ -122,6 +124,11 @@ public class MessageTypeServiceImpl implements MessageTypeService {
 	@Override
 	public List<MessageType> findByCondition(Map paramMap) {
 		return (List<MessageType>) messageTypeDao.findByCondition(paramMap);
+	}
+
+	@Override
+	public MessageType selectMsgById(String typeId) {
+		return messageTypeDao.selectMsgTypeById(Integer.valueOf(typeId));
 	}
 
 }

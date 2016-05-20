@@ -17,7 +17,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2016-04-29
  * @description Transaction Status information object
  */
-@XmlRootElement(name = "DataBaseInfo")
+@XmlRootElement(name = "TransactionStatus")
 public class TransactionStatus implements Serializable {
 
 	private static final long serialVersionUID = 5287729446970546907L;

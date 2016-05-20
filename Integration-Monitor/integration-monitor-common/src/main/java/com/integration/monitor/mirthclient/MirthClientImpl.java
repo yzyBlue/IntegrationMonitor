@@ -4,17 +4,20 @@
 package com.integration.monitor.mirthclient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.integration.monitor.model.MirthConnectResult;
 import com.mirth.connect.client.core.Client;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.model.Channel;
 import com.mirth.connect.model.ChannelStatus;
 import com.mirth.connect.model.LoginStatus;
 import com.mirth.connect.model.LoginStatus.Status;
+import com.mirth.connect.model.MessageObject;
 
 /**
  * @author Yuan.Ziyang
@@ -26,7 +29,6 @@ public class MirthClientImpl implements MirthClient {
 
 	private static final String HTTP_PREFIX = "https://";
 
-	// private static final String mirthUrl = "https://172.16.100.64:8445";
 	private static Client mirthClient;
 	private String userName;
 	private String password;
@@ -79,4 +81,36 @@ public class MirthClientImpl implements MirthClient {
 		return channelList;
 	}
 
+	@Override
+	public MirthConnectResult processMessage(MessageObject messageObject) {
+		MirthConnectResult result = new MirthConnectResult();
+		if (messageObject.getConnectorMap() == null) {
+			messageObject.setConnectorMap(new HashMap<>());
+		}
+		if (messageObject.getChannelMap() == null) {
+			messageObject.setChannelMap(new HashMap<>());
+		}
+		if (messageObject.getContext() == null) {
+			messageObject.setContext(new HashMap<>());
+		}
+		if (messageObject.getResponseMap() == null) {
+			messageObject.setResponseMap(new HashMap<>());
+		}
+		if (loginStatus.getStatus() == Status.SUCCESS) {
+			logger.debug("Login Success");
+			try {
+				mirthClient.processMessage(messageObject);
+				result.setResultCode(MirthConnectResult.SUCCESSCODE);
+				result.setResultDesc(MirthConnectResult.SUCCESSDESC);
+			} catch (ClientException e) {
+				result.setResultCode(MirthConnectResult.MIRTHCLIENTERROR);
+				result.setResultDesc(MirthConnectResult.MIRTHCLIENTDESC + " : " + e.getMessage().toString());
+			}
+		} else {
+			result.setResultCode(MirthConnectResult.MIRTHCLIENTERROR);
+			result.setResultDesc(MirthConnectResult.MIRTHCLIENTDESC + " : " + "未成功登陆MIRTH");
+		}
+
+		return result;
+	}
 }

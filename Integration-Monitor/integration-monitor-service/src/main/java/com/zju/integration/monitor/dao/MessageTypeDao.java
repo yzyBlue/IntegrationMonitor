@@ -20,4 +20,6 @@ import com.zju.integration.monitor.model.MessageType;
 public interface MessageTypeDao extends AbstractGenericDao<MessageType, Integer> {
 
 	public MessageType findMessageType(MessageType messageType);
+
+	public MessageType selectMsgTypeById(Integer typeId);
 }

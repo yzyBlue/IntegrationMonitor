@@ -3,7 +3,6 @@ package com.monitor.mirth.client;
 import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +20,7 @@ public class MirthClientServiceTest {
 	private MirthClient mirthClient;
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
-	@Test
+	// @Test
 	public void gettConnectionInfoLogsTest() throws ClientException {
 		logger.info("********************  gettConnectionInfoLogsTest  start   ********************************");
 		LinkedList<String[]> connectionInfoLogsReceived = mirthClient.getConnectionInfoLogs();

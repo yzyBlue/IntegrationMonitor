@@ -1,6 +1,7 @@
 package org.integration.monitor.mirthclient;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -18,13 +19,14 @@ import com.mirth.connect.model.ChannelStatus;
 import com.mirth.connect.model.LoginStatus;
 import com.mirth.connect.model.LoginStatus.Status;
 import com.mirth.connect.model.MessageObject;
+import com.mirth.connect.model.MessageObject.Protocol;
 import com.mirth.connect.model.converters.ObjectXMLSerializer;
 import com.mirth.connect.model.filters.MessageObjectFilter;
 
 public class MirthClientTest {
 	protected final Logger logger = Logger.getLogger(this.getClass());
-	// private static final String mirthUrl = "https://172.16.100.54:8443";
-	private static final String mirthUrl = "https://localhost:8443";
+	private static final String mirthUrl = "https://172.16.100.54:8443";
+	// private static final String mirthUrl = "https://localhost:8443";
 	private static Client mirthClient;
 	private static final String DASHBOARD_SERVICE_PLUGINPOINT = "Dashboard Connector Service";
 	private static final String GET_CONNECTION_INFO_LOGS = "getConnectionInfoLogs";
@@ -192,7 +194,7 @@ public class MirthClientTest {
 
 	}
 
-	@Test
+	// @Test
 	public void getMessage() throws ClientException {
 		MessageObjectFilter messageObjectFilter = new MessageObjectFilter();
 		messageObjectFilter.setCorrelationId("a1223351-2925-45e2-9d7e-9db35a0f51eb");
@@ -213,6 +215,24 @@ public class MirthClientTest {
 		} catch (ClientException e) {
 			logger.debug(e.getCause().getMessage());
 		}
+	}
+
+	@Test
+	public void processMessage() throws ClientException {
+		MessageObject messageObject = new MessageObject();
+		messageObject.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");
+		String rawData = "<result><hisvisitid>09000004</hisvisitid><reqdeptcode>2313</reqdeptcode><hisvisitsubid>1520180</hisvisitsubid><visitdate>2016-05-19 11:11:40.0</visitdate><eventhandlestatus>0</eventhandlestatus><messagetype>ADT</messagetype><orderno>401865</orderno><ordertype/><reqdeptname>呼吸内科</reqdeptname><eventid>37527385</eventid><ordersubno/><patientid>M000497741</patientid><reqpphysiciancode>2301</reqpphysiciancode><nurseworkstationname>呼吸内科病区</nurseworkstationname><nurseworkstationcode>1871247</nurseworkstationcode><handleresultdesc/><controlcode>NW</controlcode><queuetime>2016-05-19 11:23:02.697</queuetime><reqpphysicianname>许建英</reqpphysicianname><patientsource>I</patientsource><eventtype>A06</eventtype><eventhandletype>0</eventhandletype></result>";
+		messageObject.setRawData(rawData);
+		messageObject.setRawDataProtocol(Protocol.XML);
+		messageObject.setServerId(mirthClient.getServerId());
+		messageObject.setCorrelationId("a98577b8-90ea-42f0-91cd-8c8dfe2ac709");
+
+		messageObject.setChannelMap(new HashMap<>());
+		messageObject.setConnectorMap(new HashMap<>());
+		messageObject.setContext(new HashMap<>());
+		messageObject.setResponseMap(new HashMap<>());
+
+		mirthClient.processMessage(messageObject);
 	}
 
 }

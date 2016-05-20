@@ -16,7 +16,15 @@
 	</sql>
 	
 	
-	<select id="select"  resultMap="messageTypeMap">
+	<select id="select" parameterType="com.zju.integration.monitor.model.MessageType"  resultMap="messageTypeMap">
+		SELECT
+		*
+		FROM
+		MSG_EVENT_TYPE
+		WHERE TYPE_ID = #{typeId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectMsgTypeById"  resultMap="messageTypeMap">
 		SELECT
 		*
 		FROM

@@ -15,7 +15,7 @@ import com.zju.integration.monitor.util.DataValidate;
  * @date 2016-03-22
  * @description User information object
  */
-@XmlRootElement(name = "DataBaseInfo")
+@XmlRootElement(name = "User")
 public class User implements Serializable {
 	private static final long serialVersionUID = 991494537508911522L;
 	private long userId;

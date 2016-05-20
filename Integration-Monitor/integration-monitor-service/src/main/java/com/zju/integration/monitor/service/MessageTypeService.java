@@ -28,4 +28,6 @@ public interface MessageTypeService {
 	public IntegrationResult deleteMessageType(MessageType messageType) throws MessageTypeServiceException;
 
 	public List<MessageType> findByCondition(Map paramMap);
+
+	public MessageType selectMsgById(String typeId);
 }
