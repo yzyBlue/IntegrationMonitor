@@ -25,7 +25,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 				.getUsername();
 		this.logger.debug("User {} with session {} authenticates."+ userName+
 				httpSessionId);
-		response.sendRedirect("/integration-monitor/");
+		response.sendRedirect("/integration-monitor/index");
 
 	}
 

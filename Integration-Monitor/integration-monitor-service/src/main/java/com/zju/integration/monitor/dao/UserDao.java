@@ -14,7 +14,7 @@ import com.zju.integration.monitor.model.User;
  * @description User Dao object
  */
 @Repository
-@Transactional
+@Transactional(value = "transactionManager")
 public interface UserDao extends AbstractGenericDao<User, Integer> {
 
 	public User getUserByUserNamePassWord(@Param("userName") String userName, @Param("passWord") String passWord);

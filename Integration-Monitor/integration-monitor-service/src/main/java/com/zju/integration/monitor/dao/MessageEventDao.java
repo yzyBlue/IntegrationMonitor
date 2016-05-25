@@ -19,7 +19,7 @@ import com.zju.integration.monitor.model.MessageEvent;
  * @description Message Event Dao object
  */
 @Repository
-@Transactional
+@Transactional(value = "transactionManager")
 public interface MessageEventDao extends AbstractGenericDao<MessageEvent, Integer> {
 
 	public List<MessageEvent> getMessageByCondition(Map paramMap);

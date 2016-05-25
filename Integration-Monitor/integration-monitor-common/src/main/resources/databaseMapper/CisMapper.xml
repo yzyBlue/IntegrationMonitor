@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="integration.monitor.common.dao.cis.CisDataDao">
+	<select id="selectHrFirstPage"  resultType="java.util.Map">
+		select * from HRFirstPage where iDiagnoseId=#{visitId,jdbcType=VARCHAR}
+	</select>
+</mapper>

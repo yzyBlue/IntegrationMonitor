@@ -16,7 +16,7 @@ import com.zju.integration.monitor.model.ProblemRecord;
  * @description Problem Record Dao object
  */
 @Repository
-@Transactional
+@Transactional(value = "transactionManager")
 public interface ProblemRecordDao extends AbstractGenericDao<ProblemRecord, Integer> {
 
 }

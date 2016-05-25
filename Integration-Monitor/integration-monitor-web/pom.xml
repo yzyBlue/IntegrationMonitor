@@ -17,6 +17,7 @@
 		<tomcat.url>http://172.16.100.64:8888/manager/text</tomcat.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.name>integration-monitor-web</project.name>
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -82,6 +83,16 @@
 		<dependency>
 			<groupId>com.zju.integration.monitor</groupId>
 			<artifactId>integration-monitor-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zju.integration.monitor</groupId>
+			<artifactId>integration-monitor-mirthclient</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zju.integration.monitor</groupId>
+			<artifactId>integration-monitor-database</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

@@ -16,7 +16,7 @@ import com.zju.integration.monitor.model.IntegrationActor;
  * @description IntegrationActor Dao object
  */
 @Repository
-@Transactional
+@Transactional(value = "transactionManager")
 public interface IntegrationActorDao extends AbstractGenericDao<IntegrationActor, Integer> {
 
 }

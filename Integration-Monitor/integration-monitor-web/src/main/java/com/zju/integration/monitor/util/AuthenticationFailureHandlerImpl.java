@@ -17,7 +17,7 @@ public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHa
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("/integration-monitor/#/login?errorType=WrongUserNameOrPassword");
+		response.sendRedirect("/integration-monitor/login?errorType=WrongUserNameOrPassword");
 	}
 
 }

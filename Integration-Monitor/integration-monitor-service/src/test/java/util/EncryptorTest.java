@@ -31,7 +31,7 @@ public class EncryptorTest {
 
 	}
 
-	@Test
+	// @Test
 	public void encryptTest() {
 		String plaintext = "yzyBlue1991";
 		String ciphertext = EncryptionUtil.encrypt(plaintext);
@@ -41,9 +41,9 @@ public class EncryptorTest {
 
 	}
 
-	// @Test
+	@Test
 	public void decryptTest() {
-		String plaintext = "ArCHN2U6bULKztom7ivG8ZDnRm99lHRH";
+		String plaintext = "jUnszdHgcmAJT4zyJxko0HQpFChh/xqA";
 		String decryptor = EncryptionUtil.decrypt(plaintext);
 		logger.debug(decryptor);
 

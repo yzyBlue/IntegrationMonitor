@@ -16,7 +16,7 @@ import com.zju.integration.monitor.model.DataBaseInfo;
  * @description Database information Dao object
  */
 @Repository
-@Transactional
+@Transactional(value = "transactionManager")
 public interface DataBaseInfoDao extends AbstractGenericDao<DataBaseInfo, Integer> {
 
 }

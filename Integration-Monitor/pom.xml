@@ -1,5 +1,5 @@
-﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zju.integration.monitor</groupId>
 	<artifactId>integration-monitor</artifactId>
@@ -29,7 +29,7 @@
 			<!-- 项目开发者的email -->
 			<email> Yuan.Ziyang@vico-lab.com </email>
 			<!-- 项目开发者的主页的URL -->
-			<url />
+			<url/>
 			<!-- 项目开发者在项目中扮演的角色，角色元素描述了各种角色 -->
 			<roles>
 				<role> Project Manager </role>
@@ -51,14 +51,14 @@
 	<contributors>
 		<!-- 项目的其他贡献者。参见developers/developer元素 -->
 		<contributor>
-			<name />
-			<email />
-			<url />
-			<organization />
-			<organizationUrl />
-			<roles />
-			<timezone />
-			<properties />
+			<name/>
+			<email/>
+			<url/>
+			<organization/>
+			<organizationUrl/>
+			<roles/>
+			<timezone/>
+			<properties/>
 		</contributor>
 	</contributors>
 	<organization>
@@ -81,6 +81,7 @@
 		<fastjson.version>1.2.7</fastjson.version>
 		<jasypt.version>1.9.2</jasypt.version>
 		<log4j.version>1.2.16</log4j.version>
+<!-- 		<maven.test.skip>true</maven.test.skip> -->
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -275,9 +276,11 @@
 	</build>
 
 	<modules>
-		<module>integration-monitor-common</module>
+		<module>integration-monitor-mirthclient-v3.2.0</module>
 		<module>integration-monitor-mirthclient</module>
 		<module>integration-monitor-service</module>
 		<module>integration-monitor-web</module>
-	</modules>
+    	<module>integration-monitor-database</module>
+    	<module>integration-monitor-common</module>
+  </modules>
 </project>

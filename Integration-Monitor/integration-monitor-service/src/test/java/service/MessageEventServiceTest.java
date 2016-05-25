@@ -10,11 +10,6 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
-import com.thoughtworks.xstream.converters.collections.MapConverter;
-import com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider;
-import com.thoughtworks.xstream.io.xml.XppDriver;
 import com.zju.integration.monitor.model.MessageEvent;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
@@ -25,8 +20,6 @@ public class MessageEventServiceTest {
 
 	// @Autowired
 	// private MessageEventService messageEventService;
-
-	private XStream xstream;
 
 	private static final Map<String, WeakReference<String>> stringCache = new WeakHashMap<String, WeakReference<String>>();
 
@@ -55,17 +48,6 @@ public class MessageEventServiceTest {
 		String json = JSON.toJSONString(messageEvent);
 
 		logger.debug(json);
-
-		// http://jira.codehaus.org/browse/XSTR-651
-		xstream = new XStream(new Sun14ReflectionProvider(), new XppDriver());
-		xstream.registerConverter(new StringConverter(stringCache));
-		xstream.registerConverter(new MapConverter(xstream.getMapper()));
-		xstream.setMode(XStream.NO_REFERENCES);
-		xstream.autodetectAnnotations(true);
-
-		String xml = xstream.toXML(messageEvent);
-
-		logger.debug(xml);
 		// try {
 		// IntegrationResult result =
 		// messageEventService.saveMessageEvent(messageEvent);

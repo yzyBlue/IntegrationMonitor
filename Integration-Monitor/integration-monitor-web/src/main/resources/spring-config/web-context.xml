@@ -41,34 +41,47 @@
 	<sec:http pattern="/vendor/**" security="none" />
 	<sec:http pattern="/login.html" security="none" />
 
-	<!-- <sec:http auto-config="true" use-expressions="true" -->
-	<!-- entry-point-ref="restAuthenticationEntryPoint"> -->
-	<!-- <sec:intercept-url pattern="/**" access="permitAll" /> -->
-	<!-- <sec:intercept-url pattern="/**" access="isAuthenticated()" /> -->
-	<!-- <sec:form-login login-page="/#/login" -->
-	<!-- authentication-success-handler-ref="authenticationSuccessHandler" -->
-	<!-- authentication-failure-handler-ref="authenticationFailureHandler" -->
-	<!-- username-parameter="username" password-parameter="password" /> -->
-	<!-- <sec:logout logout-url="/logout" invalidate-session="true" -->
-	<!-- delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler" 
-		/> -->
-	<!-- <sec:remember-me remember-me-parameter="remember-me" /> -->
-	<!-- <sec:session-management> -->
-	<!-- <sec:concurrency-control max-sessions="1" -->
-	<!-- error-if-maximum-exceeded="false" expired-url="/#/login" /> -->
-	<!-- </sec:session-management> -->
-	<!-- </sec:http> -->
+	<sec:http auto-config="true" use-expressions="true"
+		entry-point-ref="restAuthenticationEntryPoint">
+		<sec:intercept-url pattern="/**" access="permitAll" />
+		<!-- <sec:intercept-url pattern="/**" access="isAuthenticated()" /> -->
+		<sec:form-login login-page="/login2"
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-handler-ref="authenticationFailureHandler"
+			username-parameter="username" password-parameter="password" />
+		<sec:logout logout-url="/logout" invalidate-session="true"
+			delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler" />
+		<sec:remember-me remember-me-parameter="remember-me" />
+		<sec:session-management>
+			<sec:concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="false" expired-url="/" />
+		</sec:session-management>
+	</sec:http>
 
-	<!-- <bean id="logoutSuccessHandler" -->
-	<!-- class="com.zju.integration.monitor.util.LogoutSuccessHandlerImpl"> -->
-	<!-- <constructor-arg value="/" /> -->
-	<!-- </bean> -->
+	<bean id="logoutSuccessHandler"
+		class="com.zju.integration.monitor.util.LogoutSuccessHandlerImpl">
+		<constructor-arg value="/" />
+	</bean>
 
-	<!-- <sec:authentication-manager alias="authenticationManager"> -->
-	<!-- <sec:authentication-provider -->
-	<!-- user-service-ref="userDetailsService"> -->
-	<!-- </sec:authentication-provider> -->
-<!-- 	</sec:authentication-manager> -->
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider
+			user-service-ref="userDetailsService">
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
+		<constructor-arg>
+			<bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" />
+		</constructor-arg>
+	</bean>
+	<!-- Provides automatic CSRF token inclusion when using Spring MVC Form 
+		tags or Thymeleaf. -->
+	<bean id="requestDataValueProcessor"
+		class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" />
+
+	<bean id="loggerListener"
+		class="org.springframework.security.authentication.event.LoggerListener" />
+
 	<bean id="mirthClient" class="com.integration.monitor.mirthclient.MirthClientImpl">
 		<constructor-arg value="172.16.100.54" />
 		<constructor-arg value="8443" />

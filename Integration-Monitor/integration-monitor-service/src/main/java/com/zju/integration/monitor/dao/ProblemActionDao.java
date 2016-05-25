@@ -16,7 +16,7 @@ import com.zju.integration.monitor.model.ProblemAction;
  * @description ProblemAction Dao object
  */
 @Repository
-@Transactional
+@Transactional(value = "transactionManager")
 public interface ProblemActionDao extends AbstractGenericDao<ProblemAction, Integer> {
 
 }
