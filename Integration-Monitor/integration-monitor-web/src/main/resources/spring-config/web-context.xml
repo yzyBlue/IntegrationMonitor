@@ -4,22 +4,19 @@
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:sec="http://www.springframework.org/schema/security"
-	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/aop
-		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/cache
-		http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
 		http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security-4.0.xsd
-		http://cxf.apache.org/transports/http/configuration
-        http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+		http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	<import resource="classpath*:config/spring-context.xml" />
 
 	<context:annotation-config />
@@ -39,13 +36,15 @@
 	<sec:http pattern="/img/**" security="none" />
 	<sec:http pattern="/l10n/**" security="none" />
 	<sec:http pattern="/vendor/**" security="none" />
-	<sec:http pattern="/login.html" security="none" />
+	<sec:http pattern="/login2" security="none" />
 
 	<sec:http auto-config="true" use-expressions="true"
 		entry-point-ref="restAuthenticationEntryPoint">
-		<sec:intercept-url pattern="/**" access="permitAll" />
-		<!-- <sec:intercept-url pattern="/**" access="isAuthenticated()" /> -->
+<!-- 		<sec:intercept-url pattern="/**" access="permitAll" /> -->
+		<sec:intercept-url pattern="/transaction/**" access="isAuthenticated()" />
 		<sec:form-login login-page="/login2"
+			default-target-url="/index" 
+
 			authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-handler-ref="authenticationFailureHandler"
 			username-parameter="username" password-parameter="password" />
@@ -69,15 +68,27 @@
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
-	<bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
-		<constructor-arg>
-			<bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" />
-		</constructor-arg>
-	</bean>
+<!-- 	<sec:authentication-manager id="authenticationManager"> -->
+<!-- 		<sec:authentication-provider> -->
+<!-- 			<sec:user-service> -->
+<!-- 				<sec:user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" /> -->
+<!-- 				<sec:user name="user" password="user" authorities="ROLE_USER" /> -->
+<!-- 			</sec:user-service> -->
+<!-- 		</sec:authentication-provider> -->
+<!-- 	</sec:authentication-manager> -->
+
+
+	<!-- <bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter"> -->
+	<!-- <constructor-arg> -->
+	<!-- <bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" 
+		/> -->
+	<!-- </constructor-arg> -->
+	<!-- </bean> -->
 	<!-- Provides automatic CSRF token inclusion when using Spring MVC Form 
 		tags or Thymeleaf. -->
-	<bean id="requestDataValueProcessor"
-		class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" />
+	<!-- <bean id="requestDataValueProcessor" -->
+	<!-- class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" 
+		/> -->
 
 	<bean id="loggerListener"
 		class="org.springframework.security.authentication.event.LoggerListener" />

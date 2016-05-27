@@ -3969,7 +3969,8 @@ table+.show-more {
 	height: 180px;
 	line-height: 110px;
 	font-size: 120px;
-	text-align: center
+	text-align: center;
+	margin-top: 10%
 }
 .logo-center a {
 	font-size: 120px;

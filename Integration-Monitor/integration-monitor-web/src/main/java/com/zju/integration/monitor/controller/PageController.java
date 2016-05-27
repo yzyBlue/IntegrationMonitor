@@ -47,7 +47,7 @@ public class PageController {
 
 	@RequestMapping("/message")
 	public String getMessage() {
-		return "message";
+		return "messageview";
 	}
 
 	@RequestMapping("/adt")

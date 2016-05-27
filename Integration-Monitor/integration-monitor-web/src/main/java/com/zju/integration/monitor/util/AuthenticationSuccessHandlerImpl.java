@@ -14,18 +14,16 @@ import org.springframework.stereotype.Component;
 
 @Component("authenticationSuccessHandler")
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
-	
+
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
 		String httpSessionId = request.getSession().getId();
-		String userName = ((UserDetails) authentication.getPrincipal())
-				.getUsername();
-		this.logger.debug("User {} with session {} authenticates."+ userName+
-				httpSessionId);
-		response.sendRedirect("/integration-monitor/index");
+		String userName = ((UserDetails) authentication.getPrincipal()).getUsername();
+		this.logger.debug("User {} with session {} authenticates." + userName + httpSessionId);
+		response.sendRedirect("/integration-monitor/message");
 
 	}
 

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="css/styles/modal.css" type="text/css">
-<!-- <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -50,10 +49,6 @@
 								<circle cx="460" cy="225" r="40" stroke="none" stroke-width="2"	fill="red" />
 								<text x="430" y="245" dx="0.01em" dy="3em" fill="#fff">病人出院</text>
 								
-<!-- 								<circle cx="200" cy="150" r="40" stroke="none" stroke-width="2"	fill="red" /> -->
-<!-- 								<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2"	fill="blue" /> -->
-<!-- 								<circle cx="200" cy="250" r="40" stroke="none" stroke-width="2"	fill="#99a3b2" /> -->
-<!-- 								<ellipse cx="200" cy="350" rx="100" ry="40"	style="fill:rgb(200,100,50);stroke:none;stroke-width:2" /> -->
 							</g>
 						</g>
 					</svg>

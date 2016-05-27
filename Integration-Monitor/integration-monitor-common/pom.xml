@@ -15,6 +15,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mybatis.version>3.2.6</mybatis.version>
+		<spring.security.version>3.2.4.RELEASE</spring.security.version>
 	</properties>
 	<dependencies>
 		<dependency>

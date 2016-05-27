@@ -121,17 +121,17 @@ var Login = React.createClass({
 	    return (
 	    <form id="loginform" novalidate="novalidate" method="post"  action="j_spring_security_check">
 			<div className="input-box">
-				<input className="input-text valid" type="text" name="j_username" placeholder="用户名" 
+				<input className="input-text valid" type="text" name="username" placeholder="用户名" 
 					value={this.state.username}  onChange={this.handleUserNameChange}/>
 				<p className="error-top"></p>
 			</div>
 			<div className="input-box no-margin">
-				<input className="input-text" type="password" name="j_password"placeholder="密   码"
+				<input className="input-text" type="password" name="password"placeholder="密   码"
 					value={this.state.password}  onChange={this.handlePassWordChange}/>
 				<p className="error-top"></p>
 			</div>					
 			<div className="remember-box">
-				<input type="checkbox" name="_spring_security_remember_me" value={this.state.remember} onChange={this.handleRememberChange} id="remember" checked="checked"/> 
+				<input type="checkbox" name="remember-me" value={this.state.remember} onChange={this.handleRememberChange} id="remember" checked="checked"/> 
 				<label> 
 					<span className="check-out"></span>
 					<span className="iconfont check-in"></span>
@@ -141,6 +141,7 @@ var Login = React.createClass({
 			</div>
 			<div className="input-box margin-min">
 				<input type="hidden" name="encode" value="false"/>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<input className="btn btn-blue btn-block" type="submit" name="submit" value="登     录" />
 			</div>
 		</form>
@@ -154,8 +155,8 @@ var LoginForm = React.createClass({
 	    $.ajax({
 	      url: this.props.url+"?userName="+user.username+"&&passWord="+user.password,
 	      dataType: 'json',
-	      //type: 'GET',
-	      cache: false,
+	      //t// ype: 'GET',
+    cache: false,
 	      success: function(result) {
 	        this.setState({result: result});
 	        alert("resultCode : "+result.resultCode+" , resultDesc : "+result.resultDesc);
@@ -182,7 +183,7 @@ var Logo = React.createClass({
 	  render: function() {
 	    return (
 	    <div className="logo-center">
-			<a id="logo-center" class="iconfont icon-monitor" href="#" title="Integration Monitor">
+			<a id="logo-center" className="iconfont icon-monitor" href="#" title="Integration Monitor">
 			</a>
 		</div>
 	    );
@@ -215,12 +216,6 @@ var style={
 }
 
 var HomeBody = React.createClass({
-	componentDidMount: function() {
-	    //console.log(Array.isArray(this.props.children)); // => false
-
-	    // warning: yields 5 for length of the string 'hello', not 1 for the
-	    // length of the non-existant array wrapper!
-	  },
 	render: function() {
 		return (
 			<div style={style}>
