@@ -131,13 +131,7 @@ var Login = React.createClass({
 				<p className="error-top"></p>
 			</div>					
 			<div className="remember-box">
-				<input type="checkbox" name="remember-me" value={this.state.remember} onChange={this.handleRememberChange} id="remember" checked="checked"/> 
-				<label> 
-					<span className="check-out"></span>
-					<span className="iconfont check-in"></span>
-					<span>自动登陆</span> 
-				</label> 
-				<a className="float-right"href="#">忘记密码？</a>
+				
 			</div>
 			<div className="input-box margin-min">
 				<input type="hidden" name="encode" value="false"/>
@@ -156,7 +150,7 @@ var LoginForm = React.createClass({
 	      url: this.props.url+"?userName="+user.username+"&&passWord="+user.password,
 	      dataType: 'json',
 	      //t// ype: 'GET',
-    cache: false,
+	      cache: false,
 	      success: function(result) {
 	        this.setState({result: result});
 	        alert("resultCode : "+result.resultCode+" , resultDesc : "+result.resultDesc);

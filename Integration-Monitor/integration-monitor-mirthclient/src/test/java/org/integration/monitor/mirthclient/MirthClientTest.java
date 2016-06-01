@@ -194,7 +194,7 @@ public class MirthClientTest {
 
 	}
 
-	@Test
+	// @Test
 	public void getMessage() throws ClientException {
 		MessageObjectFilter messageObjectFilter = new MessageObjectFilter();
 		messageObjectFilter.setCorrelationId("dfb82c1f-e720-4497-9c4e-53a43a2c14d8");
@@ -221,7 +221,7 @@ public class MirthClientTest {
 		}
 	}
 
-	// @Test
+	@Test
 	public void processMessage() throws ClientException {
 		MessageObject messageObject = new MessageObject();
 		messageObject.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");

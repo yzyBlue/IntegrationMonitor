@@ -69,4 +69,8 @@ public class PageController {
 	public String getAlert() {
 		return "alert";
 	}
+	@RequestMapping("/test")
+	public String getTest() {
+		return "test";
+	}
 }

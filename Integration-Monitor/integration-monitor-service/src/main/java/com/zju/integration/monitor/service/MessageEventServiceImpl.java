@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zju.integration.monitor.dao.MessageEventDao;
+import com.zju.integration.monitor.dao.MessageTypeDao;
 import com.zju.integration.monitor.exception.MessageEventServiceException;
 import com.zju.integration.monitor.model.IntegrationResult;
 import com.zju.integration.monitor.model.MessageEvent;
@@ -29,6 +30,9 @@ public class MessageEventServiceImpl implements MessageEventService {
 	@Autowired(required = false)
 	private MessageEventDao messageEventDao;
 
+	@Autowired(required = false)
+	private MessageTypeDao messageTypeDao;
+
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	/*
@@ -44,6 +48,9 @@ public class MessageEventServiceImpl implements MessageEventService {
 		IntegrationResult dataValidate = DataValidationUtil.validate(messageEvent);
 		if (dataValidate.getResultCode() == 0) {
 			logger.info("数据验证通过");
+			String msgTypeDesc = messageTypeDao.selectMsgTypeById(Integer.valueOf(messageEvent.getMsgTypeId()))
+					.getMessageTypeDesc();
+			messageEvent.setMsgTypeDesc(msgTypeDesc);
 			int insert = messageEventDao.insert(messageEvent);
 			if (insert > 0) {
 				result.setResultCode(IntegrationResult.SUCCESSCODE);

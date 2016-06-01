@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zju.integration.monitor.dao.MessageEventDao">
 	<resultMap id="messageEventMap" type="com.zju.integration.monitor.model.MessageEvent">
-		<id column="MESSAGE_ID" property="sequenceId" jdbcType="INTEGER" />
+		<id column="SEQUENCE_ID" property="sequenceId" jdbcType="INTEGER" />
+		<result column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
 		<result column="MSG_EVENT_CODE" property="msgTypeId" jdbcType="VARCHAR" />
+		<result column="MSG_EVENT_DESC" property="msgTypeDesc" jdbcType="VARCHAR" />
 		<result column="MSG_SUB_TYPE" property="msgSubType" jdbcType="VARCHAR" />
 		<result column="MSG_SOURCE_CODE" property="msgSourceCode" jdbcType="VARCHAR" />
 		<result column="CHANNEL_CODE" property="channelCode" jdbcType="VARCHAR" />
@@ -23,7 +25,7 @@
 	</resultMap>
 	
 	<sql id="messageEventInfo">
-		MSG_EVENT_CODE,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,SOURCE_MSG_UID,EVENT_DATE_TIME,PATIENT_ID,
+		TRANS_CODE,MSG_EVENT_CODE,MSG_EVENT_DESC,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,SOURCE_MSG_UID,EVENT_DATE_TIME,PATIENT_ID,
 		VISIT_ID,MSG_INDEX,MSG_SUB_INDEX,TRANSACTION_STATUS,HANDLE_RESULT_STATUS,EVENT_HANDLE_TIME,
 		HANDLE_RESULT_DESC,MSG_RAW_DATA,RAW_DATA_PROTOCOL,IS_ENCRYPTED 
 	</sql>
@@ -32,7 +34,7 @@
 	<!--查询事件内容表信息-->
 	<select id="select" resultMap="messageEventMap">
 		SELECT
-		<include refid="messageEventInfo"></include>
+		* 
 		FROM
 		MSG_EVENT_LOG
 		WHERE SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
@@ -41,64 +43,70 @@
 	<!-- 动态查询消息事件内容 -->
 	<select id="getMessageByCondition" parameterType="java.util.Map" resultMap="messageEventMap">
 		SELECT 
-		<include refid="messageEventInfo"></include> 
+		 * 
 		FROM MSG_EVENT_LOG 
-		where 1=1
-		<if test="msgTypeId != null"> 
+		where 1=1 
+		<if test="transCode != null and transCode != ''"> 
+ 			and TRANS_CODE =#{transCode,jdbcType=VARCHAR}
+		</if>
+		<if test="msgTypeId != null and msgTypeId != ''"> 
  			and MSG_EVENT_CODE =#{msgTypeId,jdbcType=VARCHAR}
 		</if> 
-		<if test="msgSubType != null"> 
+		<if test="msgTypeDesc != null and msgTypeDesc != ''"> 
+ 			and MSG_EVENT_DESC =#{msgTypeDesc,jdbcType=VARCHAR}
+		</if> 
+		<if test="msgSubType != null and msgSubType != ''"> 
  			and MSG_SUB_TYPE =#{msgSubType,jdbcType=VARCHAR}
 		</if> 
-		<if test="msgSourceCode != null"> 
+		<if test="msgSourceCode != null and msgSourceCode != ''"> 
  			and MSG_SOURCE_CODE =#{msgSourceCode,jdbcType=VARCHAR}
 		</if> 
-		<if test="channelCode != null"> 
+		<if test="channelCode != null and channelCode != ''"> 
  			and CHANNEL_CODE =#{channelCode,jdbcType=VARCHAR}
 		</if> 
-		<if test="sourceMsgUid != null"> 
+		<if test="sourceMsgUid != null and sourceMsgUid != ''"> 
  			and SOURCE_MSG_UID =#{sourceMsgUid,jdbcType=VARCHAR}
 		</if> 
-		<if test="eventDateTime != null"> 
+		<if test="eventDateTime != null and eventDateTime != ''"> 
  			and EVENT_DATE_TIME =#{eventDateTime,jdbcType=TIMESTAMP}
 		</if> 
-		<if test="patientId != null"> 
+		<if test="patientId != null and patientId != ''"> 
  			and PATIENT_ID =#{patientId,jdbcType=VARCHAR}
 		</if> 
-		<if test="visitId != null"> 
+		<if test="visitId != null and visitId != ''"> 
  			and VISIT_ID =#{visitId,jdbcType=VARCHAR}
 		</if> 
-		<if test="messageIndex != null"> 
+		<if test="messageIndex != null and messageIndex != ''"> 
  			and MSG_INDEX =#{messageIndex,jdbcType=VARCHAR}
 		</if> 
-		<if test="messageSubIndex != null"> 
+		<if test="messageSubIndex != null  and messageSubIndex != ''"> 
  			and MSG_SUB_INDEX =#{messageSubIndex,jdbcType=VARCHAR}
 		</if> 
-		<if test="transactionStatus != null"> 
+		<if test="transactionStatus != null and transactionStatus != ''"> 
  			and TRANSACTION_STATUS =#{transactionStatus,jdbcType=VARCHAR}
 		</if> 
-		<if test="handleResultStatus != null"> 
+		<if test="handleResultStatus != null and handleResultStatus != ''"> 
  			and HANDLE_RESULT_STATUS =#{handleResultStatus,jdbcType=VARCHAR}
 		</if> 
-		<if test="eventHandleTime != null"> 
+		<if test="eventHandleTime != null and eventHandleTime != ''" > 
  			and EVENT_HANDLE_TIME =#{eventHandleTime,jdbcType=TIMESTAMP}
 		</if> 
-		<if test="handleResultDesc != null"> 
+		<if test="handleResultDesc != null and handleResultDesc != ''"> 
  			and HANDLE_RESULT_DESC =#{handleResultDesc,jdbcType=VARCHAR}
 		</if> 
-		<if test="rawData != null"> 
+		<if test="rawData != null and rawData != ''"> 
  			and MSG_RAW_DATA =#{rawData,jdbcType=VARCHAR}
 		</if> 
-		<if test="rawDataProtocol != null"> 
+		<if test="rawDataProtocol != null and rawDataProtocol != ''"> 
  			and RAW_DATA_PROTOCOL =#{rawDataProtocol,jdbcType=VARCHAR}
 		</if> 
-		<if test="isEncrypted != null"> 
+		<if test="isEncrypted != null and isEncrypted != ''"> 
  			and IS_ENCRYPTED =#{isEncrypted,jdbcType=VARCHAR}
 		</if>
-		<if test="startDate != null">
+		<if test="startDate != null and startDate != ''">
 			and EVENT_DATE_TIME <![CDATA[ >= ]]> CONVERT(DATETIME,#{startDate,jdbcType=TIMESTAMP},120)
 		</if>
-		<if test="endDate != null">
+		<if test="endDate != null and endDate != ''">
 			and EVENT_DATE_TIME <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
 		</if>
 	</select>

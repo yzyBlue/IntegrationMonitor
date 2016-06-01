@@ -21,8 +21,12 @@ public class MessageEvent implements Serializable {
 	private static final long serialVersionUID = 6486053870579782040L;
 
 	private long sequenceId;
+	@DataValidate(description = "事务类型代码", nullable = false)
+	private String transCode;
 	@DataValidate(description = "消息类型Id", nullable = false)
 	private String msgTypeId;
+	@DataValidate(description = "消息事件描述", nullable = true)
+	private String msgTypeDesc;
 	@DataValidate(description = "消息类型子代码", nullable = true)
 	private String msgSubType;
 	@DataValidate(description = "消息来源", nullable = false)
@@ -332,6 +336,36 @@ public class MessageEvent implements Serializable {
 		this.isEncrypted = isEncrypted;
 	}
 
+	/**
+	 * @return the transCode
+	 */
+	public String getTransCode() {
+		return transCode;
+	}
+
+	/**
+	 * @param transCode
+	 *            the transCode to set
+	 */
+	public void setTransCode(String transCode) {
+		this.transCode = transCode;
+	}
+
+	/**
+	 * @return the msgTypeDesc
+	 */
+	public String getMsgTypeDesc() {
+		return msgTypeDesc;
+	}
+
+	/**
+	 * @param msgTypeDesc
+	 *            the msgTypeDesc to set
+	 */
+	public void setMsgTypeDesc(String msgTypeDesc) {
+		this.msgTypeDesc = msgTypeDesc;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -351,12 +385,14 @@ public class MessageEvent implements Serializable {
 		result = prime * result + ((messageSubIndex == null) ? 0 : messageSubIndex.hashCode());
 		result = prime * result + ((msgSourceCode == null) ? 0 : msgSourceCode.hashCode());
 		result = prime * result + ((msgSubType == null) ? 0 : msgSubType.hashCode());
+		result = prime * result + ((msgTypeDesc == null) ? 0 : msgTypeDesc.hashCode());
 		result = prime * result + ((msgTypeId == null) ? 0 : msgTypeId.hashCode());
 		result = prime * result + ((patientId == null) ? 0 : patientId.hashCode());
 		result = prime * result + ((rawData == null) ? 0 : rawData.hashCode());
 		result = prime * result + ((rawDataProtocol == null) ? 0 : rawDataProtocol.hashCode());
 		result = prime * result + (int) (sequenceId ^ (sequenceId >>> 32));
 		result = prime * result + ((sourceMsgUid == null) ? 0 : sourceMsgUid.hashCode());
+		result = prime * result + ((transCode == null) ? 0 : transCode.hashCode());
 		result = prime * result + ((transactionStatus == null) ? 0 : transactionStatus.hashCode());
 		result = prime * result + ((visitId == null) ? 0 : visitId.hashCode());
 		return result;
@@ -449,6 +485,13 @@ public class MessageEvent implements Serializable {
 		} else if (!msgSubType.equals(other.msgSubType)) {
 			return false;
 		}
+		if (msgTypeDesc == null) {
+			if (other.msgTypeDesc != null) {
+				return false;
+			}
+		} else if (!msgTypeDesc.equals(other.msgTypeDesc)) {
+			return false;
+		}
 		if (msgTypeId == null) {
 			if (other.msgTypeId != null) {
 				return false;
@@ -487,6 +530,13 @@ public class MessageEvent implements Serializable {
 		} else if (!sourceMsgUid.equals(other.sourceMsgUid)) {
 			return false;
 		}
+		if (transCode == null) {
+			if (other.transCode != null) {
+				return false;
+			}
+		} else if (!transCode.equals(other.transCode)) {
+			return false;
+		}
 		if (transactionStatus == null) {
 			if (other.transactionStatus != null) {
 				return false;
@@ -511,13 +561,14 @@ public class MessageEvent implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "MessageEvent [sequenceId=" + sequenceId + ", msgTypeId=" + msgTypeId + ", msgSubType=" + msgSubType
-				+ ", msgSourceCode=" + msgSourceCode + ", channelCode=" + channelCode + ", sourceMsgUid=" + sourceMsgUid
-				+ ", eventDateTime=" + eventDateTime + ", patientId=" + patientId + ", visitId=" + visitId
-				+ ", messageIndex=" + messageIndex + ", messageSubIndex=" + messageSubIndex + ", transactionStatus="
-				+ transactionStatus + ", handleResultStatus=" + handleResultStatus + ", eventHandleTime="
-				+ eventHandleTime + ", handleResultDesc=" + handleResultDesc + ", rawData=" + rawData
-				+ ", rawDataProtocol=" + rawDataProtocol + ", isEncrypted=" + isEncrypted + "]";
+		return "MessageEvent [sequenceId=" + sequenceId + ", transCode=" + transCode + ", msgTypeId=" + msgTypeId
+				+ ", msgTypeDesc=" + msgTypeDesc + ", msgSubType=" + msgSubType + ", msgSourceCode=" + msgSourceCode
+				+ ", channelCode=" + channelCode + ", sourceMsgUid=" + sourceMsgUid + ", eventDateTime=" + eventDateTime
+				+ ", patientId=" + patientId + ", visitId=" + visitId + ", messageIndex=" + messageIndex
+				+ ", messageSubIndex=" + messageSubIndex + ", transactionStatus=" + transactionStatus
+				+ ", handleResultStatus=" + handleResultStatus + ", eventHandleTime=" + eventHandleTime
+				+ ", handleResultDesc=" + handleResultDesc + ", rawData=" + rawData + ", rawDataProtocol="
+				+ rawDataProtocol + ", isEncrypted=" + isEncrypted + "]";
 	}
 
 }

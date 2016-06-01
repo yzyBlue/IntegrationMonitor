@@ -282,7 +282,7 @@ var MessageTable=React.createClass({
 								<td className="">ER152295</td>
 								<td className="">M000391681</td>
 								<td className="">152295</td>
-								<td className=""><a className="btn-green" data-toggle="modal" href="#myModal">查看状态</a></td>
+								<td className=""><a className="btn-green" data-toggle="modal" data-keyboard="false" data-target="#myModal">查看状态</a></td>
 								<td className=""><div className="operation">
 										<a className="iconfont" href="javascript:;"></a><a
 											className="iconfont" href="javascript:;"></a>
@@ -317,7 +317,7 @@ var Modal=React.createClass({
 					<div className="modal-dialog">
 						<div className="modal-content">
 							<div className="modal-header">
-								<button type="button" className="close" data-dismiss="modal"aria-hidden="true">&times;</button>
+								<button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 								<h4 className="modal-title" id="myModalLabel">事务状态流程</h4>
 							</div>
 							<div className="modal-body">
