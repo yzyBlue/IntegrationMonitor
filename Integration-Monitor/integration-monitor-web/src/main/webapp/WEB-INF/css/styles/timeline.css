@@ -127,6 +127,7 @@ fieldset[disabled] .btn-info.active {
 
 .tl-content.panel {
     margin-bottom: 0;
+    width: 80%;
 }
 
 .timeline-center .tl-item {
@@ -955,7 +956,9 @@ fieldset[disabled] .btn-info.active {
 }
 .clear {
     display: block;
-    overflow: hidden;
+    background-color: rgba(51, 51, 51, .4);
+    height: 200px;
+    overflow: auto;
 }
 .bg-gd {
     background-image: -webkit-gradient(linear, left 0, left 100%, from(rgba(40, 50, 60, 0)), to(rgba(40, 50, 60, 0.075)));
@@ -1320,7 +1323,7 @@ fieldset[disabled] .btn-info.active {
 }
 
 .bg-success {
-    color: #c6efd0;
+    color: #ffffff;
     background-color: #27c24c;
 }
 

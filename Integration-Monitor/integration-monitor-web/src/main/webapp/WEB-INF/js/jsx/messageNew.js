@@ -573,12 +573,12 @@ var TimeLineItem=React.createClass({
 		// alert(datetime);
 		var tlWrapClass="tl-wrap b-success";
 		var tlContentClass="tl-content panel bg-success padder";
-		if(this.props.data.sequenceId==this.props.message.sequenceId){
-			tlWrapClass="tl-wrap b-primary";
-			tlContentClass="tl-content panel bg-primary padder";
-		}else if(this.props.data.handleResultStatus=='ERROR'){
+		if(this.props.data.handleResultStatus=='ERROR'){
 			tlWrapClass="tl-wrap b-danger";
 			tlContentClass="tl-content panel bg-danger padder";
+		}else if(this.props.data.sequenceId==this.props.message.sequenceId){
+			tlWrapClass="tl-wrap b-primary";
+			tlContentClass="tl-content panel bg-primary padder";
 		}
 		var paramMap={correlationId:this.props.data.sourceMsgUid,channelId:this.props.data.channelCode};
 		return (
@@ -589,12 +589,11 @@ var TimeLineItem=React.createClass({
 	                    <span className="arrow left pull-up"></span>
 	                    <div>{this.props.data.msgTypeDesc}</div>
 	                    <div className="panel-body pull-in b-t b-light">
-	                    	<div className="clear">
-	                        	{this.props.data.handleResultStatus}
-	                        </div>
-	                        <br/>
+	                    	<h2>{this.props.data.handleResultStatus}</h2>
 	                        <div className="clear">
-	                        {this.formatXml(this.props.data.rawData)}
+		                        <pre>
+		                        	{this.formatXml(this.props.data.rawData)}
+		                        </pre>
 	                        </div>
 	                    </div>
 	                </div>
