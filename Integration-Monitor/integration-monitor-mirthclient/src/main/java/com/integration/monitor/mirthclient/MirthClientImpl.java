@@ -42,15 +42,16 @@ public class MirthClientImpl implements MirthClient {
 	private final LoginStatus loginStatus;
 	private ObjectXMLSerializer serializer = new ObjectXMLSerializer();
 
-	public MirthClientImpl(String server, int port, String userName, String password, String version)
-			throws ClientException {
+	public MirthClientImpl(String server, int port, String userName,
+			String password, String version) throws ClientException {
 		this.userName = userName;
 		this.password = password;
 		this.server = server;
 		this.port = port;
 		this.version = version;
 		this.mirthClient = new Client(getFullUrl(), 6000);
-		this.loginStatus = mirthClient.login(this.userName, this.password, this.version);
+		this.loginStatus = mirthClient.login(this.userName, this.password,
+				this.version);
 	}
 
 	private String getFullUrl() {
@@ -62,8 +63,9 @@ public class MirthClientImpl implements MirthClient {
 		LinkedList<String[]> serverLogReceived = new LinkedList<String[]>();
 		if (loginStatus.getStatus() == Status.SUCCESS) {
 			logger.debug("Login Success");
-			serverLogReceived = (LinkedList<String[]>) mirthClient.invokePluginMethod("Dashboard Connector Service",
-					"getConnectionInfoLogs", null);
+			serverLogReceived = (LinkedList<String[]>) mirthClient
+					.invokePluginMethod("Dashboard Connector Service",
+							"getConnectionInfoLogs", null);
 		}
 		return serverLogReceived;
 	}
@@ -109,32 +111,33 @@ public class MirthClientImpl implements MirthClient {
 				result.setResultDesc(MirthConnectResult.SUCCESSDESC);
 			} catch (ClientException e) {
 				result.setResultCode(MirthConnectResult.MIRTHCLIENTERROR);
-				result.setResultDesc(MirthConnectResult.MIRTHCLIENTDESC + " : " + e.getMessage().toString());
+				result.setResultDesc(MirthConnectResult.MIRTHCLIENTDESC + " : "
+						+ e.getMessage().toString());
 			}
 		} else {
 			result.setResultCode(MirthConnectResult.MIRTHCLIENTERROR);
-			result.setResultDesc(MirthConnectResult.MIRTHCLIENTDESC + " : " + "未成功登陆MIRTH");
+			result.setResultDesc(MirthConnectResult.MIRTHCLIENTDESC + " : "
+					+ "未成功登陆MIRTH");
 		}
 
 		return result;
 	}
 
-	public List<MessageObject> getMessageById(MessageObjectFilter messageObjectFilter) throws ClientException {
+	public List<MessageObject> getMessageById(
+			MessageObjectFilter messageObjectFilter) throws ClientException {
 		logger.debug("get message by message object uid ");
-		// messageObjectFilter.setCorrelationId("dfb82c1f-e720-4497-9c4e-53a43a2c14d8");
-		// messageObjectFilter.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");
-		NameValuePair[] params = { (new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
-				new NameValuePair("page", String.valueOf("0")), new NameValuePair("pageSize", String.valueOf("20")),
-				new NameValuePair("maxMessages", String.valueOf("200")), new NameValuePair("uid", ""),
-				(new NameValuePair("filter", serializer.toXML(messageObjectFilter))) };
+		NameValuePair[] params = {
+				(new NameValuePair("op",
+						Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
+				new NameValuePair("page", String.valueOf("0")),
+				new NameValuePair("pageSize", String.valueOf("20")),
+				new NameValuePair("maxMessages", String.valueOf("200")),
+				new NameValuePair("uid", ""),
+				(new NameValuePair("filter",
+						serializer.toXML(messageObjectFilter))) };
 		List<MessageObject> messageObjectList = (List<MessageObject>) serializer
-				.fromXML(mirthClient.getServerConnection().executePostMethod(Client.MESSAGE_SERVLET, params));
-		// logger.debug(messageObjectList.size());
-		// for (MessageObject messageObject : messageObjectList) {
-		// logger.debug(messageObject.getChannelId() + " [ " +
-		// messageObject.getCorrelationId() + " : "
-		// + messageObject.getId() + " ] ");
-		// }
+				.fromXML(mirthClient.getServerConnection().executePostMethod(
+						Client.MESSAGE_SERVLET, params));
 		return messageObjectList;
 	}
 }

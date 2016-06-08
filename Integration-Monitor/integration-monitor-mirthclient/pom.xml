@@ -119,6 +119,11 @@
 			<artifactId>commons-pool</artifactId>
 			<version>1.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 	<build>

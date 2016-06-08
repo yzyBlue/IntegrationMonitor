@@ -109,69 +109,76 @@
 		<if test="endDate != null and endDate != ''">
 			and EVENT_DATE_TIME <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
 		</if>
+		 order by SEQUENCE_ID desc
 	</select>
 	
 	<!-- 动态查询消息事件内容 -->
 	<select id="findByCondition" parameterType="java.util.Map" resultMap="messageEventMap">
 		SELECT 
-		<include refid="messageEventInfo"></include> 
+		 * 
 		FROM MSG_EVENT_LOG 
-		where 1=1
-		<if test="msgTypeId != null"> 
+		where 1=1 
+		<if test="transCode != null and transCode != ''"> 
+ 			and TRANS_CODE =#{transCode,jdbcType=VARCHAR}
+		</if>
+		<if test="msgTypeId != null and msgTypeId != ''"> 
  			and MSG_EVENT_CODE =#{msgTypeId,jdbcType=VARCHAR}
 		</if> 
-		<if test="msgSubType != null"> 
+		<if test="msgTypeDesc != null and msgTypeDesc != ''"> 
+ 			and MSG_EVENT_DESC =#{msgTypeDesc,jdbcType=VARCHAR}
+		</if> 
+		<if test="msgSubType != null and msgSubType != ''"> 
  			and MSG_SUB_TYPE =#{msgSubType,jdbcType=VARCHAR}
 		</if> 
-		<if test="msgSourceCode != null"> 
+		<if test="msgSourceCode != null and msgSourceCode != ''"> 
  			and MSG_SOURCE_CODE =#{msgSourceCode,jdbcType=VARCHAR}
 		</if> 
-		<if test="channelCode != null"> 
+		<if test="channelCode != null and channelCode != ''"> 
  			and CHANNEL_CODE =#{channelCode,jdbcType=VARCHAR}
 		</if> 
-		<if test="sourceMsgUid != null"> 
+		<if test="sourceMsgUid != null and sourceMsgUid != ''"> 
  			and SOURCE_MSG_UID =#{sourceMsgUid,jdbcType=VARCHAR}
 		</if> 
-		<if test="eventDateTime != null"> 
+		<if test="eventDateTime != null and eventDateTime != ''"> 
  			and EVENT_DATE_TIME =#{eventDateTime,jdbcType=TIMESTAMP}
 		</if> 
-		<if test="patientId != null"> 
+		<if test="patientId != null and patientId != ''"> 
  			and PATIENT_ID =#{patientId,jdbcType=VARCHAR}
 		</if> 
-		<if test="visitId != null"> 
+		<if test="visitId != null and visitId != ''"> 
  			and VISIT_ID =#{visitId,jdbcType=VARCHAR}
 		</if> 
-		<if test="messageIndex != null"> 
+		<if test="messageIndex != null and messageIndex != ''"> 
  			and MSG_INDEX =#{messageIndex,jdbcType=VARCHAR}
 		</if> 
-		<if test="messageSubIndex != null"> 
+		<if test="messageSubIndex != null  and messageSubIndex != ''"> 
  			and MSG_SUB_INDEX =#{messageSubIndex,jdbcType=VARCHAR}
 		</if> 
-		<if test="transactionStatus != null"> 
+		<if test="transactionStatus != null and transactionStatus != ''"> 
  			and TRANSACTION_STATUS =#{transactionStatus,jdbcType=VARCHAR}
 		</if> 
-		<if test="handleResultStatus != null"> 
+		<if test="handleResultStatus != null and handleResultStatus != ''"> 
  			and HANDLE_RESULT_STATUS =#{handleResultStatus,jdbcType=VARCHAR}
 		</if> 
-		<if test="eventHandleTime != null"> 
+		<if test="eventHandleTime != null and eventHandleTime != ''" > 
  			and EVENT_HANDLE_TIME =#{eventHandleTime,jdbcType=TIMESTAMP}
 		</if> 
-		<if test="handleResultDesc != null"> 
+		<if test="handleResultDesc != null and handleResultDesc != ''"> 
  			and HANDLE_RESULT_DESC =#{handleResultDesc,jdbcType=VARCHAR}
 		</if> 
-		<if test="rawData != null"> 
+		<if test="rawData != null and rawData != ''"> 
  			and MSG_RAW_DATA =#{rawData,jdbcType=VARCHAR}
 		</if> 
-		<if test="rawDataProtocol != null"> 
+		<if test="rawDataProtocol != null and rawDataProtocol != ''"> 
  			and RAW_DATA_PROTOCOL =#{rawDataProtocol,jdbcType=VARCHAR}
 		</if> 
-		<if test="isEncrypted != null"> 
+		<if test="isEncrypted != null and isEncrypted != ''"> 
  			and IS_ENCRYPTED =#{isEncrypted,jdbcType=VARCHAR}
 		</if>
-		<if test="startDate != null">
+		<if test="startDate != null and startDate != ''">
 			and EVENT_DATE_TIME <![CDATA[ >= ]]> CONVERT(DATETIME,#{startDate,jdbcType=TIMESTAMP},120)
 		</if>
-		<if test="endDate != null">
+		<if test="endDate != null and endDate != ''">
 			and EVENT_DATE_TIME <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
 		</if>
 	</select>
@@ -185,7 +192,9 @@
 		MSG_EVENT_LOG (
 		<include refid="messageEventInfo"></include>
 		 ) VALUES ( 
+		#{transCode,jdbcType=VARCHAR},
 		#{msgTypeId,jdbcType=VARCHAR},
+		#{msgTypeDesc,jdbcType=VARCHAR},
 		#{msgSubType,jdbcType=VARCHAR},
 		#{msgSourceCode,jdbcType=VARCHAR},
 		#{channelCode,jdbcType=VARCHAR},
@@ -209,7 +218,9 @@
 		UPDATE 
 		MSG_EVENT_LOG 
 		SET 
+		TRANS_CODE =#{transCode,jdbcType=VARCHAR},
 		MSG_EVENT_CODE=#{msgTypeId,jdbcType=VARCHAR},
+		MSG_EVENT_DESC =#{msgTypeDesc,jdbcType=VARCHAR},
 		MSG_SUB_TYPE=#{msgSubType,jdbcType=VARCHAR},
 		MSG_SOURCE_CODE=#{msgSourceCode,jdbcType=VARCHAR},
 		CHANNEL_CODE=#{channelCode,jdbcType=VARCHAR},

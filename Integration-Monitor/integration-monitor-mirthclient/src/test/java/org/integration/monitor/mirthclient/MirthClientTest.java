@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.alibaba.fastjson.JSON;
 import com.mirth.connect.client.core.Client;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.client.core.Operations;
@@ -194,19 +195,16 @@ public class MirthClientTest {
 
 	}
 
-	// @Test
+	@Test
 	public void getMessage() throws ClientException {
 		MessageObjectFilter messageObjectFilter = new MessageObjectFilter();
-		messageObjectFilter.setCorrelationId("dfb82c1f-e720-4497-9c4e-53a43a2c14d8");
+		messageObjectFilter.setCorrelationId("ca6c348f-dac1-45ad-9bf0-519bba0f942a");
 		messageObjectFilter.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");
 
-		NameValuePair[] params = {
-				(tempEnabled ? new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE.getName())
-						: new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
+		NameValuePair[] params = { (new NameValuePair("op", Operations.MESSAGE_GET_BY_PAGE_LIMIT.getName())),
 				new NameValuePair("page", String.valueOf("0")), new NameValuePair("pageSize", String.valueOf("20")),
 				new NameValuePair("maxMessages", String.valueOf("200")), new NameValuePair("uid", ""),
-				(tempEnabled ? new NameValuePair("filter", "")
-						: new NameValuePair("filter", serializer.toXML(messageObjectFilter))) };
+				(new NameValuePair("filter", serializer.toXML(messageObjectFilter))) };
 
 		try {
 			List<MessageObject> messageObjectList = (List<MessageObject>) serializer
@@ -215,13 +213,14 @@ public class MirthClientTest {
 			for (MessageObject messageObject : messageObjectList) {
 				logger.debug(messageObject.getChannelId() + " [ " + messageObject.getCorrelationId() + " : "
 						+ messageObject.getId() + " ] ");
+				logger.info(JSON.toJSONString(messageObject));
 			}
 		} catch (ClientException e) {
 			logger.debug(e.getCause().getMessage());
 		}
 	}
 
-	@Test
+	//@Test
 	public void processMessage() throws ClientException {
 		MessageObject messageObject = new MessageObject();
 		messageObject.setChannelId("e36244f2-b005-42a0-8ecc-dedc3ddc6022");

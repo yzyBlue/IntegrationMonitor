@@ -411,22 +411,165 @@ var MyTimeLine=React.createClass({
 });
 
 
+var Alert=React.createClass({
+	displayName: 'Alert',
+	reProcessMsg:function(){
+		$.notify({
+			title: '<strong>Heads up!</strong>',
+			message: 'You can use any of bootstraps other alert styles as well by default.'
+		},{
+			type: 'success',
+			allow_dismiss: false,
+			timer: 1000,
+			delay: 5000,
+			placement: {
+				from: "top",
+				align: "right"
+			},
+		});
+	},
+	render:function(){
+		return (
+			<form onSubmit={this.reProcessMsg}>
+				<button className="btn-info btn-back" type="submit">重试</button>
+			</form>
+		);
+	}
+});
 
+var MirthMsgTableBody=React.createClass({
+	getInitialState: function() {
+	    return {data:[]};
+	},
+	loadMessageFromServer:function() {
+		var paramMap= this.props.paramMap;
+		paramMap=JSON.stringify(paramMap);
+		//alert(JSON.stringify(paramMap));
+		var url="/integration-monitor/message-event/mirthmessage";
+	    $.ajax({
+		      url: url,
+		      method:'POST',
+		      data:paramMap,
+		      dataType: 'json',
+		      contentType:'application/json; charset=UTF-8',
+		      cache: false,
+		      async:false,
+		      success: function(data) {
+		    	//console.log(JSON.stringify(data.messageObjList[0]));
+//		    	  $.notify({
+//		  			title: '<strong>Heads up!</strong>',
+//		  			message: JSON.stringify(data.messageObjList[0])
+//		  		},{
+//		  			type: 'success',
+//		  			allow_dismiss: false,
+//		  			timer: 1000,
+//		  			delay: 5000,
+//		  			placement: {
+//		  				from: "top",
+//		  				align: "right"
+//		  			},
+//		  		});
+		    	this.setState({data: data.messageObjList});
+		      }.bind(this),
+		      error: function(xhr, status, err) {
+		        console.error(this.props.url, status, err.toString());
+		      }.bind(this)
+		    });
+	},
+	componentDidMount: function() {
+		this.loadMessageFromServer();
+	    //setInterval(this.loadMessageFromServer, 1000);
+	},
+//	componentWillReceiveProps (nextProps) {
+//		this.loadMessageFromServer();
+//	},
+	componentWillUnmount: function () {
+		this.isMounted = false;
+	},
+	renderBodyList:function(){
+		var datas=this.state.data;
+		//alert(JSON.stringify(data));
+		return this.state.data.map(function(messageObj,i){
+			console.log(JSON.stringify(messageObj));
+			<MsgTableBodyItem data={messageObj} key={i}/>
+		});
+	},
+	render: function(){
+		return (
+				<table className="table table-striped ">
+					<colgroup>
+						<col style={{'width': 'auto'}}/>
+						<col style={{'width': 'auto'}}/>		
+						<col style={{'width': 'auto'}}/>
+						<col style={{'width': 'auto'}}/>
+					</colgroup>
+					<thead>
+						<tr>
+							<th className="sortedth"><span className="sortedtext">序号</span><span
+								className="sorted-arrow "></span></th>
+							<th className="sortedth"><span className="sortedtext">名称</span><span
+								className="sorted-arrow"></span></th>
+							<th className="sortedth"><span className="sortedtext">处理时间</span><span
+								className="sorted-arrow "></span></th>
+							<th className="sortedth"><span className="sortedtext">处理状态</span><span
+								className="sorted-arrow "></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Source</td>
+							<td>2016-05-16 04:37:27</td>
+							<td>
+								<span className="label text-warning">SENT</span>
+							</td>
+						</tr>
+					</tbody>
+					{this.renderBodyList()}
+				</table>
+		);
+	}
+});
 
+var MsgTableBodyItem=React.createClass({
+	render:function(){
+	<tbody>
+		<tr>
+			<td>id</td>
+			<td>{this.props.data.connectorName}</td>
+			<td>{this.props.data.dateCreated}</td>
+			<td>
+				<span className="label text-warning">{this.props.data.status}</span>
+			</td>
+		</tr>
+	</tbody>
+	}
+});
 
-
-
-
+//var WithLink = React.createClass({
+//	  mixins: [LinkedStateMixin],
+//	  getInitialState: function() {
+//	    return {message: 'Hello!'};
+//	  },
+//	  render: function() {
+//	    return (
+//	    		<div>
+//		    		<input type="text" valueLink={this.linkState('message')} />
+//		    		<a>{this.state.message}</a>
+//	    		</div>
+//	    		);
+//	  }
+//});
 
 
 
 var TestView=React.createClass({
+//	var paramMap={correlationId:"f8bba958-c234-475c-8df6-97d253a5dfe9",channelId:"e36244f2-b005-42a0-8ecc-dedc3ddc6022"};
 	render : function(){
 		return (
 			<div>
-				<Header/>
-				<Example />
-				<Footer/>
+				<Alert />
+				<MirthMsgTableBody paramMap={{correlationId:"f8bba958-c234-475c-8df6-97d253a5dfe9",channelId:"e36244f2-b005-42a0-8ecc-dedc3ddc6022"}}/>
 			</div>
 		);
 	}

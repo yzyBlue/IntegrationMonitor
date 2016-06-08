@@ -76,6 +76,9 @@ public class MessageEventServiceImpl implements MessageEventService {
 	public List<MessageEvent> getMessageByCondition(Map paramMap) throws MessageEventServiceException {
 		List<MessageEvent> messageList = new ArrayList<MessageEvent>();
 		messageList = messageEventDao.getMessageByCondition(paramMap);
+		// if (messageList != null && messageList.size() > 1000) {
+		// messageList = messageList.subList(0, 1000);
+		// }
 		return messageList;
 	}
 

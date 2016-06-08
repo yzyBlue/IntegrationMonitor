@@ -46,7 +46,7 @@ table {
 	border-spacing: 0
 }
 caption, th {
-	text-align: left;
+	text-align: center;
 	font-weight: 400
 }
 sub, sup {
@@ -3333,6 +3333,7 @@ code.code-copy .copied {
 .form-list li, .form-list li h5, .table caption {
 	margin-bottom: 10px
 }
+
 input[type=checkbox] {
 	width: 16px;
 	height: 16px;
@@ -3384,7 +3385,8 @@ input[type=checkbox]:checked:after {
 	-webkit-transition: background-color .2s;
 	-moz-transition: background-color .2s;
 	-o-transition: background-color .2s;
-	transition: background-color .2s
+	transition: background-color .2s;
+	text-align: center
 }
 .table.table-striped tr:nth-child(odd)>td {
 	background-color: rgba(51, 51, 51, .25)
@@ -3436,8 +3438,8 @@ input[type=checkbox]:checked:after {
 }
 .sortedth .sorted-arrow {
 	display: none;
-/* 	background: url(../../images/sorted-arrow.png) no-repeat; */
-	background: url(https://static.oneapm.com/assets/ai/images/sorted-arrow.png) no-repeat;
+	background: url(../../images/sorted-arrow.png) no-repeat;
+/* 	background: url(https://static.oneapm.com/assets/ai/images/sorted-arrow.png) no-repeat; */
 	background-size: 13px;
 	height: 13px;
 	width: 16px

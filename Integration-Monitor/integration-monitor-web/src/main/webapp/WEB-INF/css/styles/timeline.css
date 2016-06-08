@@ -109,9 +109,9 @@ fieldset[disabled] .btn-info.active {
     top: 10px;
     display: block;
     float: left;
-    width: inherit;
+    width: 80px;
     margin-left: -8em;
-    text-align: right;
+    text-align: center;
 }
 .tl-content {
     position: relative;

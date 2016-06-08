@@ -79,7 +79,7 @@ var MessageContentWrapper=React.createClass({
 							<div className="box">
 								<div className="widget-normal">
 									<div className="widget-content" style={{display: 'block'}}>
-										<MessageContent url="/integration-monitor/message/query"/>
+										<MessageContent url="/integration-monitor/message-event/query"/>
 									</div>
 								</div>
 							</div>
@@ -115,28 +115,28 @@ var MessageContent=React.createClass({
 	},
 	componentDidMount: function() {
 		this.loadDataFromserver();
-	    //setInterval(this.loadDataFromserver, this.props.pollInterval);
+	    // setInterval(this.loadDataFromserver, this.props.pollInterval);
 	},
-//	componentWillReceiveProps: function(nextProps) {
-//		this.setState({
-//		    data: nextProps.data > this.props.data
-//		});
-//	};
-//	componentWillUpdate(nextProps, nextState){
+// componentWillReceiveProps: function(nextProps) {
+// this.setState({
+// data: nextProps.data > this.props.data
+// });
+// };
+// componentWillUpdate(nextProps, nextState){
 //		
-//	};
-//	shouldComponentUpdate: function(nextProps, nextState) {
-//		return nextProps.id !== this.props.id;
-//	},
+// };
+// shouldComponentUpdate: function(nextProps, nextState) {
+// return nextProps.id !== this.props.id;
+// },
 	handleMsgQuery: function(paramMap) {
 		console.log(this.props.url);
-		//alert(this.props.url+" : "+paramMap.patientId);
+		// alert(this.props.url+" : "+paramMap.patientId);
 		this.setState({data: []});
 		var paramMap=JSON.stringify(paramMap); 
-		//alert(paramMap);
-//		var datas = this.state.data;
-//		var newDatas = datas.concat([data]);
-//		this.setState({data: newDatas});
+		// alert(paramMap);
+// var datas = this.state.data;
+// var newDatas = datas.concat([data]);
+// this.setState({data: newDatas});
 	    $.ajax({
 	      url: this.props.url,
 	      method:'POST',
@@ -146,7 +146,7 @@ var MessageContent=React.createClass({
 	      async:true,
 	      cache:false,
 	      success: function(response) {
-	    	//console.log(response);
+	    	// console.log(response);
 	        this.setState({data: response});
 	      }.bind(this),
 	      error: function(xhr, status, err) {
@@ -160,9 +160,9 @@ var MessageContent=React.createClass({
 			<div>
 				<h2>检索条件</h2>
 				<InputTextList onMsgQuerySubmit={this.handleMsgQuery}/>
-				<MessageTable data={this.state.data} pageIndex={this.state.pageIndex} url="/integration-monitor/message/process"/>
+				<MessageTable url="/integration-monitor/message-event/process" data={this.state.data} pageIndex={this.state.pageIndex} />
 				<MyPagination data={this.state.data} onPageIndexChange={this.onPageIndexChange}/>
-				<Modal data={this.state.data} />
+				
 			</div>
 		);
 	}
@@ -275,7 +275,7 @@ var InputTextList = React.createClass({
 		var endDate = this.state.endDate.trim();
 		var transCode=this.state.transCode.trim();
 		this.props.onMsgQuerySubmit({"patientId": patientId, "visitId": visitId,"messageIndex": messageIndex,"startDate": startDate, "endDate": endDate,"transCode":transCode});
-		//this.setState({patientId: '', visitId: '', messageIndex: ''});
+		// this.setState({patientId: '', visitId: '', messageIndex: ''});
 	},
 	render: function(){
 		return(
@@ -324,9 +324,9 @@ var MessageTable=React.createClass({
 		var start=10*index;
 		var end=10*(index+1);
 		dataList=this.props.data.slice(start,end);
-		return dataList.map(function(message){
+		return dataList.map(function(message,i){
 			return (
-				<TableBody url={url} message={message} key={message.sequenceId} />
+				<TableBody url={url} message={message} key={message.sequenceId} id={i+""}/>
 			);
 	 });
 	},
@@ -346,11 +346,14 @@ var MessageTable=React.createClass({
 							<col style={{'width': 'auto'}}/>
 							<col style={{'width': 'auto'}}/>
 							<col style={{'width': 'auto'}}/>
+							<col style={{'width': 'auto'}}/>
 						</colgroup>
 						<thead>
 							<tr>
-								<th className="sortedth"><span className="sortedtext"></span><span
-									className="sorted-arrow "></span></th>
+								<th className="sortedth">
+									<span className="sortedtext"></span>
+									<span className="sorted-arrow "></span>
+								</th>
 								<th className="sortedth"><span className="sortedtext">编号</span><span
 									className="sorted-arrow desc "></span></th>
 								<th className="sortedth"><span className="sortedtext">消息类型</span><span
@@ -366,6 +369,8 @@ var MessageTable=React.createClass({
 								<th className="sortedth"><span className="sortedtext">就诊号</span><span
 									className="sorted-arrow "></span></th>
 								<th className="sortedth"><span className="sortedtext">处理状态</span><span
+									className="sorted-arrow "></span></th>
+								<th className="sortedth"><span className="sortedtext">处理过程</span><span
 									className="sorted-arrow "></span></th>
 								<th className="sortedth"><span className="sortedtext">流程状态</span><span
 									className="sorted-arrow "></span></th>
@@ -387,7 +392,7 @@ var TableBody=React.createClass({
 		var message=this.props.message;
 		var paramMap={channelId:message.channelCode,rawData:message.rawData};
 		var paramMap=JSON.stringify(paramMap); 
-		alert(paramMap);
+		// alert(paramMap);
 		 $.ajax({
 		      url: this.props.url,
 		      method:'POST',
@@ -396,34 +401,88 @@ var TableBody=React.createClass({
 		      contentType:'application/json; charset=UTF-8',
 		      cache: false,
 		      success: function(data) {
-		    	  alert(JSON.stringify(data));
+		    	  // alert(JSON.stringify(data));
+		    	  $.notify({
+		  			title: '<strong>消息重试结果</strong><br/>',
+		  			message: '结果代码：'+data.resultCode+'<br/>结果描述：'+data.resultDesc
+		  		},{
+		  			type: 'success',
+		  			allow_dismiss: true,
+		  			timer: 1000,
+		  			delay: 5000,
+		  			placement: {
+		  				from: "top",
+		  				align: "right"
+		  			},
+		  		});
 		      }.bind(this),
 		      error: function(xhr, status, err) {
 		        console.error(this.props.url, status, err.toString());
+		        $.notify({
+		  			title: '<strong>消息重试结果!</strong>',
+		  			message: err.toString()
+		  		},{
+		  			type: 'danger',
+		  			allow_dismiss: true,
+		  			timer: 1000,
+		  			delay: 5000,
+		  			placement: {
+		  				from: "top",
+		  				align: "right"
+		  			},
+		  		});
 		      }.bind(this)
 		});
 	},
 	render:function(){
+		var modalId="#timeline"+this.props.message.sequenceId;
+		var tableModal="#table"+this.props.message.sequenceId;
+		var transCode=this.props.message.transCode;
+		var transName="";
+		if(transCode=="PAM"){
+			transName="病人管理";
+		}else if(transCode=="EXAM"){
+			transName="检查";
+		}else if(transCode=="LABTEST"){
+			transName="检验";
+		}else if(transCode=="ORDER"){
+			transName="医嘱";
+		}else if(transCode=="SURGERY"){
+			transName="手术";
+		}else if(transCode=="DRUG"){
+			transName="摆药";
+		}else if(transCode=="FARE"){
+			transName="费用";
+		}
+		// alert("tbody: "+JSON.stringify(this.props.message));
 		return (
 			<tbody >
 				<tr>
 					<td><i className="iconfont  state-downtime"></i></td>
 					<td>{this.props.message.sequenceId}</td>
 					<td>{this.props.message.msgTypeDesc}</td>
-					<td>{this.props.message.transCode}</td>
+					<td>{transName}</td>
 					<td>{this.props.message.eventDateTime}</td>
 					<td>{this.props.message.messageIndex}</td>
 					<td>{this.props.message.patientId}</td>
 					<td>{this.props.message.visitId}</td>
-					<td>{this.props.message.handleResultStatus}</td>
 					<td>
-						<a className="btn-green" data-toggle="modal" data-target="#myModal">查看状态</a>
+						<span className="label text-warning">{this.props.message.handleResultStatus}</span>
+					</td>
+					<td>
+						<a className="btn-green" data-toggle="modal" data-target={tableModal}>查看处理过程</a>
+						<Modal message={this.props.message} title="通道处理过程详情" modalKey={this.props.id} modal="table"/>
+					</td>
+					<td>
+						<a className="btn-green" data-toggle="modal" data-target={modalId}>查看状态</a>
+						<Modal message={this.props.message} title="事务流程状态" modalKey={this.props.id} modal="timeline"/>
 					</td>
 					<td>
 						<input type="hidden" name="paramMap" value="paramMap"/> 
 						<form onSubmit={this.reProcessMsg}>
 							<button className="btn-info btn-back" type="submit">重试</button>
 						</form>
+						
 					</td>
 				</tr>
 			</tbody>	
@@ -438,26 +497,30 @@ var Modal=React.createClass({
 	getInitialState: function() {
 	    return {data:[]};
 	},
-	componentDidMount: function() {
-		this.setState({data:this.props.data});
+	renderModalBody:function(){
+		var modal=this.props.modal;
+		var paramMap={correlationId:this.props.message.sourceMsgUid,channelId:this.props.message.channelCode};
+		if(modal=='timeline'){
+			return (<MyTimeLine message={this.props.message}/>);
+		}else if(modal=='table'){
+			return (<MirthMsgTableBody paramMap={paramMap} eventType={this.props.message.msgTypeDesc}/>);
+		}
 	},
 	render:function(){
-		var dataList=this.state.data;
-		if(dataList.length>10){
-			dataList=dataList.slice(0,10);
-		}
-		
+		var modalId=this.props.modal+this.props.message.sequenceId;
+		// alert("modal: "+JSON.stringify(this.props.message));
+		var myModalLabel=this.props.modal+"Label"+this.props.modalKey;
 		return (
-			<div className="modal fade" id="myModal" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel" aria-hidden="true">
+			<div className="modal fade" id={modalId}  tabindex="-1" role="dialog"
+					aria-labelledby={myModalLabel} aria-hidden="true">
 					<div className="modal-dialog">
 						<div className="modal-content">
 							<div className="modal-header">
 								<button type="button" className="close" data-dismiss="modal"aria-hidden="true">&times;</button>
-								<h4 className="modal-title" id="myModalLabel">事务状态流程</h4>
+								<h4 className="modal-title" id={myModalLabel}>{this.props.title}</h4>
 							</div>
 							<div className="modal-body">
-								<MyTimeLine data={this.state.data}/>
+								{this.renderModalBody()}
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-default" data-dismiss="modal">关闭</button>
@@ -471,26 +534,219 @@ var Modal=React.createClass({
 });
 
 
-var MyTimeLine=React.createClass({
+var TimeLineItem=React.createClass({
+	formatXml: function(xml) {
+		console.log(xml);
+	        var formatted = '';
+	        var reg = /(>)(<)(\/*)/g;
+	        xml = xml.replace(reg, '$1\r\n$2$3');
+	        var pad = 0;
+	        jQuery.each(xml.split('\r\n'), function(index, node) {
+	            var indent = 0;
+	            if (node.match(/.+<\/\w[^>]*>$/)) {
+	                indent = 0;
+	            } else if (node.match(/^<\/\w/)) {
+	                if (pad != 0) {
+	                    pad -= 1;
+	                }
+	            } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
+	                indent = 1;
+	            } else {
+	                indent = 0;
+	            }
+
+	            var padding = '';
+	            for (var i = 0; i < pad; i++) {
+	                padding += '  ';
+	            }
+
+	            formatted += padding + node + '\r\n';
+	            pad += indent;
+	        });
+	        formatted = formatted.replace(/\n$/, '');
+	        console.log(formatted);
+	        return formatted;
+	 },
 	render:function(){
-		var dataList=this.props.data;
-		var timeLineList=dataList.map(function(message){
-			<li className="tl-item" key={message.sequenceId}>
-	            <div className="tl-wrap">
-	                <span className="tl-date">{message.eventDateTime}</span>
-	                <div className="tl-content panel padder b-a">
-	                
+		// var datetime=this.props.data.eventDateTime;
+		// datetime=datetime.replace(' ','\n');
+		// alert(datetime);
+		var tlWrapClass="tl-wrap b-success";
+		var tlContentClass="tl-content panel bg-success padder";
+		if(this.props.data.sequenceId==this.props.message.sequenceId){
+			tlWrapClass="tl-wrap b-primary";
+			tlContentClass="tl-content panel bg-primary padder";
+		}else if(this.props.data.handleResultStatus=='ERROR'){
+			tlWrapClass="tl-wrap b-danger";
+			tlContentClass="tl-content panel bg-danger padder";
+		}
+		var paramMap={correlationId:this.props.data.sourceMsgUid,channelId:this.props.data.channelCode};
+		return (
+			<li className="tl-item">
+	            <div className={tlWrapClass}>
+	                <span className="tl-date">{this.props.data.eventDateTime}</span>
+	                <div className={tlContentClass}>
 	                    <span className="arrow left pull-up"></span>
-	                    <div> {message.msgTypeDesc}</div>
+	                    <div>{this.props.data.msgTypeDesc}</div>
 	                    <div className="panel-body pull-in b-t b-light">
+	                    	<div className="clear">
+	                        	{this.props.data.handleResultStatus}
+	                        </div>
+	                        <br/>
 	                        <div className="clear">
-	                        {message.rawData}
+	                        {this.formatXml(this.props.data.rawData)}
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </li>
+		);
+	}
+});
+
+var MirthMsgTableBody=React.createClass({
+	getInitialState: function() {
+		// console.log("getInitialState");
+	    return {data:[]};
+	},
+	loadMessageFromServer:function() {
+		// console.log("loadMessageFromServer");
+		var paramMap= this.props.paramMap;
+		paramMap=JSON.stringify(paramMap);
+		// alert(JSON.stringify(paramMap));
+		var url="/integration-monitor/message-event/mirthmessage";
+	    $.ajax({
+		      url: url,
+		      method:'POST',
+		      data:paramMap,
+		      dataType: 'json',
+		      contentType:'application/json; charset=UTF-8',
+		      cache: false,
+		      success: function(data) {
+		    	  // console.log("loadMessageFromServer : $.ajax");
+		    	// console.log(JSON.stringify(data.messageObjList));
+		    	  console.log(this.isMounted);
+		    	  if (this.isMounted) {
+		    		  this.setState({data: data.messageObjList});
+		    	  }
+		      }.bind(this),
+		      error: function(xhr, status, err) {
+		        console.error(this.props.url, status, err.toString());
+		      }.bind(this)
+		    });
+	},
+	componentDidMount: function() {
+		// console.log("componentDidMount");
+		this.loadMessageFromServer();
+	},
+// componentWillReceiveProps (nextProps) {
+// this.loadMessageFromServer();
+//	
+// },
+	componentWillUnmount: function () {
+		// console.log("componentWillUnmount");
+		this.isMounted = false;
+	},
+	renderBodyList:function(){
+		// console.log("renderBodyList");
+		var datas=this.state.data.reverse();
+		console.log(datas.length);
+		return this.state.data.map(function(messageObj,i){
+		// console.log(messageObj.connectorName);
+		// console.log("renderBodyList : MsgTableBodyItem"+i);
+			return (<MsgTableBodyItem data={messageObj} key={'MsgBody'+(i+1)} id={''+(i+1)}/>);
 		});
+	},
+	render: function(){
+		// console.log("render");
+		return (
+				<table className="table-msg table-msg-striped">
+					<caption>{this.props.eventType}</caption>
+					<thead>
+						<tr>
+							<th className=""><span className="">序号</span><span
+								className=""></span></th>
+							<th className=""><span className="">名称</span><span
+								className=""></span></th>
+							<th className=""><span className="">处理时间</span><span
+								className=""></span></th>
+							<th className=""><span className="">Protocol</span><span
+								className=""></span></th>
+							<th className=""><span className="">处理状态</span><span
+								className=""></span></th>
+						</tr>
+					</thead>
+					{this.renderBodyList()}
+				</table>
+		);
+	}
+});
+
+		
+var MsgTableBodyItem=React.createClass({
+	showDetail:function(){
+		var error=this.props.data.status=='ERROR'?this.props.data.errors:'成功';
+		
+	},
+	render:function(){
+		// console.log("MsgTableBodyItem");
+		var error=this.props.data.status=='ERROR'?this.props.data.errors:'';
+		return (
+			<tbody>
+				<tr>
+					<td>{this.props.id}</td>
+					<td>{this.props.data.connectorName}</td>
+					<td>{this.props.data.dateCreated}</td>
+					<td>{this.props.data.encodedDataProtocol}</td>
+					<td>
+						<button type="button" className="btn btn-white text-danger" data-toggle="tooltip" data-placement="right" title={error} onClick={this.showDetail}>
+							{this.props.data.status}
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		);
+	}
+});
+
+var MyTimeLine=React.createClass({
+	getInitialState: function() {
+	    return {data:[]};
+	},
+	getMsgState:function(){
+		var message=this.props.message;
+		// this.setState({message:message});
+		// alert("this.props.message : "+JSON.stringify(message));
+		var url="/integration-monitor/message-event/query";
+		var paramMap={visitId:message.visitId,transCode:message.transCode};
+		paramMap=JSON.stringify(paramMap); 
+		// alert(paramMap);
+		 $.ajax({
+		      url: url,
+		      method:'POST',
+		      data:paramMap,
+		      dataType: 'json',
+		      contentType:'application/json; charset=UTF-8',
+		      cache: false,
+		      success: function(data) {
+		    	  // alert(JSON.stringify(data));
+		    	  this.setState({data:data});
+		      }.bind(this),
+		      error: function(xhr, status, err) {
+		        console.error(this.props.url, status, err.toString());
+		      }.bind(this)
+		});
+	},
+	componentDidMount: function() {
+		this.getMsgState();
+	},
+	renderTimeList:function(){
+		var message=this.props.message;
+		return this.state.data.map(function(data,i){
+			return (<TimeLineItem data={data} key={data.sequenceId} message={message}/>);
+		});
+	},
+	render:function(){
 		return (
 			<div className="col">
 		        <div className="wrapper">
@@ -498,41 +754,8 @@ var MyTimeLine=React.createClass({
 		                <li className="tl-header">
 		                    <div className="btn btn-info btn-default btn-rounded">Now</div>
 		                </li>
-		               {timeLineList}
-		                <li className="tl-header">
-		                    <div className="btn btn-sm btn-default btn-rounded">2014</div>
-		                </li>
-		                <li className="tl-item">
-		                    <div className="tl-wrap b-success">
-		                        <span className="tl-date">2013-10-08</span>
-		                        <div className="tl-content panel bg-success padder">
-		                            <span className="arrow left pull-up hidden-left"></span>
-		                            <div className="text-lt">病人入院</div>
-		                            <div className="panel-body pull-in b-t b-light">
-		                                <div className="clear">
-		                                    MSH|^~\&amp;|Shine||PACS||||ADT^A01|16847330|P|2.4|||NE|AL| EVN|A01|20150609140610| PID|1||M000394849|00991720|周俩呼^ZEH||19991229|U|||^^^^||^^^^^^^^15952234778|^^^^^^^^13852155574|||| PV1|1|I|呼吸科^呼吸科A护理站^||||^|^|||||||||^||1519541|||||||||||||||||||||||||20150429143009| IN1|||1|普通患者 |
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </li>
-		                <li className="tl-header">
-		                    <div className="btn btn-icon btn-rounded btn-default"><i className="fa fa-twitter"></i></div>
-		                </li>
-		                <li className="tl-item tl-left">
-		                    <div className="tl-wrap b-primary">
-		                        <span className="tl-date">2013-05-07</span>
-		                        <div className="tl-content panel bg-primary padder">
-		                            <span className="arrow left pull-up hidden-left"></span>
-		                            <div className="text-lt">病人挂号</div>
-		                            <div className="panel-body pull-in b-t b-light">
-		                                <div className="clear">
-		                                    MSH|^~\&amp;|Shine||PACS||||ADT^A04|16847330|P|2.4|||NE|AL| EVN|A01|20150609140610| PID|1||M000394849|00991720|周俩呼^ZEH||19991229|U|||^^^^||^^^^^^^^15952234778|^^^^^^^^13852155574|||| PV1|1|I|呼吸科^呼吸科A护理站^||||^|^|||||||||^||1519541|||||||||||||||||||||||||20150429143009| IN1|||1|普通患者 |
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </li>
+		               {this.renderTimeList()}
+		               
 		                <li className="tl-header">
 		                    <div className="btn btn-sm btn-default btn-rounded">更多</div>
 		                </li>
@@ -571,10 +794,11 @@ var Pager = React.createClass({
 			prevText:'Prev',
 			nextText:'Next',
 			lastText:'Last',
-			showLinkNum:10 ,//如果设置小于0的数字，那么则不显示数字标签
-			alwaysShow:true,//当总页数只有一页时是否显示
-			goWidth:50,//跳转输入框的宽度
-			recordTextFormat: '{0}/{1}' //{0}对应当前页 {1}对应总页数 {2}对应总记录数 如果不希望显示此部分内容，将此部分赋空值
+			showLinkNum:10 ,// 如果设置小于0的数字，那么则不显示数字标签
+			alwaysShow:true,// 当总页数只有一页时是否显示
+			goWidth:50,// 跳转输入框的宽度
+			recordTextFormat: '{0}/{1}' // {0}对应当前页 {1}对应总页数 {2}对应总记录数
+										// 如果不希望显示此部分内容，将此部分赋空值
 		};
 	},
 	callBack:function(index){
@@ -627,7 +851,7 @@ var Pager = React.createClass({
 			})
 		);
 		if(this.props.showLinkNum > 0){
-			//PageIndex从0开始计算
+			// PageIndex从0开始计算
 			var startIndex = ~~(this.props.pageIndex / this.props.showLinkNum) * this.props.showLinkNum;
 			var endIndex = Math.min(startIndex + this.props.showLinkNum,totalPages);
 			for(var i=startIndex;i<endIndex;i++){
@@ -658,7 +882,7 @@ var Pager = React.createClass({
 			})
 		);
 		
-		if(totalPages>this.props.showLinkNum){//显示快速跳转输入框
+		if(totalPages>this.props.showLinkNum){// 显示快速跳转输入框
 			var style={display:'inline-block',float:'left'};
 			arr.push(
 				<li key="G">
@@ -671,7 +895,7 @@ var Pager = React.createClass({
 				</li>
 			);
 		}
-		if(this.props.recordTextFormat.length>0){//显示文本
+		if(this.props.recordTextFormat.length>0){// 显示文本
 			arr.push(
 				<li key="T" style={{marginLeft:5}}>
 					<span>{this.props.recordTextFormat.replace(/\{0\}/g, this.props.pageIndex + 1)
@@ -711,7 +935,7 @@ var MyPagination=React.createClass({
 	            nextText:"下一页",  
 	            lastText:"尾页",  
 	            recordTextFormat: "{0}/{1}页 共{2}条记录",  
-	            //showLinkNum:2,  
+	            // showLinkNum:2,
 	            callBack:this.pageIndexChanged  
 	        };  
 
