@@ -23,7 +23,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		String httpSessionId = request.getSession().getId();
 		String userName = ((UserDetails) authentication.getPrincipal()).getUsername();
 		this.logger.debug("User {} with session {} authenticates." + userName + httpSessionId);
-		response.sendRedirect("/integration-monitor/message");
+		response.sendRedirect("/integration-monitor/index");
 
 	}
 

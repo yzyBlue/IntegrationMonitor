@@ -27,27 +27,40 @@
 <!-- 		</property> -->
 <!-- 		<property name="ignoreUnresolvablePlaceholders" value="true" /> -->
 <!-- 	</bean> -->
-	<bean id="dataSourceMonitor" name="dataSourceMonitor" init-method="init"
-		destroy-method="close" class="com.alibaba.druid.pool.DruidDataSource">
-		<property name="driverClassName" value="${database.drivername}" />
-		<property name="url" value="${monitor.url}" />
-		<property name="username" value="${monitor.username}" />
-		<property name="password" value="${monitor.password}" />
-		<property name="initialSize" value="0" />
-		<property name="maxActive" value="20" />
-		<property name="minIdle" value="0" />
-		<property name="maxWait" value="60000" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testOnReturn" value="false" />
-		<property name="testWhileIdle" value="true" />
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<property name="minEvictableIdleTimeMillis" value="25200000" />
-		<property name="removeAbandoned" value="true" />
-		<property name="removeAbandonedTimeout" value="1800" />
-		<property name="logAbandoned" value="true" />
-		<property name="filters" value="mergeStat" />
-		<property name="validationQuery" value="${database.validationQuery}"></property>
-	</bean>
+<!-- 	<bean id="dataSourceMonitor" name="dataSourceMonitor" init-method="init" -->
+<!-- 		destroy-method="close" class="com.alibaba.druid.pool.DruidDataSource"> -->
+<!-- 		<property name="driverClassName" value="${database.drivername}" /> -->
+<!-- 		<property name="url" value="${monitor.url}" /> -->
+<!-- 		<property name="username" value="${monitor.username}" /> -->
+<!-- 		<property name="password" value="${monitor.password}" /> -->
+<!-- 		<property name="initialSize" value="0" /> -->
+<!-- 		<property name="maxActive" value="20" /> -->
+<!-- 		<property name="minIdle" value="0" /> -->
+<!-- 		<property name="maxWait" value="60000" /> -->
+<!-- 		<property name="testOnBorrow" value="false" /> -->
+<!-- 		<property name="testOnReturn" value="false" /> -->
+<!-- 		<property name="testWhileIdle" value="true" /> -->
+<!-- 		<property name="timeBetweenEvictionRunsMillis" value="60000" /> -->
+<!-- 		<property name="minEvictableIdleTimeMillis" value="25200000" /> -->
+<!-- 		<property name="removeAbandoned" value="true" /> -->
+<!-- 		<property name="removeAbandonedTimeout" value="1800" /> -->
+<!-- 		<property name="logAbandoned" value="true" /> -->
+<!-- 		<property name="filters" value="mergeStat" /> -->
+<!-- 		<property name="validationQuery" value="${database.validationQuery}"></property> -->
+<!-- 	</bean> -->
+	
+	<bean id="dataSourceMonitor" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${database.drivername}" />
+        <property name="jdbcUrl" value="${monitor.url}" />
+        <property name="user" value="${monitor.username}" />
+        <property name="password" value="${monitor.password}" />
+        <property name="initialPoolSize" value="5" />
+        <property name="minPoolSize" value="5" />
+        <property name="maxPoolSize" value="20" />
+        <property name="maxIdleTime" value="100" />
+        <property name="acquireIncrement" value="5" />
+    </bean> 
+	
 	<!-- 使用spring的会话管理 -->
 	<bean id="sqlSessionFactoryMonitor" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSourceMonitor" />

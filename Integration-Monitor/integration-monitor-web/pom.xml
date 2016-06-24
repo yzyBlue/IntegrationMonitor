@@ -78,8 +78,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.4.RELEASE</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>com.zju.integration.monitor</groupId>
 			<artifactId>integration-monitor-service</artifactId>

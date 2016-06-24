@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.AlertActionDao">
+	<resultMap id="alertActionInfoMap" type="com.zju.integration.monitor.model.AlertAction">
+		<id column="SERIAL_NO" property="serialNo" jdbcType="INTEGER" />
+		<result column="ALERT_CODE" property="alertCode" jdbcType="VARCHAR" />
+		<result column="ALERT_NAME" property="alertName" jdbcType="VARCHAR" />
+		<result column="ACTOR_CODE" property="actorCode" jdbcType="VARCHAR" />
+		<result column="ACTOR_NAME" property="actorName" jdbcType="VARCHAR" />
+		<result column="ACTION_DATE_TIME" property="actionDateTime" jdbcType="TIMESTAMP" />
+		<result column="ACTION_TYPE_CODE" property="actionTypeCode" jdbcType="VARCHAR" />
+		<result column="ACTION_TYPE_NAME" property="actionTypeName" jdbcType="VARCHAR" />
+		<result column="ACTION_MEMO" property="actionMemo" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="alertActionInfo">
+		ALERT_CODE,ALERT_NAME,ACTOR_CODE,ACTOR_NAME,ACTION_DATE_TIME,ACTION_TYPE_CODE,ACTION_TYPE_NAME,ACTION_MEMO 
+	</sql>
+	
+	<select id="select" resultMap="alertActionInfoMap">
+		select * from ALERT_ACTION where  SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.AlertAction">
+		<selectKey resultType="long" order="AFTER" keyProperty="serialNo">
+			SELECT ident_current('ALERT_ACTION') AS serialNo
+		</selectKey>
+		INSERT dbo.ALERT_ACTION(
+		<include refid="alertActionInfo"></include>
+		)   VALUES  (
+			#{alertCode,jdbcType=VARCHAR},
+			#{alertName,jdbcType=VARCHAR},
+			#{actorCode,jdbcType=VARCHAR},
+			#{actorName,jdbcType=INTEGER},
+			GETDATE(),
+			#{actionTypeCode,jdbcType=VARCHAR},
+			#{actionTypeName,jdbcType=VARCHAR},
+			#{actionMemo,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.zju.integration.monitor.model.AlertAction">
+		UPDATE ALERT_ACTION SET 
+			ALERT_CODE=#{alertCode,jdbcType=VARCHAR},
+			ALERT_NAME=#{alertTheme,jdbcType=VARCHAR},
+			ACTOR_CODE=#{actorCode,jdbcType=VARCHAR},
+			ACTOR_NAME=#{actorName,jdbcType=VARCHAR},
+			ACTION_TYPE_CODE=#{actionTypeCode,jdbcType=VARCHAR},
+			ACTION_TYPE_NAME=#{actionTypeName,jdbcType=VARCHAR},
+			ACTION_MEMO=#{actionMemo,jdbcType=VARCHAR}  
+		where SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.AlertAction">
+		DELETE FROM ALERT_ACTION WHERE SERIAL_NO = #{serialNo,jdbcType=INTEGER}
+	</delete>
+	
+	<select id="findByCondition" parameterType="java.util.Map" resultMap="alertActionInfoMap">
+		select * from ALERT_ACTION where 1=1
+		<if test="alertCode != null and alertCode !=''">
+			and ALERT_CODE=#{alertCode,jdbcType=VARCHAR}
+		</if>
+		<if test="alertName != null and alertName !=''">
+			and ALERT_NAME=#{alertName,jdbcType=VARCHAR}
+		</if>
+		<if test="actorCode != null and actorCode !=''">
+			and ACTOR_CODE=#{actorCode,jdbcType=VARCHAR}
+		</if>
+		<if test="actorName != null and actorName !=''">
+			and ACTOR_NAME=#{actorName,jdbcType=VARCHAR}
+		</if>
+		<if test="actionTypeCode != null and actionTypeCode !=''">
+			and ACTION_TYPE_CODE=#{actionTypeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="actionTypeName != null and actionTypeName !=''">
+			and ACTION_TYPE_NAME=#{actionTypeName,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null and startDate != ''">
+			and ACTION_DATE_TIME <![CDATA[ >= ]]> CONVERT(DATETIME,#{startDate,jdbcType=TIMESTAMP},120)
+		</if>
+		<if test="endDate != null and endDate != ''">
+			and ACTION_DATE_TIME <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
+		</if>
+		 order by SERIAL_NO desc
+	</select>
+
+</mapper>

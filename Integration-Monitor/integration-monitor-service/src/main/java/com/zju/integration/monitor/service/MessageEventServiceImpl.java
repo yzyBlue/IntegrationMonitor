@@ -6,15 +6,23 @@ package com.zju.integration.monitor.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zju.integration.monitor.dao.AlertActionDao;
+import com.zju.integration.monitor.dao.AlertDao;
 import com.zju.integration.monitor.dao.MessageEventDao;
 import com.zju.integration.monitor.dao.MessageTypeDao;
 import com.zju.integration.monitor.exception.MessageEventServiceException;
+import com.zju.integration.monitor.model.ActionType;
+import com.zju.integration.monitor.model.Alert;
+import com.zju.integration.monitor.model.AlertAction;
+import com.zju.integration.monitor.model.AlertLevel;
+import com.zju.integration.monitor.model.AlertStatus;
 import com.zju.integration.monitor.model.IntegrationResult;
 import com.zju.integration.monitor.model.MessageEvent;
 import com.zju.integration.monitor.util.DataValidationUtil;
@@ -32,6 +40,12 @@ public class MessageEventServiceImpl implements MessageEventService {
 
 	@Autowired(required = false)
 	private MessageTypeDao messageTypeDao;
+
+	@Autowired(required = false)
+	private AlertDao alertDao;
+
+	@Autowired(required = false)
+	private AlertActionDao alertActionDao;
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
@@ -59,6 +73,20 @@ public class MessageEventServiceImpl implements MessageEventService {
 				result.setResultCode(IntegrationResult.INTERNALERROR);
 				result.setResultDesc("数据验证成功，写入数据失败");
 			}
+			Alert alert = checkMessageEvent(messageEvent);
+			AlertAction alertAction = new AlertAction();
+			if (alert != null) {
+				alert.setMsgSequenceId(String.valueOf(messageEvent.getSequenceId()));
+				alert.setAlertTheme(msgTypeDesc);
+				alertAction.setAlertName(alert.getAlertName());
+				alertAction.setAlertCode(alert.getAlertCode());
+				alertAction.setActorCode("admin");
+				alertAction.setActorName("admin");
+				alertAction.setActionTypeName(ActionType.ADD.getName());
+				alertAction.setActionTypeCode(String.valueOf(ActionType.ADD.getIndex()));
+				alertDao.insert(alert);
+				alertActionDao.insert(alertAction);
+			}
 		} else {
 			result.setResultCode(dataValidate.getResultCode());
 			result.setResultDesc(dataValidate.getResultDesc());
@@ -80,6 +108,43 @@ public class MessageEventServiceImpl implements MessageEventService {
 		// messageList = messageList.subList(0, 1000);
 		// }
 		return messageList;
+	}
+
+	private Alert checkMessageEvent(MessageEvent messageEvent) {
+		//logger.info("[checkMessageEvent] : " + messageEvent.toString());
+		Alert alert = new Alert();
+		String status = messageEvent.getHandleResultStatus();
+		if (status == "ERROR") {
+			String alertCode = getGuid();
+			alert.setAlertCode(alertCode);
+			alert.setAlertName(messageEvent.getMsgTypeDesc());
+			alert.setAlertContent(messageEvent.getHandleResultDesc());
+			alert.setAlertLevel(AlertLevel.ERROR.getName());
+			alert.setAlertStatus(AlertStatus.TODO.getName());
+			alert.setNotifyPerson("Admin");
+		} else if (status == "FILTERED") {
+			String alertCode = getGuid();
+			alert.setAlertCode(alertCode);
+			alert.setAlertName(messageEvent.getMsgTypeDesc());
+			alert.setAlertContent(messageEvent.getHandleResultDesc());
+			alert.setAlertLevel(AlertLevel.WARN.getName());
+			alert.setAlertStatus(AlertStatus.TODO.getName());
+			alert.setNotifyPerson("Admin");
+		} else {
+			alert = null;
+		}
+		return alert;
+
+	}
+
+	/**
+	 * Returns a globaly unique id.
+	 * 
+	 * @return
+	 * 
+	 */
+	private String getGuid() {
+		return UUID.randomUUID().toString();
 	}
 
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.AlertDao">
+	<resultMap id="alertInfoMap" type="com.zju.integration.monitor.model.Alert">
+		<id column="SERIAL_NO" property="serialNo" jdbcType="INTEGER" />
+		<result column="ALERT_CODE" property="alertCode" jdbcType="VARCHAR" />
+		<result column="ALERT_NAME" property="alertName" jdbcType="VARCHAR" />
+		<result column="ALERT_THEME" property="alertTheme" jdbcType="VARCHAR" />
+		<result column="MSG_SEQ_ID" property="msgSequenceId" jdbcType="INTEGER" />
+		<result column="ALERT_CONTENT" property="alertContent" jdbcType="VARCHAR" />
+		<result column="ALERT_LEVEL" property="alertLevel" jdbcType="VARCHAR" />
+		<result column="ALERT_STATUS" property="alertStatus" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="NOTIFY_PERSON" property="notifyPerson" jdbcType="VARCHAR" />
+		<result column="ALERT_MEMO" property="alertMemo" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="alertInfo">
+		ALERT_CODE,ALERT_NAME,ALERT_THEME,MSG_SEQ_ID,ALERT_CONTENT,ALERT_LEVEL,ALERT_STATUS,CREATE_DATE,NOTIFY_PERSON,ALERT_MEMO 
+	</sql>
+	
+	<select id="select" resultMap="alertInfoMap">
+		select * from INTE_ALERT where  ALERT_CODE = #{alertCode,jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="insert" parameterType="com.zju.integration.monitor.model.Alert">
+		<selectKey resultType="long" order="AFTER" keyProperty="serialNo">
+			SELECT ident_current('INTE_ALERT') AS serialNo
+		</selectKey>
+		INSERT dbo.INTE_ALERT(
+		<include refid="alertInfo"></include>
+		)   VALUES  (
+			#{alertCode,jdbcType=VARCHAR},
+			#{alertName,jdbcType=VARCHAR},
+			#{alertTheme,jdbcType=VARCHAR},
+			#{msgSequenceId,jdbcType=INTEGER},
+			#{alertContent,jdbcType=VARCHAR},
+			#{alertLevel,jdbcType=VARCHAR},
+			#{alertStatus,jdbcType=VARCHAR},
+			GETDATE(),
+			#{notifyPerson,jdbcType=VARCHAR},
+			#{alertMemo,jdbcType=VARCHAR} 
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.zju.integration.monitor.model.Alert">
+		UPDATE INTE_ALERT SET 
+			ALERT_NAME=#{alertName,jdbcType=VARCHAR},
+			ALERT_THEME=#{alertTheme,jdbcType=VARCHAR},
+			ALERT_CONTENT=#{alertCode,jdbcType=VARCHAR},
+			ALERT_LEVEL=#{alertLevel,jdbcType=VARCHAR},
+			ALERT_STATUS=#{alertStatus,jdbcType=VARCHAR},
+			NOTIFY_PERSON=#{notifyPerson,jdbcType=VARCHAR},
+			ALERT_MEMO=#{alertMemo,jdbcType=VARCHAR} 
+		WHERE ALERT_CODE = #{alertCode,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete" parameterType="com.zju.integration.monitor.model.Alert">
+		DELETE FROM INTE_ALERT WHERE ALERT_CODE = #{alertCode,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="findByCondition" parameterType="java.util.Map" resultMap="alertInfoMap">
+		select * from INTE_ALERT where 1=1
+		<if test="alertCode != null and alertCode !=''">
+			and ALERT_CODE=#{alertCode,jdbcType=VARCHAR}
+		</if>
+		<if test="alertName != null and alertName !=''">
+			and ALERT_NAME=#{alertName,jdbcType=VARCHAR}
+		</if>
+		<if test="alertTheme != null and alertTheme !=''">
+			and ALERT_THEME=#{alertTheme,jdbcType=VARCHAR}
+		</if>
+		<if test="msgSequenceId != null and msgSequenceId !=0 and msgSequenceId !=''">
+			and MSG_SEQ_ID=#{msgSequenceId,jdbcType=INTEGER}
+		</if>
+		<if test="alertLevel != null and alertLevel !=''">
+			and ALERT_LEVEL=#{alertLevel,jdbcType=VARCHAR}
+		</if>
+		<if test="alertStatus != null and alertStatus !=''">
+			and ALERT_STATUS=#{alertStatus,jdbcType=VARCHAR}
+		</if>
+		<if test="notifyPerson != null and notifyPerson !=''">
+			and NOTIFY_PERSON=#{notifyPerson,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null and startDate != ''">
+			and CREATE_DATE <![CDATA[ >= ]]> CONVERT(DATETIME,#{startDate,jdbcType=TIMESTAMP},120)
+		</if>
+		<if test="endDate != null and endDate != ''">
+			and CREATE_DATE <![CDATA[ <= ]]> CONVERT(DATETIME,#{endDate,jdbcType=TIMESTAMP},120)
+		</if>
+		 order by SERIAL_NO desc
+	</select>
+
+</mapper>

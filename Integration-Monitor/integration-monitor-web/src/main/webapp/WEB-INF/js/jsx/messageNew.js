@@ -129,7 +129,7 @@ var MessageContent=React.createClass({
 // return nextProps.id !== this.props.id;
 // },
 	handleMsgQuery: function(paramMap) {
-		console.log(this.props.url);
+		//console.log(this.props.url);
 		// alert(this.props.url+" : "+paramMap.patientId);
 		this.setState({data: []});
 		var paramMap=JSON.stringify(paramMap); 
@@ -174,7 +174,7 @@ var liStyle = {
 
 var CheckBoxList=React.createClass({
 	getInitialState: function() {
-	    return {pam:false,exam:false,labtest:false,order:false,surgery:false,drug:false,fare:false};
+	    return {pam:false,exam:false,labtest:false,order:false,surgery:false,drug:false,presc:false};
 	},
 	handleChange:function(e){
 		var name=e.target.value;
@@ -191,12 +191,12 @@ var CheckBoxList=React.createClass({
 			this.setState({surgery:checked});
 		}else if(name=="DRUG"){
 			this.setState({drug:checked});
-		}else if(name=="FARE"){
-			this.setState({fare:checked});
+		}else if(name=="PRESC"){
+			this.setState({presc:checked});
 		}
 	},
 	onClickChange:function(){
-		this.setState({pam:false,exam:false,labtest:false,order:false,surgery:false,drug:false,fare:false});
+		this.setState({pam:false,exam:false,labtest:false,order:false,surgery:false,drug:false,presc:false});
 	},
 	render: function(){
 		return (
@@ -209,7 +209,7 @@ var CheckBoxList=React.createClass({
 					<li><label><input type="checkbox" value="ORDER" checked={this.state.order} onChange={this.handleChange}/><span>医嘱</span></label></li>
 					<li><label><input type="checkbox" value="SURGERY" checked={this.state.surgery} onChange={this.handleChange}/><span>手术</span></label></li>
 					<li><label><input type="checkbox" value="DRUG" checked={this.state.drug} onChange={this.handleChange}/><span>摆药</span></label></li>
-					<li><label><input type="checkbox" value="FARE" checked={this.state.fare} onChange={this.handleChange}/><span>费用</span></label></li>
+					<li><label><input type="checkbox" value="PRESC" checked={this.state.presc} onChange={this.handleChange}/><span>处方</span></label></li>
 					<li><button className="btn-blue btn-xs" type="button" onClick={this.onClickChange}>重置</button></li>
 				</ul>
 				<div className="text-align-right">
@@ -222,7 +222,7 @@ var CheckBoxList=React.createClass({
 		
 var MultiSelect=React.createClass({
 	getInitialState: function() {
-	    return {option:"PAM"};
+	    return {option:""};
 	},
 	handleChange:function(event){
 		this.setState({option:event.target.option});
@@ -231,13 +231,14 @@ var MultiSelect=React.createClass({
 	render:function(){
 		return (
 			<select className="form-control" value={this.state.option} onChange={this.handleChange}>
+				<option value="">所有</option>
 				<option value="PAM">病人管理</option>	
 				<option value="EXAM">检查</option>	
 				<option value="LABTEST">检验</option>	
 				<option value="ORDER">医嘱</option>	
 				<option value="SURGERY">手术</option>	
 				<option value="DRUG">摆药</option>	
-				<option value="FARE">费用</option>	
+				<option value="PRESC">处方</option>	
 			</select>
 		);
 	}
@@ -347,6 +348,7 @@ var MessageTable=React.createClass({
 							<col style={{'width': 'auto'}}/>
 							<col style={{'width': 'auto'}}/>
 							<col style={{'width': 'auto'}}/>
+							<col style={{'width': 'auto'}}/>
 						</colgroup>
 						<thead>
 							<tr>
@@ -357,6 +359,8 @@ var MessageTable=React.createClass({
 								<th className="sortedth"><span className="sortedtext">编号</span><span
 									className="sorted-arrow desc "></span></th>
 								<th className="sortedth"><span className="sortedtext">消息类型</span><span
+									className="sorted-arrow "></span></th>
+								<th className="sortedth"><span className="sortedtext">消息子类型</span><span
 									className="sorted-arrow "></span></th>
 								<th className="sortedth"><span className="sortedtext">事务类型</span><span
 									className="sorted-arrow "></span></th>
@@ -461,6 +465,7 @@ var TableBody=React.createClass({
 					<td><i className="iconfont  state-downtime"></i></td>
 					<td>{this.props.message.sequenceId}</td>
 					<td>{this.props.message.msgTypeDesc}</td>
+					<td>{this.props.message.msgSubType}</td>
 					<td>{transName}</td>
 					<td>{this.props.message.eventDateTime}</td>
 					<td>{this.props.message.messageIndex}</td>
@@ -536,7 +541,7 @@ var Modal=React.createClass({
 
 var TimeLineItem=React.createClass({
 	formatXml: function(xml) {
-		console.log(xml);
+		//console.log(xml);
 	        var formatted = '';
 	        var reg = /(>)(<)(\/*)/g;
 	        xml = xml.replace(reg, '$1\r\n$2$3');
@@ -564,7 +569,7 @@ var TimeLineItem=React.createClass({
 	            pad += indent;
 	        });
 	        formatted = formatted.replace(/\n$/, '');
-	        console.log(formatted);
+	        //console.log(formatted);
 	        return formatted;
 	 },
 	render:function(){
@@ -624,7 +629,7 @@ var MirthMsgTableBody=React.createClass({
 		      success: function(data) {
 		    	  // console.log("loadMessageFromServer : $.ajax");
 		    	// console.log(JSON.stringify(data.messageObjList));
-		    	  console.log(this.isMounted);
+		    	 // console.log(this.isMounted);
 		    	  if (this.isMounted) {
 		    		  this.setState({data: data.messageObjList});
 		    	  }
@@ -649,7 +654,7 @@ var MirthMsgTableBody=React.createClass({
 	renderBodyList:function(){
 		// console.log("renderBodyList");
 		var datas=this.state.data.reverse();
-		console.log(datas.length);
+		//console.log(datas.length);
 		return this.state.data.map(function(messageObj,i){
 		// console.log(messageObj.connectorName);
 		// console.log("renderBodyList : MsgTableBodyItem"+i);
@@ -689,7 +694,9 @@ var MsgTableBodyItem=React.createClass({
 	},
 	render:function(){
 		// console.log("MsgTableBodyItem");
-		var error=this.props.data.status=='ERROR'?this.props.data.errors:'';
+		var connectorName=this.props.data.connectorName;
+		var response=this.props.data.responseMap[connectorName];
+		var response=this.props.data.status=='ERROR'?this.props.data.errors:response;
 		return (
 			<tbody>
 				<tr>
@@ -698,7 +705,7 @@ var MsgTableBodyItem=React.createClass({
 					<td>{this.props.data.dateCreated}</td>
 					<td>{this.props.data.encodedDataProtocol}</td>
 					<td>
-						<button type="button" className="btn btn-white text-danger" data-toggle="tooltip" data-placement="right" title={error} onClick={this.showDetail}>
+						<button type="button" className="btn btn-white text-danger" data-toggle="tooltip" data-placement="right" title={response} onClick={this.showDetail}>
 							{this.props.data.status}
 						</button>
 					</td>

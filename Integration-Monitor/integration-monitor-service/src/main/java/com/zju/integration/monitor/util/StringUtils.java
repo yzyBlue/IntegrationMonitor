@@ -57,5 +57,9 @@ public class StringUtils {
 		}
 		return true;
 	}
+	
+	public static String convertLFtoCR(String str) {
+		return str.replaceAll("\\r\\n|\\n", "\r");
+	}
 
 }

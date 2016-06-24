@@ -1,0 +1,32 @@
+.sidebar {
+    background: rgba(51,51,51,.6);
+    width: 50px;
+    position: fixed;
+    z-index: 1000;
+}
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sidebar li {
+    position: relative;
+    margin-bottom: 0;
+}
+.sidebar li a.active {
+    color: #fff;
+    cursor: pointer;
+}
+.sidebar li a {
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+    overflow: hidden;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}

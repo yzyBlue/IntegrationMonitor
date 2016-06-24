@@ -23,7 +23,7 @@ import com.zju.integration.monitor.util.DataValidationUtil;
  * @author Yuan.Ziyang
  *
  */
-@Service("integrationActor")
+@Service("integrationActorService")
 @Transactional(rollbackFor = MessageEventServiceException.class)
 public class IntegrationActorServiceImpl implements IntegrationActorService {
 

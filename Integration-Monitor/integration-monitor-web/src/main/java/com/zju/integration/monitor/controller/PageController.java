@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 	@RequestMapping("/")
-	public String getHome() {
-		return "login2";
+	public String getLogin() {
+		return "login";
 	}
 
 	@RequestMapping("/index")
@@ -16,7 +16,7 @@ public class PageController {
 	}
 
 	@RequestMapping("/login")
-	public String getLogin() {
+	public String getLogin2() {
 		return "login";
 	}
 
@@ -69,6 +69,7 @@ public class PageController {
 	public String getAlert() {
 		return "alert";
 	}
+
 	@RequestMapping("/test")
 	public String getTest() {
 		return "test";

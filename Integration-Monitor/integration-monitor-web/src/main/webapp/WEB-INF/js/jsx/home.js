@@ -54,10 +54,16 @@ var DropDown=React.createClass({
 			visible:false
         };
     },
+    onSelect:function(){
+    	this.setState({visible: !this.state.visible});
+    },
+    componentDidMount: function() {
+    	var dropdown = this.refs.dropdown;//拿到了原生DOM 
+    },
 	render:function() {
-		const displayValue = this.visible ? 'block' : 'none';
+		var displayValue = this.visible ? 'block' : 'none';
 	    return (
-			<div className="dropdown-main" style={{display: displayValue}}>
+			<div className="dropdown-main" ref="dropdown" style={{display: displayValue}} onSelect={this.onSelect}>
 				<ul>
 					<li><a data-lang="en" href="#">中文</a></li>
 					<li><a data-lang="zh_CN" href="#">English</a></li>
@@ -121,7 +127,7 @@ var Login = React.createClass({
 	    return (
 	    <form id="loginform" novalidate="novalidate" method="post"  action="j_spring_security_check">
 			<div className="input-box">
-				<input className="input-text valid" type="text" name="username" placeholder="用户名" 
+				<input className="input-text valid" type="text" name="username" placeholder="用户名" autoFocus="true"
 					value={this.state.username}  onChange={this.handleUserNameChange}/>
 				<p className="error-top"></p>
 			</div>

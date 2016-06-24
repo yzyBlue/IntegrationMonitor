@@ -24,6 +24,25 @@
 		<result column="IS_ENCRYPTED" property="isEncrypted" jdbcType="VARCHAR" />
 	</resultMap>
 	
+	<resultMap id="messageStatisticMap" type="com.zju.integration.monitor.model.MessageStatistic">
+		<id column="SERIAL_NO" property="serialNo" jdbcType="INTEGER" />
+		<result column="PAM" property="pam" jdbcType="INTEGER" />
+		<result column="EXAM" property="exam" jdbcType="INTEGER" />
+		<result column="ORDER" property="order" jdbcType="INTEGER" />
+		<result column="DRUG" property="drug" jdbcType="INTEGER" />
+		<result column="PRESC" property="presc" jdbcType="INTEGER" />
+		<result column="SURGERY" property="surgery" jdbcType="INTEGER" />
+		<result column="LABTEST" property="labTest" jdbcType="INTEGER" />
+		<result column="CONSULT" property="consult" jdbcType="INTEGER" />
+		<result column="DIAGNOSE" property="diagnose" jdbcType="INTEGER" />
+		<result column="PHYSIGN" property="physign" jdbcType="INTEGER" />
+		<result column="NEWBORN" property="newborn" jdbcType="INTEGER" />
+		<result column="FPMR" property="fpmr" jdbcType="INTEGER" />
+		<result column="EMR" property="emr" jdbcType="INTEGER" />
+		<result column="ALLCOUNT" property="allCount" jdbcType="INTEGER" />
+		<result column="RECORD_DATE" property="recordDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
 	<sql id="messageEventInfo">
 		TRANS_CODE,MSG_EVENT_CODE,MSG_EVENT_DESC,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,SOURCE_MSG_UID,EVENT_DATE_TIME,PATIENT_ID,
 		VISIT_ID,MSG_INDEX,MSG_SUB_INDEX,TRANSACTION_STATUS,HANDLE_RESULT_STATUS,EVENT_HANDLE_TIME,
@@ -245,6 +264,29 @@
 		DELETE FROM MSG_EVENT_LOG WHERE SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
 	</delete>
 	
-	
+	<select id="getMessageStatistic" resultMap="messageStatisticMap">
+		<![CDATA[ 
+			declare @ALLCOUNT int, @PAM int,@EXAM int,@ORDER int,@DRUG int, @PRESC int ,@SURGERY int,
+					@LABTEST int,@CONSULT int ,@DIAGNOSE int, @PHYSIGN int , @NEWBORN int, @FPMR int ,@EMR int,@RECORD_DATE datetime;
+			select @ALLCOUNT=count(*) from MSG_EVENT_LOG  WITH(NOLOCK) where CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @PAM=count(*)  from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PAM' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @EXAM=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='EXAM' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @ORDER=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='ORDER' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @DRUG=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='DRUG' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @PRESC=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PRESC' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @SURGERY=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='SURGERY' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @LABTEST=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='LABTEST' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @CONSULT=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='CONSULT' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @DIAGNOSE=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='DIAGNOSE' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @PHYSIGN=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PHYSIGN' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @NEWBORN=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='NEWBORN' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @FPMR=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='FPMR' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @EMR=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='EMR' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @RECORD_DATE=getDate();
+			select @ALLCOUNT as ALLCOUNT, @PAM as PAM,@EXAM as EXAM,@ORDER as [ORDER],@DRUG as DRUG,
+					@PRESC as PRESC,@SURGERY as SURGERY,@LABTEST as LABTEST,@CONSULT as CONSULT,
+					@DIAGNOSE as DIAGNOSE,@PHYSIGN as PHYSIGN,@NEWBORN as NEWBORN,@FPMR as FPMR,@EMR as EMR,@RECORD_DATE as recordDate ;
+		]]>
+	</select>
 	
 </mapper>
