@@ -23,4 +23,6 @@ public interface MessageEventService {
 
 	public List<MessageEvent> getMessageByCondition(Map paramMap) throws MessageEventServiceException;
 
+	public MessageEvent getMessageEventById(long sequenceId);
+
 }

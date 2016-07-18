@@ -25,7 +25,7 @@ import com.zju.integration.monitor.util.DataValidationUtil;
  * @description Transaction Service implements object
  */
 @Service("transactionService")
-@Transactional(rollbackFor = TransactionServiceException.class)
+@Transactional(rollbackFor = TransactionServiceException.class,value = "transactionManager")
 public class TransactionServiceImpl implements TransactionService {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());

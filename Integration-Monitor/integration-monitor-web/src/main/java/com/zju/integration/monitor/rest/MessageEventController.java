@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,7 +64,7 @@ public class MessageEventController {
 			"application/json;charset=UTF-8" }, consumes = { "application/json;charset=UTF-8" })
 	public @ResponseBody List<MessageEvent> queryMessageEvent(@RequestBody Map paramMap)
 			throws MessageEventServiceException {
-		logger.debug(paramMap.toString());
+		logger.info(paramMap.toString());
 		List<MessageEvent> messageEventList = new ArrayList<>();
 		messageEventList = messageService.getMessageByCondition(paramMap);
 		return messageEventList;
@@ -93,44 +94,57 @@ public class MessageEventController {
 		}
 		return result;
 	}
+
 	@RequestMapping(value = "/mirthmessage", method = RequestMethod.POST, produces = {
-	"application/json;charset=UTF-8" }, consumes = { "application/json;charset=UTF-8" })
-	public @ResponseBody QueryMsgObjectResult getMirthCorrelatedMessage(@RequestBody Map paramMap){
+			"application/json;charset=UTF-8" }, consumes = { "application/json;charset=UTF-8" })
+	public @ResponseBody QueryMsgObjectResult getMirthCorrelatedMessage(@RequestBody Map paramMap) {
 		logger.debug(paramMap.toString());
-		QueryMsgObjectResult queryResult=new QueryMsgObjectResult();
+		QueryMsgObjectResult queryResult = new QueryMsgObjectResult();
 		MirthConnectResult mirthConnectResult = new MirthConnectResult();
-		List<MessageObject> mirthMsgList=new ArrayList<>();
-		String validate="";
-		if(paramMap==null){
+		List<MessageObject> mirthMsgList = new ArrayList<>();
+		String validate = "";
+		if (paramMap == null) {
 			mirthConnectResult.setResultCode(1);
-			validate=validate+"输入参数不能为空";
+			validate = validate + "输入参数不能为空";
 			mirthConnectResult.setResultDesc(validate);
-		}else if(paramMap.get("channelId") == null || paramMap.get("channelId").equals("")){
+		} else if (paramMap.get("channelId") == null || paramMap.get("channelId").equals("")) {
 			mirthConnectResult.setResultCode(1);
-			validate=validate+"channelId不能为空";
+			validate = validate + "channelId不能为空";
 			mirthConnectResult.setResultDesc(validate);
-		}else if(paramMap.get("correlationId") == null || paramMap.get("correlationId").equals("")){
+		} else if (paramMap.get("correlationId") == null || paramMap.get("correlationId").equals("")) {
 			mirthConnectResult.setResultCode(1);
-			validate=validate+"correlationId不能为空";
+			validate = validate + "correlationId不能为空";
 			mirthConnectResult.setResultDesc(validate);
-		}else{
+		} else {
 			mirthConnectResult.setResultCode(0);
-			validate=validate+"数据验证通过,";
+			validate = validate + "数据验证通过,";
 			MessageObjectFilter messageObjectFilter = new MessageObjectFilter();
 			messageObjectFilter.setCorrelationId((String) paramMap.get("correlationId"));
 			messageObjectFilter.setChannelId((String) paramMap.get("channelId"));
 			try {
-				mirthMsgList=mirthClient.getMessageById(messageObjectFilter);
-				mirthConnectResult.setResultDesc(validate+MirthConnectResult.SUCCESSDESC);
+				mirthMsgList = mirthClient.getMessageById(messageObjectFilter);
+				mirthConnectResult.setResultDesc(validate + MirthConnectResult.SUCCESSDESC);
 			} catch (ClientException e) {
 				e.printStackTrace();
 				mirthConnectResult.setResultCode(MirthConnectResult.MIRTHCLIENTERROR);
-				mirthConnectResult.setResultDesc(validate+MirthConnectResult.MIRTHCLIENTDESC+e.getCause().getMessage());
+				mirthConnectResult
+						.setResultDesc(validate + MirthConnectResult.MIRTHCLIENTDESC + e.getCause().getMessage());
 			}
 		}
 		queryResult.setMessageObjList(mirthMsgList);
 		queryResult.setMirthConnectResult(mirthConnectResult);
 		return queryResult;
 	}
-	
+
+	@RequestMapping(value = "/message", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody MessageEvent getMessageEventById(@RequestParam("sequenceId") long sequenceId) {
+		MessageEvent messageEvent = new MessageEvent();
+		messageEvent = messageService.getMessageEventById(sequenceId);
+		if (messageEvent == null) {
+			return new MessageEvent();
+		} else {
+			return messageEvent;
+		}
+	}
+
 }

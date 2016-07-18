@@ -3,6 +3,7 @@
  */
 package com.zju.integration.monitor.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ import com.zju.integration.monitor.model.IntegrationResult;
  * @description Integration Alert service implement Class
  */
 @Service("alertService")
-@Transactional(rollbackFor = AlertServiceException.class)
+@Transactional(rollbackFor = AlertServiceException.class, value = "transactionManager")
 public class AlertServiceImpl implements AlertService {
 
 	@Autowired(required = false)
@@ -40,10 +41,10 @@ public class AlertServiceImpl implements AlertService {
 
 	@Override
 	public IntegrationResult addAlertInfo(Alert alert) throws AlertServiceException {
-		IntegrationResult result=new IntegrationResult();
+		IntegrationResult result = new IntegrationResult();
 		try {
-			int insert=alertDao.insert(alert);
-			if(insert>0){
+			int insert = alertDao.insert(alert);
+			if (insert > 0) {
 				result.setResultCode(IntegrationResult.SUCCESSCODE);
 				result.setResultDesc(IntegrationResult.SUCCESSDESC);
 				AlertAction alertAction = new AlertAction();
@@ -54,23 +55,23 @@ public class AlertServiceImpl implements AlertService {
 				alertAction.setActionTypeName(ActionType.ADD.getName());
 				alertAction.setActionTypeCode(String.valueOf(ActionType.ADD.getIndex()));
 				alertActionDao.insert(alertAction);
-			}else{
+			} else {
 				result.setResultCode(IntegrationResult.INTERNALERROR);
 				result.setResultDesc(IntegrationResult.INTERNALDESC);
 			}
 		} catch (Exception e) {
 			result.setResultCode(IntegrationResult.INTERNALERROR);
-			result.setResultDesc(IntegrationResult.INTERNALDESC+e.getCause().getMessage().toString());
+			result.setResultDesc(IntegrationResult.INTERNALDESC + e.getCause().getMessage().toString());
 		}
 		return result;
 	}
 
 	@Override
 	public IntegrationResult updateAlertInfo(Alert alert) throws AlertServiceException {
-		IntegrationResult result=new IntegrationResult();
+		IntegrationResult result = new IntegrationResult();
 		try {
-			int update=alertDao.update(alert);
-			if(update>0){
+			int update = alertDao.update(alert);
+			if (update > 0) {
 				result.setResultCode(IntegrationResult.SUCCESSCODE);
 				result.setResultDesc(IntegrationResult.SUCCESSDESC);
 				AlertAction alertAction = new AlertAction();
@@ -80,21 +81,22 @@ public class AlertServiceImpl implements AlertService {
 				alertAction.setActorName("admin");
 				alertAction.setActionTypeName(ActionType.UPDATE.getName());
 				alertAction.setActionTypeCode(String.valueOf(ActionType.UPDATE.getIndex()));
+				alertAction.setActionMemo(alert.getAlertMemo());
 				alertActionDao.insert(alertAction);
-			}else{
+			} else {
 				result.setResultCode(IntegrationResult.INTERNALERROR);
 				result.setResultDesc(IntegrationResult.INTERNALDESC);
 			}
 		} catch (Exception e) {
 			result.setResultCode(IntegrationResult.INTERNALERROR);
-			result.setResultDesc(IntegrationResult.INTERNALDESC+e.getCause().getMessage().toString());
+			result.setResultDesc(IntegrationResult.INTERNALDESC + e.getCause().getMessage().toString());
 		}
 		return result;
 	}
 
 	@Override
 	public Alert findAlertInfo(String alertCode) {
-		
+
 		return alertDao.select(alertCode);
 	}
 
@@ -111,12 +113,12 @@ public class AlertServiceImpl implements AlertService {
 
 	@Override
 	public IntegrationResult deleteAlertInfo(String alertCode) throws AlertServiceException {
-		IntegrationResult result=new IntegrationResult();
-		Alert alert=new Alert();
+		IntegrationResult result = new IntegrationResult();
+		Alert alert = new Alert();
 		alert.setAlertCode(alertCode);
 		try {
-			int delete=alertDao.delete(alert);
-			if(delete>0){
+			int delete = alertDao.delete(alert);
+			if (delete > 0) {
 				result.setResultCode(IntegrationResult.SUCCESSCODE);
 				result.setResultDesc(IntegrationResult.SUCCESSDESC);
 				AlertAction alertAction = new AlertAction();
@@ -127,15 +129,35 @@ public class AlertServiceImpl implements AlertService {
 				alertAction.setActionTypeName(ActionType.DELETE.getName());
 				alertAction.setActionTypeCode(String.valueOf(ActionType.DELETE.getIndex()));
 				alertActionDao.insert(alertAction);
-			}else{
+			} else {
 				result.setResultCode(IntegrationResult.INTERNALERROR);
 				result.setResultDesc(IntegrationResult.INTERNALDESC);
 			}
 		} catch (Exception e) {
 			result.setResultCode(IntegrationResult.INTERNALERROR);
-			result.setResultDesc(IntegrationResult.INTERNALDESC+e.getCause().getMessage().toString());
+			result.setResultDesc(IntegrationResult.INTERNALDESC + e.getCause().getMessage().toString());
 		}
-		
+
+		return result;
+	}
+
+	@Override
+	public List<AlertAction> findAlertAction(String alertCode) {
+		Map paramMap = new HashMap();
+		paramMap.put("alertCode", alertCode);
+		return (List<AlertAction>) alertActionDao.findByCondition(paramMap);
+	}
+	
+
+	@Override
+	public IntegrationResult getErrorAlertCount() {
+		Map paramMap = new HashMap();
+		paramMap.put("alertLevel", "ERROR");
+		paramMap.put("alertStatus", "TODO");
+		List<Alert> list=(List<Alert>) alertDao.findByCondition(paramMap);
+		IntegrationResult result=new IntegrationResult();
+		result.setResultCode(list.size());
+		result.setResultDesc("查询ERROR级别待处理的警报数目");
 		return result;
 	}
 

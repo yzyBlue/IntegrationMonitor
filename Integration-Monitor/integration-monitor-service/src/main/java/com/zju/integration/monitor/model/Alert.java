@@ -35,7 +35,7 @@ public class Alert implements Serializable {
 	private String alertTheme;
 
 	@DataValidate(description = "关联消息ID", nullable = false)
-	private String msgSequenceId;
+	private long msgSequenceId;
 
 	@DataValidate(description = "警报详细内容", nullable = true)
 	private String alertContent;
@@ -122,7 +122,7 @@ public class Alert implements Serializable {
 	/**
 	 * @return the msgSequenceId
 	 */
-	public String getMsgSequenceId() {
+	public long getMsgSequenceId() {
 		return msgSequenceId;
 	}
 
@@ -130,7 +130,7 @@ public class Alert implements Serializable {
 	 * @param msgSequenceId
 	 *            the msgSequenceId to set
 	 */
-	public void setMsgSequenceId(String msgSequenceId) {
+	public void setMsgSequenceId(long msgSequenceId) {
 		this.msgSequenceId = msgSequenceId;
 	}
 
@@ -241,7 +241,7 @@ public class Alert implements Serializable {
 		result = prime * result + ((alertStatus == null) ? 0 : alertStatus.hashCode());
 		result = prime * result + ((alertTheme == null) ? 0 : alertTheme.hashCode());
 		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + ((msgSequenceId == null) ? 0 : msgSequenceId.hashCode());
+		result = prime * result + (int) (msgSequenceId ^ (msgSequenceId >>> 32));
 		result = prime * result + ((notifyPerson == null) ? 0 : notifyPerson.hashCode());
 		result = prime * result + (int) (serialNo ^ (serialNo >>> 32));
 		return result;
@@ -320,11 +320,7 @@ public class Alert implements Serializable {
 		} else if (!createDate.equals(other.createDate)) {
 			return false;
 		}
-		if (msgSequenceId == null) {
-			if (other.msgSequenceId != null) {
-				return false;
-			}
-		} else if (!msgSequenceId.equals(other.msgSequenceId)) {
+		if (msgSequenceId != other.msgSequenceId) {
 			return false;
 		}
 		if (notifyPerson == null) {

@@ -18,7 +18,7 @@
     	http://www.springframework.org/schema/util
     	http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
-	<import resource="classpath*:database-context.xml" />
+<!-- 	<import resource="classpath*:database-context.xml" /> -->
 	<!--引入数据库配置文件database.config.properties -->
 <!-- 	<bean id="propertyConfigurer" -->
 <!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
@@ -48,7 +48,7 @@
 <!-- 		<property name="filters" value="mergeStat" /> -->
 <!-- 		<property name="validationQuery" value="${database.validationQuery}"></property> -->
 <!-- 	</bean> -->
-	
+	<context:property-placeholder location="classpath:jdbc.properties"/>
 	<bean id="dataSourceMonitor" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${database.drivername}" />
         <property name="jdbcUrl" value="${monitor.url}" />

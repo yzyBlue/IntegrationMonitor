@@ -1,6 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { Tooltip,OverlayTrigger } from 'react-bootstrap';
+
 var Navigation = React.createClass({
+	getTooltip:function(tooltip){
+		return (<Tooltip id="tooltip">{tooltip}</Tooltip>);
+	},
 	render: function() {
     return (
     	<div className="nav">
@@ -8,17 +13,24 @@ var Navigation = React.createClass({
 				<ul>
 					<li>
 				        <Link to="/statistics" activeClassName="active">
-					        <i className="iconfont icon-ai" data-toggle="tooltip"  title="事务概览" data-placement="bottom"/>
+					        <OverlayTrigger placement="bottom" overlay={this.getTooltip('事务概览')}>
+						        <i className="iconfont icon-ai"/>
+						    </OverlayTrigger>
 				        </Link>
 		          	</li>
 		          	<li>
 		          		<Link to="/messagequery" activeClassName="active">
-		          			<i className="iconfont icon-bi" data-toggle="tooltip"  title="消息查询" data-placement="bottom"/>
+		          			<OverlayTrigger placement="bottom" overlay={this.getTooltip('消息查询')}>
+						        <i className="iconfont icon-bi"/>
+						    </OverlayTrigger>
 		          		</Link>
 		          	</li>
 		          	<li>
 		          		<Link to="/alarm" activeClassName="active">
-		          			<i className="iconfont" data-toggle="tooltip"  title="警报提醒" data-placement="bottom">&#xe66f;</i>
+		          			<OverlayTrigger placement="bottom" overlay={this.getTooltip('警报提醒')}>
+						        <i className="iconfont">&#xe66f;</i>
+						    </OverlayTrigger>
+		          			
 		          		</Link>
 		          	</li>
 				</ul>

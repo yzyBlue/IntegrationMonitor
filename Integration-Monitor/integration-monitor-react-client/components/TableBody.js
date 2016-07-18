@@ -23,12 +23,13 @@ var TableBody=React.createClass({
 		  			type: 'success',
 		  			allow_dismiss: true,
 		  			timer: 1000,
-		  			delay: 5000,
+		  			delay: 2000,
 		  			placement: {
 		  				from: "top",
 		  				align: "right"
-		  			},
+		  			}
 		  		});
+		    	window.location.reload(true);
 		      }.bind(this),
 		      error: function(xhr, status, err) {
 		        console.error(this.props.url, status, err.toString());
@@ -43,7 +44,7 @@ var TableBody=React.createClass({
 		  			placement: {
 		  				from: "top",
 		  				align: "right"
-		  			},
+		  			}
 		  		});
 		      }.bind(this)
 		});
@@ -95,11 +96,7 @@ var TableBody=React.createClass({
 						<Modal message={this.props.message} title="事务流程状态" modalKey={this.props.id} modal="timeline"/>
 					</td>
 					<td>
-						<input type="hidden" name="paramMap" value="paramMap"/> 
-						<form onSubmit={this.reProcessMsg}>
-							<button className="btn-info btn-back" type="submit">重试</button>
-						</form>
-						
+						<li onClick={this.reProcessMsg}><a className="btn-info btn-back" href="javascript:void(0)">重试</a></li>
 					</td>
 				</tr>
 			</tbody>	

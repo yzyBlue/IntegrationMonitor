@@ -27,4 +27,6 @@ public interface MessageEventDao extends AbstractGenericDao<MessageEvent, Intege
 
 	public MessageStatistic getMessageStatistic(String currentDate);
 
+	public MessageEvent getMessageById(long sequenceId);
+
 }

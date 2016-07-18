@@ -11,7 +11,7 @@ public class SQLSessionConfig {
 
 	static {
 		try {
-			String resource = "config/SQLMapperConfig.xml";
+			String resource = "tableMapper/SQLMapperConfig.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		} catch (Exception e) {

@@ -46,7 +46,7 @@
 		UPDATE INTE_ALERT SET 
 			ALERT_NAME=#{alertName,jdbcType=VARCHAR},
 			ALERT_THEME=#{alertTheme,jdbcType=VARCHAR},
-			ALERT_CONTENT=#{alertCode,jdbcType=VARCHAR},
+			ALERT_CONTENT=#{alertContent,jdbcType=VARCHAR},
 			ALERT_LEVEL=#{alertLevel,jdbcType=VARCHAR},
 			ALERT_STATUS=#{alertStatus,jdbcType=VARCHAR},
 			NOTIFY_PERSON=#{notifyPerson,jdbcType=VARCHAR},

@@ -37,16 +37,32 @@ var data = [[1220832000000, 22.56],
 [1228780800000, 14.29], [1228867200000, 14.03], 
 [1228953600000, 13.57], [1229040000000, 14.04], 
 [1229299200000, 13.54]];
-
+const chart = {
+    backgroundColor: 'rgba(0,0,0,0)'
+};
 var navigator={
 	outlineColor:'#ffffff',
 };
 
+var scrollbar= {
+            barBackgroundColor: 'gray',
+            barBorderRadius: 7,
+            barBorderWidth: 0,
+            buttonBackgroundColor: 'gray',
+            buttonBorderWidth: 0,
+            buttonArrowColor: 'yellow',
+            buttonBorderRadius: 7,
+            rifleColor: 'yellow',
+            trackBackgroundColor: 'white',
+            trackBorderWidth: 1,
+            trackBorderColor: 'silver',
+            trackBorderRadius: 7
+        };
 var navigation={
     menuItemStyle: {
         fontWeight: 'normal',
-        background: 'none',
-        color: '#303030'
+        background: '#ffffff',
+        color: 'rgba(0,0,0,0)'
     },
     menuItemHoverStyle: {
         fontWeight: 'bold',
@@ -58,22 +74,39 @@ var navigation={
 	background: 'rgba(0,0,0,0)'
 	}      
 };
-
+const labels={
+  style: {
+    color: '#ffffff'
+  }
+};
+const plotOptions = {
+  line:{
+    color:'#ffffff'
+  }
+};
+const credits = {
+    enabled: false
+};
 var config = {
+  chart:chart,
   rangeSelector: {
     selected: 1
   },
+  labels:labels,
+  scrollbar:scrollbar,
+  credits:credits,
   navigator:navigator,
   navigation:navigation,
   title: {
-    text: 'AAPL Stock Price',
-    style:{ "color": "#000000", "fontSize": "20px" }
+    text: '消息事件统计详情',
+    style:{ "color": "#ffffff", "fontSize": "20px" }
   },
+  plotOptions:plotOptions,
   series: [{
-    name: 'AAPL',
+    name: '消息数目',
     data: data,
     tooltip: {
-      valueDecimals: 2,
+      valueDecimals: 0,
       backgroundColor:'rgba(0,0,0,0.5)',
       style:{ "color": "#ffffff", "fontSize": "10px" }
     }

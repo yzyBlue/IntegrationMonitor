@@ -23,7 +23,7 @@ var MessageTable=React.createClass({
 		return (
 			<div className="widget-normal">
 				<div className="widget-content">
-					<table className="table table-striped ">
+					<table className="table">
 						<colgroup>
 							<col style={{'width': 'auto'}}/>
 							<col style={{'width': 'auto'}}/>

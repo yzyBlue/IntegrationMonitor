@@ -32,7 +32,7 @@ import com.zju.integration.monitor.util.DataValidationUtil;
  *
  */
 @Service("messageEventService")
-@Transactional(rollbackFor = MessageEventServiceException.class)
+@Transactional(rollbackFor = MessageEventServiceException.class, value = "transactionManager")
 public class MessageEventServiceImpl implements MessageEventService {
 
 	@Autowired(required = false)
@@ -76,14 +76,15 @@ public class MessageEventServiceImpl implements MessageEventService {
 			Alert alert = checkMessageEvent(messageEvent);
 			AlertAction alertAction = new AlertAction();
 			if (alert != null) {
-				alert.setMsgSequenceId(String.valueOf(messageEvent.getSequenceId()));
+				alert.setMsgSequenceId(messageEvent.getSequenceId());
 				alert.setAlertTheme(msgTypeDesc);
 				alertAction.setAlertName(alert.getAlertName());
 				alertAction.setAlertCode(alert.getAlertCode());
 				alertAction.setActorCode("admin");
-				alertAction.setActorName("admin");
+				alertAction.setActorName("管理员");
 				alertAction.setActionTypeName(ActionType.ADD.getName());
 				alertAction.setActionTypeCode(String.valueOf(ActionType.ADD.getIndex()));
+				alertAction.setActionMemo(alert.getAlertMemo());
 				alertDao.insert(alert);
 				alertActionDao.insert(alertAction);
 			}
@@ -110,26 +111,31 @@ public class MessageEventServiceImpl implements MessageEventService {
 		return messageList;
 	}
 
+	@Override
+	public MessageEvent getMessageEventById(long sequenceId) {
+		return messageEventDao.getMessageById(sequenceId);
+	}
+
 	private Alert checkMessageEvent(MessageEvent messageEvent) {
-		//logger.info("[checkMessageEvent] : " + messageEvent.toString());
+		// logger.info("[checkMessageEvent] : " + messageEvent.toString());
 		Alert alert = new Alert();
 		String status = messageEvent.getHandleResultStatus();
-		if (status == "ERROR") {
+		if (status == "ERROR" || status.equals("ERROR")) {
 			String alertCode = getGuid();
 			alert.setAlertCode(alertCode);
-			alert.setAlertName(messageEvent.getMsgTypeDesc());
+			alert.setAlertName(messageEvent.getTransCode());
 			alert.setAlertContent(messageEvent.getHandleResultDesc());
-			alert.setAlertLevel(AlertLevel.ERROR.getName());
-			alert.setAlertStatus(AlertStatus.TODO.getName());
-			alert.setNotifyPerson("Admin");
-		} else if (status == "FILTERED") {
+			alert.setAlertLevel(AlertLevel.ERROR.getCode());
+			alert.setAlertStatus(AlertStatus.TODO.getCode());
+			alert.setNotifyPerson("集成开发");
+		} else if (status == "FILTERED" || status.equals("FILTERED")) {
 			String alertCode = getGuid();
 			alert.setAlertCode(alertCode);
-			alert.setAlertName(messageEvent.getMsgTypeDesc());
+			alert.setAlertName(messageEvent.getTransCode());
 			alert.setAlertContent(messageEvent.getHandleResultDesc());
-			alert.setAlertLevel(AlertLevel.WARN.getName());
-			alert.setAlertStatus(AlertStatus.TODO.getName());
-			alert.setNotifyPerson("Admin");
+			alert.setAlertLevel(AlertLevel.WARN.getCode());
+			alert.setAlertStatus(AlertStatus.TODO.getCode());
+			alert.setNotifyPerson("集成开发");
 		} else {
 			alert = null;
 		}
@@ -143,7 +149,7 @@ public class MessageEventServiceImpl implements MessageEventService {
 	 * @return
 	 * 
 	 */
-	private String getGuid() {
+	private static String getGuid() {
 		return UUID.randomUUID().toString();
 	}
 

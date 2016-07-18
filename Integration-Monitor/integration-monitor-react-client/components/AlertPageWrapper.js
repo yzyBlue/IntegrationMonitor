@@ -1,31 +1,29 @@
 import React from 'react'
 import AlertList from './AlertList'
 import AlertDetail from './AlertDetail'
-const dataList=[
-	  		{alertId:4290433,alertType:'ios全功能展示',alertTitle:'ios全功能展示',alertTime:'7分钟前',state:'todo'},
-	  		{alertId:4290434,alertType:'android全功能展示',alertTitle:'android全功能展示',alertTime:'8分钟前',state:'todo'},
-	  		{alertId:4290435,alertType:'可用性',alertTitle:'Ct监控[Baidu]',alertTime:'9分钟前',state:'doing'},
-			{alertId:4290436,alertType:'监控宝',alertTitle:'监控宝',alertTime:'10分钟前',state:'doing'},
-			{alertId:4290437,alertType:'test',alertTitle:'Test',alertTime:'11分钟前',state:'done'}
-	  	];
+import AlertPagination from './AlertPagination'
+
 var AlertPageWrapper = React.createClass({
 	getInitialState:function(){
 		return {
-			category: 'allAlert',alertDetail:'',itemSelectIndex:0
+			category: 'allAlert',alertDetail:'',itemSelectIndex:{itemIndex:0,pageIndex:0},pageIndex:0
 		};
+	},
+	onPageIndexChange:function(pageIndex){
+		this.setState({pageIndex:pageIndex,itemSelectIndex:{itemIndex:0,pageIndex:pageIndex}});
 	},
 	componentDidMount() {
 	    this.setState({
 	      category: this.props.params.category
-	    })
+	    });
   	},
   	dataFilter:function(datas){
   		var category=this.props.params.category;
-  		if(category==''||category==null||category=='allAlert'){
+  		if(category==''||category==null||category=='all'){
   			return datas;
   		}else{
   			return datas.filter(function(data){
-  				return data.state==category;
+  				return data.alertStatus.toLowerCase()==category;
   			});
   		}
   	},
@@ -40,13 +38,16 @@ var AlertPageWrapper = React.createClass({
   			return (<li id="curType" style={{display: 'none'}}></li>);
   		}
   	},
-  	itemSelectChanged:function(index){
-		this.setState({itemSelectIndex:index});
+  	itemSelectChanged:function(alertIndex){
+		this.setState({itemSelectIndex:alertIndex});
 	},
 	render: function() {
-		var style={'minHeight': '897px', 'paddingTop': '15px','overflow':'hidden'};
-		var data=this.dataFilter(dataList);
-		var alertDetail=data[this.state.itemSelectIndex];
+		var style={'paddingTop': '15px','overflow':'hidden'};
+		var alertList=this.props.data;
+		var data=this.dataFilter(alertList);
+		//console.log("itemIndex : "+this.state.itemSelectIndex.itemIndex+" , pageIndex :"+this.state.itemSelectIndex.pageIndex);
+		var alertIndex=this.state.itemSelectIndex.itemIndex+6*this.state.itemSelectIndex.pageIndex;
+		var alertDetail=data[alertIndex];
 		return (
 			<div id="page-wrapper" style={style}>
 				<div className="container-fluid">
@@ -62,8 +63,11 @@ var AlertPageWrapper = React.createClass({
 	                    </div>
                 	</div>
                 	<div className="row">
-						<AlertList data={data} itemSelectIndex={this.state.itemSelectIndex} callBack={this.itemSelectChanged}/>
+						<AlertList data={data} itemSelectIndex={this.state.itemSelectIndex} callBack={this.itemSelectChanged} pageIndex={this.state.pageIndex}/>
 						<AlertDetail data={alertDetail} />
+                	</div>
+                	<div className="col-pagination">
+						<AlertPagination data={data} onPageIndexChange={this.onPageIndexChange}/>
                 	</div>
 				</div>
 			</div>

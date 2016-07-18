@@ -24,7 +24,7 @@ import com.zju.integration.monitor.util.DataValidationUtil;
  *
  */
 @Service("integrationActorService")
-@Transactional(rollbackFor = MessageEventServiceException.class)
+@Transactional(rollbackFor = IntegrationActorServiceException.class,value = "transactionManager")
 public class IntegrationActorServiceImpl implements IntegrationActorService {
 
 	@Autowired(required = false)

@@ -19,7 +19,32 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.zju.integration.monitor.service" />
 	<task:scheduled-tasks>
-<!-- 		<task:scheduled ref="statisticCaculateService" method="alertStatisticJob" cron="0/5 * * * * ?" /> -->
-		<task:scheduled ref="statisticCaculateService" method="messageStatisticJob" cron="0/5 * * * * ?" />
+		<task:scheduled ref="statisticCaculateService" method="messageStatisticJob" cron="0/10 * * * * ?" />
 	</task:scheduled-tasks>
+	
+	<!-- SET default mail properties -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="mail.vico-lab.com"/>
+        <property name="protocol" value="smtp" /> 
+        <!-- 465 for Gamil -->
+        <property name="port" value="10825"/>
+        <property name="username" value="Yuan.Ziyang@vico-lab.com"/>
+        <property name="password" value="yzyBlue1991"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- true for Gamil -->
+                <prop key="mail.smtp.starttls.enable">false</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+	<!--Asyn send Eamil--> 
+<!--     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">   -->
+<!--        <property name="corePoolSize" value="10"/>   -->
+<!--        <property name="maxPoolSize" value="30"/>   -->
+<!--     </bean> -->
+	<bean id="dataBaseCreateService" class="com.zju.integration.monitor.service.DataBaseCreateServiceImpl">
+	</bean>
 </beans>

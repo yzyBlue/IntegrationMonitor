@@ -74,7 +74,10 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -140,6 +143,7 @@
 					<password>admin</password>
 					<server>tomcat</server>
 					<path>/${project.build.finalName}</path>
+<!-- 					<path>/integration-monitor-test</path> -->
 					<charset>${project.build.sourceEncoding}</charset>
 					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
 					<!-- tomcat7:run时会用到port -->

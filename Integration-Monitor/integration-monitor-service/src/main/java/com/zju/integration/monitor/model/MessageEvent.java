@@ -33,6 +33,8 @@ public class MessageEvent implements Serializable {
 	private String msgSourceCode;
 	@DataValidate(description = "通道ID", nullable = false)
 	private String channelCode;
+	@DataValidate(description = "通道名称", nullable = false)
+	private String channelName;
 	@DataValidate(description = "源消息UID", nullable = false)
 	private String sourceMsgUid;
 	@DataValidate(description = "发生时间", nullable = false)
@@ -61,6 +63,8 @@ public class MessageEvent implements Serializable {
 	private String rawDataProtocol;
 	@DataValidate(description = "消息加密", nullable = true)
 	private String isEncrypted;
+
+	private Date recordDate;
 
 	public MessageEvent() {
 		super();
@@ -366,209 +370,235 @@ public class MessageEvent implements Serializable {
 		this.msgTypeDesc = msgTypeDesc;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @return the recordDate
+	 */
+	public Date getRecordDate() {
+		return recordDate;
+	}
+
+	/**
+	 * @param recordDate
+	 *            the recordDate to set
+	 */
+	public void setRecordDate(Date recordDate) {
+		this.recordDate = recordDate;
+	}
+
+	/**
+	 * @return the channelName
+	 */
+	public String getChannelName() {
+		return channelName;
+	}
+
+	/**
+	 * @param channelName the channelName to set
+	 */
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((channelCode == null) ? 0 : channelCode.hashCode());
-		result = prime * result + ((eventDateTime == null) ? 0 : eventDateTime.hashCode());
-		result = prime * result + ((eventHandleTime == null) ? 0 : eventHandleTime.hashCode());
-		result = prime * result + ((handleResultDesc == null) ? 0 : handleResultDesc.hashCode());
-		result = prime * result + ((handleResultStatus == null) ? 0 : handleResultStatus.hashCode());
-		result = prime * result + ((isEncrypted == null) ? 0 : isEncrypted.hashCode());
-		result = prime * result + ((messageIndex == null) ? 0 : messageIndex.hashCode());
-		result = prime * result + ((messageSubIndex == null) ? 0 : messageSubIndex.hashCode());
-		result = prime * result + ((msgSourceCode == null) ? 0 : msgSourceCode.hashCode());
-		result = prime * result + ((msgSubType == null) ? 0 : msgSubType.hashCode());
-		result = prime * result + ((msgTypeDesc == null) ? 0 : msgTypeDesc.hashCode());
-		result = prime * result + ((msgTypeId == null) ? 0 : msgTypeId.hashCode());
-		result = prime * result + ((patientId == null) ? 0 : patientId.hashCode());
+		result = prime * result
+				+ ((channelCode == null) ? 0 : channelCode.hashCode());
+		result = prime * result
+				+ ((channelName == null) ? 0 : channelName.hashCode());
+		result = prime * result
+				+ ((eventDateTime == null) ? 0 : eventDateTime.hashCode());
+		result = prime * result
+				+ ((eventHandleTime == null) ? 0 : eventHandleTime.hashCode());
+		result = prime
+				* result
+				+ ((handleResultDesc == null) ? 0 : handleResultDesc.hashCode());
+		result = prime
+				* result
+				+ ((handleResultStatus == null) ? 0 : handleResultStatus
+						.hashCode());
+		result = prime * result
+				+ ((isEncrypted == null) ? 0 : isEncrypted.hashCode());
+		result = prime * result
+				+ ((messageIndex == null) ? 0 : messageIndex.hashCode());
+		result = prime * result
+				+ ((messageSubIndex == null) ? 0 : messageSubIndex.hashCode());
+		result = prime * result
+				+ ((msgSourceCode == null) ? 0 : msgSourceCode.hashCode());
+		result = prime * result
+				+ ((msgSubType == null) ? 0 : msgSubType.hashCode());
+		result = prime * result
+				+ ((msgTypeDesc == null) ? 0 : msgTypeDesc.hashCode());
+		result = prime * result
+				+ ((msgTypeId == null) ? 0 : msgTypeId.hashCode());
+		result = prime * result
+				+ ((patientId == null) ? 0 : patientId.hashCode());
 		result = prime * result + ((rawData == null) ? 0 : rawData.hashCode());
-		result = prime * result + ((rawDataProtocol == null) ? 0 : rawDataProtocol.hashCode());
+		result = prime * result
+				+ ((rawDataProtocol == null) ? 0 : rawDataProtocol.hashCode());
+		result = prime * result
+				+ ((recordDate == null) ? 0 : recordDate.hashCode());
 		result = prime * result + (int) (sequenceId ^ (sequenceId >>> 32));
-		result = prime * result + ((sourceMsgUid == null) ? 0 : sourceMsgUid.hashCode());
-		result = prime * result + ((transCode == null) ? 0 : transCode.hashCode());
-		result = prime * result + ((transactionStatus == null) ? 0 : transactionStatus.hashCode());
+		result = prime * result
+				+ ((sourceMsgUid == null) ? 0 : sourceMsgUid.hashCode());
+		result = prime * result
+				+ ((transCode == null) ? 0 : transCode.hashCode());
+		result = prime
+				* result
+				+ ((transactionStatus == null) ? 0 : transactionStatus
+						.hashCode());
 		result = prime * result + ((visitId == null) ? 0 : visitId.hashCode());
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof MessageEvent)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		MessageEvent other = (MessageEvent) obj;
 		if (channelCode == null) {
-			if (other.channelCode != null) {
+			if (other.channelCode != null)
 				return false;
-			}
-		} else if (!channelCode.equals(other.channelCode)) {
+		} else if (!channelCode.equals(other.channelCode))
 			return false;
-		}
+		if (channelName == null) {
+			if (other.channelName != null)
+				return false;
+		} else if (!channelName.equals(other.channelName))
+			return false;
 		if (eventDateTime == null) {
-			if (other.eventDateTime != null) {
+			if (other.eventDateTime != null)
 				return false;
-			}
-		} else if (!eventDateTime.equals(other.eventDateTime)) {
+		} else if (!eventDateTime.equals(other.eventDateTime))
 			return false;
-		}
 		if (eventHandleTime == null) {
-			if (other.eventHandleTime != null) {
+			if (other.eventHandleTime != null)
 				return false;
-			}
-		} else if (!eventHandleTime.equals(other.eventHandleTime)) {
+		} else if (!eventHandleTime.equals(other.eventHandleTime))
 			return false;
-		}
 		if (handleResultDesc == null) {
-			if (other.handleResultDesc != null) {
+			if (other.handleResultDesc != null)
 				return false;
-			}
-		} else if (!handleResultDesc.equals(other.handleResultDesc)) {
+		} else if (!handleResultDesc.equals(other.handleResultDesc))
 			return false;
-		}
 		if (handleResultStatus == null) {
-			if (other.handleResultStatus != null) {
+			if (other.handleResultStatus != null)
 				return false;
-			}
-		} else if (!handleResultStatus.equals(other.handleResultStatus)) {
+		} else if (!handleResultStatus.equals(other.handleResultStatus))
 			return false;
-		}
 		if (isEncrypted == null) {
-			if (other.isEncrypted != null) {
+			if (other.isEncrypted != null)
 				return false;
-			}
-		} else if (!isEncrypted.equals(other.isEncrypted)) {
+		} else if (!isEncrypted.equals(other.isEncrypted))
 			return false;
-		}
 		if (messageIndex == null) {
-			if (other.messageIndex != null) {
+			if (other.messageIndex != null)
 				return false;
-			}
-		} else if (!messageIndex.equals(other.messageIndex)) {
+		} else if (!messageIndex.equals(other.messageIndex))
 			return false;
-		}
 		if (messageSubIndex == null) {
-			if (other.messageSubIndex != null) {
+			if (other.messageSubIndex != null)
 				return false;
-			}
-		} else if (!messageSubIndex.equals(other.messageSubIndex)) {
+		} else if (!messageSubIndex.equals(other.messageSubIndex))
 			return false;
-		}
 		if (msgSourceCode == null) {
-			if (other.msgSourceCode != null) {
+			if (other.msgSourceCode != null)
 				return false;
-			}
-		} else if (!msgSourceCode.equals(other.msgSourceCode)) {
+		} else if (!msgSourceCode.equals(other.msgSourceCode))
 			return false;
-		}
 		if (msgSubType == null) {
-			if (other.msgSubType != null) {
+			if (other.msgSubType != null)
 				return false;
-			}
-		} else if (!msgSubType.equals(other.msgSubType)) {
+		} else if (!msgSubType.equals(other.msgSubType))
 			return false;
-		}
 		if (msgTypeDesc == null) {
-			if (other.msgTypeDesc != null) {
+			if (other.msgTypeDesc != null)
 				return false;
-			}
-		} else if (!msgTypeDesc.equals(other.msgTypeDesc)) {
+		} else if (!msgTypeDesc.equals(other.msgTypeDesc))
 			return false;
-		}
 		if (msgTypeId == null) {
-			if (other.msgTypeId != null) {
+			if (other.msgTypeId != null)
 				return false;
-			}
-		} else if (!msgTypeId.equals(other.msgTypeId)) {
+		} else if (!msgTypeId.equals(other.msgTypeId))
 			return false;
-		}
 		if (patientId == null) {
-			if (other.patientId != null) {
+			if (other.patientId != null)
 				return false;
-			}
-		} else if (!patientId.equals(other.patientId)) {
+		} else if (!patientId.equals(other.patientId))
 			return false;
-		}
 		if (rawData == null) {
-			if (other.rawData != null) {
+			if (other.rawData != null)
 				return false;
-			}
-		} else if (!rawData.equals(other.rawData)) {
+		} else if (!rawData.equals(other.rawData))
 			return false;
-		}
 		if (rawDataProtocol == null) {
-			if (other.rawDataProtocol != null) {
+			if (other.rawDataProtocol != null)
 				return false;
-			}
-		} else if (!rawDataProtocol.equals(other.rawDataProtocol)) {
+		} else if (!rawDataProtocol.equals(other.rawDataProtocol))
 			return false;
-		}
-		if (sequenceId != other.sequenceId) {
+		if (recordDate == null) {
+			if (other.recordDate != null)
+				return false;
+		} else if (!recordDate.equals(other.recordDate))
 			return false;
-		}
+		if (sequenceId != other.sequenceId)
+			return false;
 		if (sourceMsgUid == null) {
-			if (other.sourceMsgUid != null) {
+			if (other.sourceMsgUid != null)
 				return false;
-			}
-		} else if (!sourceMsgUid.equals(other.sourceMsgUid)) {
+		} else if (!sourceMsgUid.equals(other.sourceMsgUid))
 			return false;
-		}
 		if (transCode == null) {
-			if (other.transCode != null) {
+			if (other.transCode != null)
 				return false;
-			}
-		} else if (!transCode.equals(other.transCode)) {
+		} else if (!transCode.equals(other.transCode))
 			return false;
-		}
 		if (transactionStatus == null) {
-			if (other.transactionStatus != null) {
+			if (other.transactionStatus != null)
 				return false;
-			}
-		} else if (!transactionStatus.equals(other.transactionStatus)) {
+		} else if (!transactionStatus.equals(other.transactionStatus))
 			return false;
-		}
 		if (visitId == null) {
-			if (other.visitId != null) {
+			if (other.visitId != null)
 				return false;
-			}
-		} else if (!visitId.equals(other.visitId)) {
+		} else if (!visitId.equals(other.visitId))
 			return false;
-		}
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "MessageEvent [sequenceId=" + sequenceId + ", transCode=" + transCode + ", msgTypeId=" + msgTypeId
-				+ ", msgTypeDesc=" + msgTypeDesc + ", msgSubType=" + msgSubType + ", msgSourceCode=" + msgSourceCode
-				+ ", channelCode=" + channelCode + ", sourceMsgUid=" + sourceMsgUid + ", eventDateTime=" + eventDateTime
-				+ ", patientId=" + patientId + ", visitId=" + visitId + ", messageIndex=" + messageIndex
-				+ ", messageSubIndex=" + messageSubIndex + ", transactionStatus=" + transactionStatus
-				+ ", handleResultStatus=" + handleResultStatus + ", eventHandleTime=" + eventHandleTime
-				+ ", handleResultDesc=" + handleResultDesc + ", rawData=" + rawData + ", rawDataProtocol="
-				+ rawDataProtocol + ", isEncrypted=" + isEncrypted + "]";
+		return "MessageEvent [sequenceId=" + sequenceId + ", transCode="
+				+ transCode + ", msgTypeId=" + msgTypeId + ", msgTypeDesc="
+				+ msgTypeDesc + ", msgSubType=" + msgSubType
+				+ ", msgSourceCode=" + msgSourceCode + ", channelCode="
+				+ channelCode + ", channelName=" + channelName
+				+ ", sourceMsgUid=" + sourceMsgUid + ", eventDateTime="
+				+ eventDateTime + ", patientId=" + patientId + ", visitId="
+				+ visitId + ", messageIndex=" + messageIndex
+				+ ", messageSubIndex=" + messageSubIndex
+				+ ", transactionStatus=" + transactionStatus
+				+ ", handleResultStatus=" + handleResultStatus
+				+ ", eventHandleTime=" + eventHandleTime
+				+ ", handleResultDesc=" + handleResultDesc + ", rawData="
+				+ rawData + ", rawDataProtocol=" + rawDataProtocol
+				+ ", isEncrypted=" + isEncrypted + ", recordDate=" + recordDate
+				+ "]";
 	}
+	
 
 }

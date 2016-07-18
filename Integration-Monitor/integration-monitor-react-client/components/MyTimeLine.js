@@ -1,5 +1,6 @@
 import React from 'react'
 import TimeLineItem from './TimeLineItem'
+import IntegrationService from './IntegrationService'
 var MyTimeLine=React.createClass({
 	getInitialState: function() {
 	    return {data:[]};
@@ -8,7 +9,8 @@ var MyTimeLine=React.createClass({
 		var message=this.props.message;
 		// this.setState({message:message});
 		// alert("this.props.message : "+JSON.stringify(message));
-		var url="/integration-monitor/message-event/query";
+		var url=IntegrationService.MessageEventService.queryMessageEventByMap;
+		//var url="http://172.16.100.64:8888/integration-monitor/message-event/query";
 		var paramMap;
 		if(message.transCode=='PAM'){
 			paramMap={visitId:message.visitId,transCode:message.transCode};
@@ -35,7 +37,8 @@ var MyTimeLine=React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		this.getMsgState();
+		//this.getMsgState();
+		setTimeout(this.getMsgState(), 5000);
 	},
 	renderTimeList:function(){
 		var message=this.props.message;

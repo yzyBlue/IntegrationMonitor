@@ -1,10 +1,14 @@
 package com.zju.integration.monitor.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
+
+	protected final Logger logger = Logger.getLogger(this.getClass());
+
 	@RequestMapping("/")
 	public String getLogin() {
 		return "login";
@@ -73,5 +77,10 @@ public class PageController {
 	@RequestMapping("/test")
 	public String getTest() {
 		return "test";
+	}
+
+	@RequestMapping(value = "/registration")
+	public String registration() {
+		return "registration";
 	}
 }

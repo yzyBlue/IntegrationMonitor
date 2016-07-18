@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Navigation from './Navigation'
 import Statistics from './Statistics'
- var App=React.createClass({
+var App=React.createClass({
   render() {
     return (
     <div >

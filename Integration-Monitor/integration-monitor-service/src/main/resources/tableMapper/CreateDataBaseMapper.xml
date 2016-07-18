@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zju.integration.monitor.dao.CreateDataBaseDao">
+	<update id="createTableTransType">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'TRANS_TYPE') AND OBJECTPROPERTY(ID, 'IsTable') = 1)
+		CREATE TABLE TRANS_TYPE(
+			TRANS_ID NUMERIC(30, 0) PRIMARY KEY IDENTITY(1,1),
+			TRANS_CODE VARCHAR(10),
+			TRANS_NAME VARCHAR(255),
+			TRANS_CHINESE_NAME
+			VARCHAR(255),
+			TRANS_MEMO VARCHAR(8000),
+			CREATE_DATE_TIME DATETIME
+		)
+	</update>
+	<update id="createTableMsgEventType">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'MSG_EVENT_TYPE') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE TABLE MSG_EVENT_TYPE(
+			[TYPE_ID] NUMERIC(30, 0) PRIMARY KEY
+			IDENTITY(1,1),
+			MESSAGE_TYPE VARCHAR(10),
+			EVENT_TYPE VARCHAR(10),
+			CONTROL_CODE VARCHAR(10),
+			TRANS_CODE VARCHAR(10),
+			MSG_TYPE_DESC
+			VARCHAR(50),
+			CREATE_DATE_TIME DATETIME
+		)
+	</update>
+	<update id="createTableMsgEventLog">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'MSG_EVENT_LOG') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE TABLE MSG_EVENT_LOG(
+			SEQUENCE_ID NUMERIC(30, 0) PRIMARY KEY
+			IDENTITY(1,1),
+			TRANS_CODE VARCHAR(30),
+			MSG_EVENT_CODE INT ,
+			MSG_SUB_TYPE
+			VARCHAR(30),
+			MSG_EVENT_DESC VARCHAR(50),
+			MSG_SOURCE_CODE VARCHAR(255),
+			CHANNEL_CODE VARCHAR(255),
+			CHANNEL_NAME VARCHAR(40),
+			SOURCE_MSG_UID
+			VARCHAR(255),
+			EVENT_DATE_TIME DATETIME,
+			PATIENT_ID VARCHAR(50),
+			VISIT_ID
+			VARCHAR(50),
+			MSG_INDEX VARCHAR(30),
+			MSG_SUB_INDEX VARCHAR(30),
+			TRANSACTION_STATUS VARCHAR(10),
+			HANDLE_RESULT_STATUS VARCHAR(10),
+			EVENT_HANDLE_TIME DATETIME,
+			HANDLE_RESULT_DESC VARCHAR(MAX),
+			MSG_RAW_DATA VARCHAR(MAX),
+			RAW_DATA_PROTOCOL VARCHAR(30),
+			IS_ENCRYPTED
+			SMALLINT,
+			RECORD_DATE DATETIME
+		)
+	</update>
+	<update id="createTableTransStatus">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'TRANSACTION_STATUS') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE TABLE TRANSACTION_STATUS(
+			SERIAL_NO NUMERIC(30, 0) PRIMARY KEY IDENTITY(1,1),
+			TRANS_CODE VARCHAR(30),
+			TRANS_NAME VARCHAR(30),
+			TRANS_STATUS_CODE VARCHAR(30),
+			TRANS_STATUS_NAME VARCHAR(30),
+			TRANS_STATUS_DESC VARCHAR(255),
+			CREATE_DATE_TIME DATETIME
+		)
+	</update>
+	<update id="createTableAlertInfo">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'INTE_ALERT') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE	TABLE INTE_ALERT(
+			SERIAL_NO NUMERIC(30, 0) PRIMARY KEY IDENTITY(1,1),
+			ALERT_CODE VARCHAR(50),
+			ALERT_NAME VARCHAR(50),
+			ALERT_THEME VARCHAR(50),
+			MSG_SEQ_ID INT,
+			ALERT_CONTENT VARCHAR(max),
+			ALERT_LEVEL VARCHAR(10),
+			ALERT_STATUS VARCHAR(10),
+			CREATE_DATE DATETIME,
+			NOTIFY_PERSON VARCHAR(50),
+			ALERT_MEMO VARCHAR(MAX)
+		)
+
+	</update>
+	<update id="createTableAlertAction">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'ALERT_ACTION') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE TABLE ALERT_ACTION(
+			SERIAL_NO NUMERIC(30, 0) PRIMARY KEY IDENTITY(1,1),
+			ALERT_CODE VARCHAR(50),
+			ALERT_NAME VARCHAR(50),
+			ACTOR_CODE VARCHAR(50),
+			ACTOR_NAME VARCHAR(50),
+			ACTION_DATE_TIME DATETIME,
+			ACTION_TYPE_CODE VARCHAR(20),
+			ACTION_TYPE_NAME VARCHAR(20),
+			ACTION_MEMO VARCHAR(max),
+		)
+
+	</update>
+	<update id="createTableMsgStatistics">
+		IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'MSG_EVENT_STATISTICS') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE TABLE MSG_EVENT_STATISTICS (
+			SERIAL_NO NUMERIC(30, 0) PRIMARY KEY IDENTITY(1,1),
+			PAM INT,
+			EXAM INT,
+			[ORDER] INT,
+			DRUG INT,
+			PRESC INT,
+			SURGERY INT,
+			LABTEST INT,
+			CONSULT INT,
+			DIAGNOSE INT,
+			PHYSIGN INT,
+			NEWBORN INT,
+			FPMR INT,
+			EMR INT,
+			ALLCOUNT INT,
+			RECORD_DATE DATETIME
+		)
+	</update>
+	
+	<update id="createTableUserInfo">
+	IF NOT EXISTS (SELECT * FROM dbo.SysObjects
+		WHERE ID =
+		object_id(N'USER_INFO') AND OBJECTPROPERTY(ID, 'IsTable') =
+		1)
+		CREATE TABLE USER_INFO(
+			[USER_ID] NUMERIC(30, 0) PRIMARY KEY IDENTITY(1,1),
+			[USER_NAME] VARCHAR(20),
+			USER_PWD VARCHAR(255),
+			ROLE_CODE VARCHAR(20),
+			CREATE_DATE DATETIME,
+			CREATOR_ID VARCHAR(20),
+			VOIDED_BY VARCHAR(20),
+			VOIDED_FLAG VARCHAR(1),
+			MODIFY_DATE DATETIME
+		)
+	</update>
+	
+	<insert id="insertTransTypeInfo">
+	<![CDATA[ 
+ 	IF NOT EXISTS (SELECT * FROM TRANS_TYPE) 
+ 		INSERT INTO TRANS_TYPE VALUES  
+ 			('PAM','Patient Administrative','病人管理','病人管理，包括病人入出转，病人信息更新，病人换床等记录',getdate()), 
+ 			('EXAM','Examination Transaction','检查事务','检查流程所有事务，包括下达申请，预约安排，检查开始，检查状态变更，检查数据生成，检查报告生成等',getdate()),
+ 			('ORDER','Order Transaction','医嘱事务','医嘱管理，包括医嘱下达，医嘱执行，医嘱状态变更等。',getdate()), 
+ 			('DRUG','Drug Transaction','摆药事务','摆药流程管理，包括摆药申请下达，摆药状态返回，退药申请，退药状态返回等。',getdate()), 
+ 			('PRESC','Prescription Transaction','处方事务','处方流程管理，包括处方申请下达，处方状态返回等',getdate()), 
+ 			('SURGERY','Surgery Transaction','手术事务','手术事务管理，包括手术申请下达，手术状态返回，手术预约安排，手术开始，手术状态变更，手术完成，手术报告生成等。',getdate()),
+ 			('LABTEST','LabTest Transaction','检验事务','检验流程上所有事务管理，包括检验申请下达，检验采标开始，检验状态变更，检验报告生成。',getdate()),
+ 			('CONSULT','Consult Transaction','会诊事务','会诊事务管理，包括会诊申请下达，会诊安排，会诊意见等',getdate()), 
+ 			('DIAGNOSE','Diagnose Transaction','诊断事务','诊断信息管理，包括诊断信息生成，诊断信息变更，诊断信息删除等操作。',getdate()), 
+ 			('PHYSIGN','PhysicalSign Transaction','体征事务','体征信息管理，包括体征信息录入，体征信息变更，体征信息删除等',getdate()), 
+ 			('NEWBORN','NewBorn Transaction','新生儿事务','新生儿信息管理，包括新生儿信息录入等',getdate()), 
+			('FPMR','FirstPage Transaction','病案首页管理','病案首页更新',getdate()), 
+ 			('EMR','EMR Transaction','病历管理','病历信息管理，包括病例提交，病历更新，病历删除等。',getdate()) 
+ 	ELSE
+ 		SELECT 0
+ 		]]>
+	</insert>
+	
+	<insert id="insertMessageType">
+	<![CDATA[ 
+ 	IF NOT EXISTS (SELECT * FROM MSG_EVENT_TYPE ) 
+ 	INSERT INTO MSG_EVENT_TYPE  
+ 	(MESSAGE_TYPE,EVENT_TYPE,CONTROL_CODE,TRANS_CODE,MSG_TYPE_DESC,CREATE_DATE_TIME) VALUES  
+ 		('ADT','A01','','PAM','病人入院',GETDATE()), 
+ 		('ADT','A06','NW','PAM','病人入科',GETDATE()), 
+ 		('ADT','A06','CA','PAM','病人取消入科',GETDATE()), 
+ 		('ADT','A02','NW','PAM','病人转科',GETDATE()), 
+ 		('ADT','A02','CA','PAM','病人取消转科',GETDATE()), 
+ 		('ADT','A17','','PAM','病人换床',GETDATE()), 
+ 		('ADT','A08','','PAM','病人信息更新',GETDATE()), 
+ 		('ADT','A03','NW','PAM','病人出院',GETDATE()), 
+ 		('ADT','A03','CA','PAM','病人取消出院',GETDATE()), 
+ 		('ADT','A04','','PAM','门诊挂号',GETDATE()), 
+ 		( 'ORM' , 'O01' , 'NW' , 'EXAM' , '检查申请下达' , GETDATE()), 
+ 		( 'SIU' , 'S12' , '' , 'EXAM' , '检查预约' , GETDATE()), 
+ 		( 'SIU' , 'S15' , '' , 'EXAM' , '取消检查预约' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'CA' , 'EXAM' , '取消检查申请' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'SC' , 'EXAM' , '检查状态变更' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'DA' , 'EXAM' , '检查数据获取' , GETDATE()), 
+ 		( 'ORU' , 'R01' , '' , 'EXAM' , '获取检查报告' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'NW' , 'ORDER' , '医嘱下达' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'SC' , 'ORDER' , '医嘱状态变更' , GETDATE()), 
+ 		( 'OMP' , 'O09' , 'NW' , 'DRUG' , '摆药申请下达' , GETDATE()), 
+ 		( 'OMP' , 'O09' , 'CA' , 'DRUG' , '取消摆药申请' , GETDATE()), 
+ 		( 'OMP' , 'O09' , 'SC' , 'DRUG' , '摆药状态变更' , GETDATE()), 
+ 		( 'OMP' , 'O09' , 'NW' , 'PRESC' , '处方申请下达' , GETDATE()), 
+ 		( 'OMP' , 'O09' , 'CA' , 'PRESC' , '取消处方申请' , GETDATE()), 
+ 		( 'OMP' , 'O09' , 'SC' , 'PRESC' , '处方状态变更' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'NW' , 'SURGERY' , '手术申请下达' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'CA' , 'SURGERY' , '取消手术申请' , GETDATE()), 
+ 		( 'SIU' , 'S12' , '' , 'SURGERY' , '手术预约' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'SC' , 'SURGERY' , '手术状态变更' , GETDATE()), 
+ 		( 'OML' , 'O21' , 'NW' , 'LABTEST' , '检验申请下达' , GETDATE()), 
+ 		( 'OML' , 'O21' , 'CA' , 'LABTEST' , '取消检验申请' , GETDATE()), 
+ 		( 'OML' , 'O21' , 'SC' , 'LABTEST' , '检验状态变更' , GETDATE()), 
+ 		( 'ORU' , 'R01' , '' , 'LABTEST' , '获取检验报告' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'NW' , 'CONSULT' , '会诊申请下达' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'CA' , 'CONSULT' , '取消会诊申请' , GETDATE()), 
+ 		( 'SIU' , 'O21' , '' , 'CONSULT' , '会诊安排' , GETDATE()), 
+ 		( 'ORM' , 'O01' , 'SC' , 'CONSULT' , '会诊状态变更' , GETDATE()), 
+ 		( 'ORU' , 'R01' , 'F' , 'CONSULT' , '会诊意见' , GETDATE()), 
+ 		( 'PPR' , 'PC1' , '' , 'DIAG' , '添加诊断信息' , GETDATE()), 
+ 		( 'PPR' , 'PC2' , '' , 'DIAG' , '更新诊断信息' , GETDATE()), 
+ 		( 'PPR' , 'PC3' , '' , 'DIAG' , '删除诊断信息' , GETDATE()), 
+ 		( 'ORU' , 'R01' , 'F' , 'PHYSIGN' , '添加体征信息' , GETDATE()), 
+ 		( 'ORU' , 'R01' , 'C' , 'PHYSIGN' , '更新体征信息' , GETDATE()), 
+ 		( 'ORU' , 'R01' , 'P' , 'PHYSIGN' , '删除体征信息' , GETDATE()), 
+ 		( 'ORU' , 'R01' , 'F' , 'NEWBORN' , '添加新生儿信息' , GETDATE()), 
+ 		( 'ADT' , 'A08' , '' , 'FPMR' , '病案首页更新' , GETDATE()), 
+ 		( 'MDM' , 'T02' , '' , 'EMR' , '病历信息生成' , GETDATE()), 
+ 		( 'MDM' , 'T04' , '' , 'EMR' , '病历状态变更' , GETDATE()) 
+ 	ELSE
+ 		SELECT 0
+ 		]]> 
+	</insert>
+	
+	<insert id="insertUserInfo">
+	<![CDATA[ 
+ 	IF NOT EXISTS (SELECT * FROM USER_INFO WHERE USER_NAME='admin') 
+ 	 INSERT INTO USER_INFO ( USER_NAME , USER_PWD ,ROLE_CODE ,CREATE_DATE ,CREATOR_ID ,VOIDED_BY ,VOIDED_FLAG ,MODIFY_DATE ) 
+ 			VALUES  ( 'admin' ,'3rUSa9aG550+L6P0Tmu5cA==' ,'ADMIN' , GETDATE() , 'admin' , '' , '0' ,NULL) 
+ 	ELSE
+ 		SELECT 0
+ 	]]> 
+	</insert>
+</mapper>

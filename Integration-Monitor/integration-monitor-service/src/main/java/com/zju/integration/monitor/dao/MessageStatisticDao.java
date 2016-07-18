@@ -3,6 +3,9 @@
  */
 package com.zju.integration.monitor.dao;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.zju.integration.monitor.model.MessageStatistic;
 
 /**
@@ -12,7 +15,12 @@ import com.zju.integration.monitor.model.MessageStatistic;
  * @date 2016-06-23
  * @description Message Statistics Dao object
  */
+@Repository
+@Transactional(value = "transactionManager")
 public interface MessageStatisticDao extends AbstractGenericDao<MessageStatistic, Integer> {
 
 	public MessageStatistic selectByDate(String recordDate);
+
+	public MessageStatistic getMessageStatistic();
+
 }

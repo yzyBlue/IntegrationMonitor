@@ -4,6 +4,7 @@ import CheckBoxList from './CheckBoxList'
 import MessageTable from './MessageTable'
 import InputTextList from './InputTextList'
 import MyPagination from './MyPagination'
+import IntegrationService from './IntegrationService'
 
 var MessageContent=React.createClass({
 	getInitialState: function() {
@@ -13,10 +14,12 @@ var MessageContent=React.createClass({
 		this.setState({pageIndex:pageIndex});
 	},
 	loadDataFromserver:function() {
+		var paramMap={count:1000};
+		paramMap=JSON.stringify(paramMap);
 	    $.ajax({
 		      url: this.props.url,
 		      method:'POST',
-		      data:'{}',
+		      data:paramMap,
 		      dataType: 'json',
 		      contentType:'application/json; charset=UTF-8',
 		      cache: false,
@@ -29,12 +32,13 @@ var MessageContent=React.createClass({
 		    });
 	},
 	componentDidMount: function() {
-		this.loadDataFromserver();
-	    // setInterval(this.loadDataFromserver, this.props.pollInterval);
+		//this.loadDataFromserver();
+	    setTimeout(this.loadDataFromserver, 1000);
 	},
 	handleMsgQuery: function(paramMap) {
 		this.setState({data: []});
 		var paramMap=JSON.stringify(paramMap); 
+		console.log(paramMap);
 	    $.ajax({
 	      url: this.props.url,
 	      method:'POST',
@@ -54,11 +58,12 @@ var MessageContent=React.createClass({
 	    });
 	  },
 	render: function () {
+		var url=IntegrationService.MessageEventService.processMessageEvent;
 		return(
 			<div>
 				<h2>检索条件</h2>
 				<InputTextList onMsgQuerySubmit={this.handleMsgQuery}/>
-				<MessageTable url="/integration-monitor/message-event/process" data={this.state.data} pageIndex={this.state.pageIndex} />
+				<MessageTable url={url} data={this.state.data} pageIndex={this.state.pageIndex} />
 				<MyPagination data={this.state.data} onPageIndexChange={this.onPageIndexChange}/>
 				
 			</div>

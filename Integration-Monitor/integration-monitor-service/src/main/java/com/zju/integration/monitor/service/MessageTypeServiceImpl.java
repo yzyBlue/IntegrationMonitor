@@ -25,7 +25,7 @@ import com.zju.integration.monitor.util.DataValidationUtil;
  * @description MessageType Service Implements
  */
 @Service("messageTypeService")
-@Transactional(rollbackFor = MessageTypeServiceException.class)
+@Transactional(rollbackFor = MessageTypeServiceException.class,value = "transactionManager")
 public class MessageTypeServiceImpl implements MessageTypeService {
 
 	@Autowired(required = false)

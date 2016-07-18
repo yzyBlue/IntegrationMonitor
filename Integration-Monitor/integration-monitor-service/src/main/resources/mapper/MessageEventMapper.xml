@@ -9,6 +9,7 @@
 		<result column="MSG_SUB_TYPE" property="msgSubType" jdbcType="VARCHAR" />
 		<result column="MSG_SOURCE_CODE" property="msgSourceCode" jdbcType="VARCHAR" />
 		<result column="CHANNEL_CODE" property="channelCode" jdbcType="VARCHAR" />
+		<result column="CHANNEL_NAME" property="channelName" jdbcType="VARCHAR" />
 		<result column="SOURCE_MSG_UID" property="sourceMsgUid" jdbcType="VARCHAR" />
 		<result column="EVENT_DATE_TIME" property="eventDateTime" jdbcType="TIMESTAMP" />
 		<result column="PATIENT_ID" property="patientId" jdbcType="VARCHAR" />
@@ -22,6 +23,7 @@
 		<result column="MSG_RAW_DATA" property="rawData" jdbcType="VARCHAR" />
 		<result column="RAW_DATA_PROTOCOL" property="rawDataProtocol" jdbcType="VARCHAR" />
 		<result column="IS_ENCRYPTED" property="isEncrypted" jdbcType="VARCHAR" />
+		<result column="RECORD_DATE" property="recordDate" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<resultMap id="messageStatisticMap" type="com.zju.integration.monitor.model.MessageStatistic">
@@ -44,9 +46,9 @@
 	</resultMap>
 	
 	<sql id="messageEventInfo">
-		TRANS_CODE,MSG_EVENT_CODE,MSG_EVENT_DESC,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,SOURCE_MSG_UID,EVENT_DATE_TIME,PATIENT_ID,
+		TRANS_CODE,MSG_EVENT_CODE,MSG_EVENT_DESC,MSG_SUB_TYPE,MSG_SOURCE_CODE,CHANNEL_CODE,CHANNEL_NAME,SOURCE_MSG_UID,EVENT_DATE_TIME,PATIENT_ID,
 		VISIT_ID,MSG_INDEX,MSG_SUB_INDEX,TRANSACTION_STATUS,HANDLE_RESULT_STATUS,EVENT_HANDLE_TIME,
-		HANDLE_RESULT_DESC,MSG_RAW_DATA,RAW_DATA_PROTOCOL,IS_ENCRYPTED 
+		HANDLE_RESULT_DESC,MSG_RAW_DATA,RAW_DATA_PROTOCOL,IS_ENCRYPTED,RECORD_DATE  
 	</sql>
 	
 	
@@ -59,11 +61,24 @@
 		WHERE SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
 	</select>
 	
+	<!--查询事件内容表信息-->
+	<select id="getMessageById" resultMap="messageEventMap">
+		SELECT
+		* 
+		FROM
+		MSG_EVENT_LOG
+		WHERE SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
+	</select>
+	
 	<!-- 动态查询消息事件内容 -->
 	<select id="getMessageByCondition" parameterType="java.util.Map" resultMap="messageEventMap">
 		SELECT 
+		<if test="count != null and count != '' and count != 0 ">
+			TOP (#{count,jdbcType=INTEGER})
+		</if>
 		 * 
 		FROM MSG_EVENT_LOG 
+		WITH (NOLOCK)
 		where 1=1 
 		<if test="transCode != null and transCode != ''"> 
  			and TRANS_CODE =#{transCode,jdbcType=VARCHAR}
@@ -82,6 +97,9 @@
 		</if> 
 		<if test="channelCode != null and channelCode != ''"> 
  			and CHANNEL_CODE =#{channelCode,jdbcType=VARCHAR}
+		</if> 
+		<if test="channelName != null and channelName != ''"> 
+ 			and CHANNEL_NAME =#{channelName,jdbcType=VARCHAR}
 		</if> 
 		<if test="sourceMsgUid != null and sourceMsgUid != ''"> 
  			and SOURCE_MSG_UID =#{sourceMsgUid,jdbcType=VARCHAR}
@@ -135,7 +153,7 @@
 	<select id="findByCondition" parameterType="java.util.Map" resultMap="messageEventMap">
 		SELECT 
 		 * 
-		FROM MSG_EVENT_LOG 
+		FROM MSG_EVENT_LOG WITH(NOLOCK) 
 		where 1=1 
 		<if test="transCode != null and transCode != ''"> 
  			and TRANS_CODE =#{transCode,jdbcType=VARCHAR}
@@ -217,6 +235,7 @@
 		#{msgSubType,jdbcType=VARCHAR},
 		#{msgSourceCode,jdbcType=VARCHAR},
 		#{channelCode,jdbcType=VARCHAR},
+		#{channelName,jdbcType=VARCHAR},
 		#{sourceMsgUid,jdbcType=VARCHAR},
 		#{eventDateTime,jdbcType=TIMESTAMP},
 		#{patientId,jdbcType=VARCHAR}, 
@@ -229,7 +248,8 @@
 		#{handleResultDesc,jdbcType=VARCHAR},
 		#{rawData,jdbcType=VARCHAR},
 		#{rawDataProtocol,jdbcType=VARCHAR},
-		#{isEncrypted,jdbcType=VARCHAR}
+		#{isEncrypted,jdbcType=VARCHAR},
+		GETDATE()
 		)
 	</insert>
 	<!--更新消息内容信息-->
@@ -243,6 +263,7 @@
 		MSG_SUB_TYPE=#{msgSubType,jdbcType=VARCHAR},
 		MSG_SOURCE_CODE=#{msgSourceCode,jdbcType=VARCHAR},
 		CHANNEL_CODE=#{channelCode,jdbcType=VARCHAR},
+		CHANNEL_NAME=#{channelName,jdbcType=VARCHAR},
 		SOURCE_MSG_UID=#{sourceMsgUid,jdbcType=VARCHAR},
 		EVENT_DATE_TIME=#{eventDateTime,jdbcType=TIMESTAMP},
 		PATIENT_ID=#{patientId,jdbcType=VARCHAR},
@@ -255,7 +276,8 @@
 		HANDLE_RESULT_DESC=#{handleResultDesc,jdbcType=VARCHAR},
 		MSG_RAW_DATA=#{rawData,jdbcType=VARCHAR},
 		RAW_DATA_PROTOCOL=#{rawDataProtocol,jdbcType=VARCHAR},
-		IS_ENCRYPTED=#{isEncrypted,jdbcType=VARCHAR} 
+		IS_ENCRYPTED=#{isEncrypted,jdbcType=VARCHAR},
+		RECORD_DATE=GETDATE() 
 		WHERE 
 		SEQUENCE_ID = #{sequenceId,jdbcType=INTEGER}
 	</update>
@@ -268,20 +290,20 @@
 		<![CDATA[ 
 			declare @ALLCOUNT int, @PAM int,@EXAM int,@ORDER int,@DRUG int, @PRESC int ,@SURGERY int,
 					@LABTEST int,@CONSULT int ,@DIAGNOSE int, @PHYSIGN int , @NEWBORN int, @FPMR int ,@EMR int,@RECORD_DATE datetime;
-			select @ALLCOUNT=count(*) from MSG_EVENT_LOG  WITH(NOLOCK) where CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @PAM=count(*)  from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PAM' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @EXAM=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='EXAM' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @ORDER=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='ORDER' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @DRUG=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='DRUG' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @PRESC=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PRESC' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @SURGERY=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='SURGERY' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @LABTEST=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='LABTEST' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @CONSULT=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='CONSULT' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @DIAGNOSE=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='DIAGNOSE' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @PHYSIGN=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PHYSIGN' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @NEWBORN=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='NEWBORN' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @FPMR=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='FPMR' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
-			select @EMR=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='EMR' and CONVERT(DATE,EVENT_DATE_TIME,120)=#{currentDate,jdbcType=VARCHAR};
+			select @ALLCOUNT=count(*) from MSG_EVENT_LOG  WITH(NOLOCK) where CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @PAM=count(*)  from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PAM' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @EXAM=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='EXAM' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @ORDER=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='ORDER' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @DRUG=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='DRUG' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @PRESC=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PRESC' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @SURGERY=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='SURGERY' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @LABTEST=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='LABTEST' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @CONSULT=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='CONSULT' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @DIAGNOSE=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='DIAGNOSE' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @PHYSIGN=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='PHYSIGN' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @NEWBORN=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='NEWBORN' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @FPMR=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='FPMR' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
+			select @EMR=count(*) from MSG_EVENT_LOG WITH(NOLOCK) where TRANS_CODE='EMR' and CONVERT(DATE,RECORD_DATE,120)=#{currentDate,jdbcType=VARCHAR};
 			select @RECORD_DATE=getDate();
 			select @ALLCOUNT as ALLCOUNT, @PAM as PAM,@EXAM as EXAM,@ORDER as [ORDER],@DRUG as DRUG,
 					@PRESC as PRESC,@SURGERY as SURGERY,@LABTEST as LABTEST,@CONSULT as CONSULT,

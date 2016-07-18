@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.zju.integration.monitor.exception.AlertServiceException;
 import com.zju.integration.monitor.model.Alert;
+import com.zju.integration.monitor.model.AlertAction;
 import com.zju.integration.monitor.model.IntegrationResult;
 
 /**
@@ -18,15 +19,18 @@ import com.zju.integration.monitor.model.IntegrationResult;
  * @description Integration Alert service interface
  */
 public interface AlertService {
-	
+
 	public IntegrationResult addAlertInfo(Alert alert) throws AlertServiceException;
-	
+
 	public IntegrationResult updateAlertInfo(Alert alert) throws AlertServiceException;
-	
+
 	public Alert findAlertInfo(String alertCode);
-	
+
 	public List<Alert> findAlertByCondition(Map paramMap);
-	
+
 	public IntegrationResult deleteAlertInfo(String alertCode) throws AlertServiceException;
 
+	public List<AlertAction> findAlertAction(String alertCode);
+	
+	public IntegrationResult getErrorAlertCount();
 }

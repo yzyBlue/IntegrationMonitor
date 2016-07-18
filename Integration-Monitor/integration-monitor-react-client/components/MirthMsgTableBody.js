@@ -1,5 +1,6 @@
 import React from 'react'
 import MsgTableBodyItem from './MsgTableBodyItem'
+import IntegrationService from './IntegrationService'
 var MirthMsgTableBody=React.createClass({
 	getInitialState: function() {
 		// console.log("getInitialState");
@@ -10,7 +11,8 @@ var MirthMsgTableBody=React.createClass({
 		var paramMap= this.props.paramMap;
 		paramMap=JSON.stringify(paramMap);
 		// alert(JSON.stringify(paramMap));
-		var url="/integration-monitor/message-event/mirthmessage";
+		var url=IntegrationService.MessageEventService.getMirthCorrelatedMessage;
+		//var url="http://172.16.100.64:8888/integration-monitor/message-event/mirthmessage";
 	    $.ajax({
 		      url: url,
 		      method:'POST',
@@ -33,7 +35,7 @@ var MirthMsgTableBody=React.createClass({
 	},
 	componentDidMount: function() {
 		// console.log("componentDidMount");
-		this.loadMessageFromServer();
+		setTimeout(this.loadMessageFromServer(),5000);
 	},
 // componentWillReceiveProps (nextProps) {
 // this.loadMessageFromServer();
@@ -56,7 +58,7 @@ var MirthMsgTableBody=React.createClass({
 	render: function(){
 		// console.log("render");
 		return (
-				<table className="table-msg table-msg-striped">
+				<table className="table-msg">
 					<caption>{this.props.eventType}</caption>
 					<thead>
 						<tr>

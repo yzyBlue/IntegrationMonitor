@@ -161,11 +161,12 @@ tbody.collapse.in {
         top: 53px;
         left: 160px;
         width: 160px;
+        height: 72%;
         margin-left: -160px;
         margin-top: 35px;
         border: none;
         overflow-y: auto;
-        background-color: rgba(51, 51, 51, .4);
+        background-color: rgba(0, 0, 0, .1);
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
@@ -181,7 +182,7 @@ tbody.collapse.in {
     .side-nav li a:focus,
     .side-nav li a.active {
         outline: none;
-        background-color: #4F6481 !important;
+        background-color: rgba(0, 0, 0, .15) !important;
     }
 }
 
@@ -224,7 +225,7 @@ tbody.collapse.in {
 	border-left-width:5px;
 	border-left-style:solid;
 	height:auto;
-	background-color:rgba(0,0,0,0.2);
+	background-color:rgba(0,0,0,0.08);
 	border-top: 1px solid rgba(255, 255, 255, .2);
 	min-height:95px;
 	cursor:pointer;
@@ -246,6 +247,12 @@ tbody.collapse.in {
 }
 .border-lblue {
     border-left-color: #42a8ef;
+}
+.border-lred {
+    border-left-color: #FF3A3A;
+}
+.border-lorange {
+    border-left-color: #EF7742;
 }
 b, strong {
     font-weight: 700;
@@ -315,6 +322,18 @@ c {
 	}
 }
 
+.col-pagination {
+    padding-left:0px;
+    padding-right:5px;
+    padding-top: 5px;
+}
+@media (min-width: 1200px){
+	.col-pagination {
+	    width: 100%;
+	    float: left;
+	}
+}
+
 .breadcrumb {
 	background-color:rgba(0, 0, 0, .15);
 	border:1px solid rgba(51, 51, 51, 0);
@@ -363,6 +382,7 @@ ol {
 	display:inline-block;
     position: relative;
     padding-left: 10px;
+    width: 90%;
     width: auto;
     float:left;
 }
@@ -382,7 +402,7 @@ ol {
     margin-top: 15px;
 }
 
-.warn-topLine label ,.item-left .activeAlarm ,.warn-topLine .appService {
+.warn-topLine label ,.item-left ,.warn-topLine .appService {
 	font-weight:normal;
 	color:#A9A9A9;
 	font-size:12px;
@@ -394,6 +414,7 @@ ol {
 .entityName {
 	font-size:16px;
 	font-weight:bold;
+	color:#EDF1F2;
 }
 
 .alarmName {
@@ -401,25 +422,107 @@ ol {
     padding-right: 15px;
     margin-top:5px;
 }
+
+.alarm-label{
+	padding-left: 10px;
+	color:#54aff0;
+}
+
 .activeAlarm {
 	margin-top:5px;
-	width: 360px;
+	width: 50%;
     word-break: break-all;
+    font-weight:bolder;
+	font-size:12px;
 }
 .whitebg {
 	background-color:rgba(0, 0, 0, .15);
 	overflow:hidden;
 	padding:0px 10px;
 	border: 1px solid rgba(255, 255, 255, .15);
+	min-height: 580px;
 }
 .grey {
     color: rgba(240, 243, 244, .8);
 }
 
 .col-alert-datail {
-    width: 53%;
+    width: 72%;
     float: left;
 }
 .lastTimeTxt{
 	color:rgba(0, 237, 86, 0.83);
+}
+.sidebar-1 {
+	display: block;
+	background: rgba(51,51,51,.6);
+    width: 50px;
+    position: fixed;
+    z-index: 1000;
+}
+.sidebar-1:after, .sidebar-1:before {
+    box-sizing: border-box;
+}
+.sidebar-1 ul {
+	display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.sidebar-1 li {
+	display: list-item;
+    position: relative;
+    margin-bottom: 0;
+    text-align: -webkit-match-parent;
+}
+.form-group-memo {
+    margin-bottom: 15px;
+    padding-top:6px;
+}
+.form-control-memo {
+  display: block;
+  width: 70%;
+  height: 25px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: rgba(0,0,0,1);
+  background-color: rgba(240, 243, 244, .8);
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+   float: left;
+}
+.form-control-memo:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.form-control-memo::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.form-control-memo:-ms-input-placeholder {
+  color: #999;
+}
+.form-control-memo::-webkit-input-placeholder {
+  color: #999;
+}
+.form-control-memo[disabled],
+.form-control-memo[readonly],
+fieldset[disabled] .form-control-memo {
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
 }

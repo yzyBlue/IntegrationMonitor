@@ -17,6 +17,9 @@ var chart = {
          }
       }
    };
+const credits = {
+    enabled: false
+};
 var title = {
       text: '事务运行情况实时监控',
       style:{ "color": "#ffffff", "fontSize": "20px" ,"letter-spacing":".03em"}
@@ -121,7 +124,8 @@ const config ={
 			legend : legend,
 			series : series,
 			exporting : exporting, 
-			plotOptions : plotOptions
+			plotOptions : plotOptions,
+      credits:credits
 			};
 var SplineChart=React.createClass({
 	getInitialState:function(){
